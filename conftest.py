@@ -33,16 +33,8 @@ def test_prompts():
 
 @pytest.fixture(scope="session")
 def claude_client():
-    class MockClaudeClient:
-        def ask(self, prompt):
-            return {
-                "text": "Mock response for: " + prompt,
-                "tool_calls": [{"name": "geocode", "parameters": {"address": "stub"}}]
-            }
-    return MockClaudeClient()
-#def claude_client():
-  #  from clients.claude_client import ClaudeClient
-  #  return ClaudeClient()
+    from clients.claude_client import ClaudeClient
+    return ClaudeClient()
 
 
 @pytest.fixture(scope="session")

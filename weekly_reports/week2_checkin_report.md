@@ -14,8 +14,8 @@ Phase 1 is complete and Phase 2 Gemini validation is done — both ahead of the 
 | Tools covered | 51 / 51 (100%) |
 | LLMs covered per tool | Claude + Gemini (both) |
 | Gemini tests | passing ✅ |
-| Claude tests | written and verified, pending Anthropic API key |
-| LLMs validated | 1 of 3 (Gemini ✅, Claude 🔴 blocked, GPT-4 🔜) |
+| Claude tests | 25 / 47 passed (53%) — halted by API credit limit, 0 code failures |
+| LLMs validated | 1.5 of 3 (Gemini ✅, Claude 🟡 partial, GPT-4 🔜) |
 | Tool categories covered | All 9 categories — see breakdown below |
 
 ---
@@ -80,10 +80,25 @@ Gemini sometimes returns a one-line summary instead of reporting specific data v
 
 ---
 
+## Claude Trial Results
+
+A personal Anthropic API key was used to run a partial Claude baseline today. Key findings:
+
+- **25 / 47 Claude tests passed** before the account ran out of API credits
+- **0 code failures** — every failure was `"Your credit balance is too low"` (HTTP 400)
+- Tests passed across: geocoding, risk assessment, property, demographics, address extended, workflows, and LLM compat categories
+- Tests not yet reached: map services, spatial analysis, utilities (hit credit limit mid-run)
+
+**Technical blocker resolved:** The Claude client was rewritten to run the MCP agentic loop locally (fetch tools from localhost → call tools against local MCP server → feed results back to Claude API). This eliminates the need for a public-facing MCP URL or tunnel service. Claude now works the same way as the Gemini client.
+
+**Waiting on:** Precisely-issued Anthropic API key to complete the full 47-test Claude baseline.
+
+---
+
 ## Current Blockers
 
-### 🔴 Anthropic API key (high priority)
-All Claude tests are written and verified but cannot run without the key. This is the only remaining gap to complete the Claude baseline.
+### 🟡 Anthropic API credits (medium priority)
+Claude client is fully working. 25/47 tests confirmed passing. Need a Precisely API key to complete the remaining 22 tests (map services, spatial, utilities).
 
 ---
 
@@ -91,7 +106,7 @@ All Claude tests are written and verified but cannot run without the key. This i
 
 | Priority | Task |
 |---|---|
-| Immediate | Get Anthropic API key → run Claude baseline → complete Phase 1 |
+| Immediate | Get Precisely Anthropic API key → run remaining 22 Claude tests → complete Phase 1 |
 | This week | Build OpenAI client → run tests against GPT-4 |
 | This week | Start Phase 2 compatibility matrix document |
 | Ongoing | Document LLM behavioral differences as they're found |
