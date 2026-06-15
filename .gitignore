@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Pytest
+.pytest_cache/
+
+# Logs — run results stay local
+logs/
+
+# Environment / secrets
+.env
+*.env
+
+# macOS
+.DS_Store

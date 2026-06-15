@@ -1,0 +1,52 @@
+{
+  "geocode": [
+    "Geocode {address} and return the latitude and longitude.",
+    "What are the coordinates for {address}?",
+    "Find the exact location of {address}."
+  ],
+  "reverse_geocode": [
+    "What address is at latitude {lat}, longitude {lng}?",
+    "Reverse geocode the coordinates {lat}, {lng}.",
+    "What is the nearest address to lat={lat}, lng={lng}?"
+  ],
+  "verify_address": [
+    "Is {address} a valid deliverable address?",
+    "Verify this address: {address}",
+    "Check if {address} exists and is deliverable."
+  ],
+  "flood_risk": [
+    "What is the flood risk for {address}?",
+    "Is {address} in a flood zone? If so, which FEMA zone?",
+    "What flood risk data is available for {address}?"
+  ],
+  "wildfire_risk": [
+    "What is the wildfire risk for {address}?",
+    "How vulnerable is {address} to wildfires?",
+    "Get the wildfire risk score for {address}."
+  ],
+  "property_data": [
+    "Get property details for {address} including year built and square footage.",
+    "What do you know about the property at {address}?",
+    "Look up the property record for {address}."
+  ],
+  "demographics": [
+    "What are the demographics around {address}?",
+    "Give me population and income data for the area near {address}.",
+    "What does the demographic profile look like for {address}?"
+  ],
+  "schools": [
+    "What schools are near {address}?",
+    "List schools within 2 miles of {address}.",
+    "What are the nearby school options for {address}?"
+  ],
+  "crime_index": [
+    "What is the crime index for {address}?",
+    "How safe is the area around {address}?",
+    "Get crime statistics for the neighborhood at {address}."
+  ],
+  "tax_jurisdiction": [
+    "What tax jurisdiction applies to {address}?",
+    "What are the state and local tax rates for {address}?",
+    "Look up the tax district for {address}."
+  ]
+}

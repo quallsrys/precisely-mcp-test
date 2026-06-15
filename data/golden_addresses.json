@@ -1,0 +1,62 @@
+[
+  {
+    "id": "precisely_hq",
+    "address": "1 Global View, Troy, NY 12180",
+    "city": "Troy",
+    "state": "NY",
+    "zip": "12180",
+    "expected_lat": 42.682242,
+    "expected_lng": -73.704443,
+    "notes": "Precisely headquarters — used as primary golden address"
+  },
+  {
+    "id": "empire_state",
+    "address": "350 Fifth Ave, New York, NY 10118",
+    "city": "New York",
+    "state": "NY",
+    "zip": "10118",
+    "expected_lat": 40.7484,
+    "expected_lng": -73.9967,
+    "notes": "Empire State Building — high-profile NYC landmark"
+  },
+  {
+    "id": "sf_market",
+    "address": "1 Market St, San Francisco, CA 94105",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94105",
+    "expected_lat": 37.7944,
+    "expected_lng": -122.3954,
+    "notes": "San Francisco downtown — high earthquake and coastal risk area"
+  },
+  {
+    "id": "paradise_ca",
+    "address": "123 Main St, Paradise, CA 95969",
+    "city": "Paradise",
+    "state": "CA",
+    "zip": "95969",
+    "expected_lat": 39.7596,
+    "expected_lng": -121.6219,
+    "notes": "Paradise, CA — known high wildfire risk area (2018 Camp Fire)"
+  },
+  {
+    "id": "miami_beach",
+    "address": "1 Ocean Dr, Miami Beach, FL 33139",
+    "city": "Miami Beach",
+    "state": "FL",
+    "zip": "33139",
+    "expected_lat": 25.7781,
+    "expected_lng": -80.1300,
+    "notes": "Miami Beach — high flood and coastal risk area"
+  },
+  {
+    "id": "white_house",
+    "address": "1600 Pennsylvania Ave NW, Washington, DC 20500",
+    "city": "Washington",
+    "state": "DC",
+    "zip": "20500",
+    "expected_lat": 38.8977,
+    "expected_lng": -77.0365,
+    "notes": "White House — well-known landmark with stable geocode result"
+  }
+]
