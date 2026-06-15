@@ -113,9 +113,13 @@ class GeminiClient:
             # Try to parse JSON response
             try:
                 parsed = json.loads(raw)
+                text = parsed.get("text", raw)
+                # Gemini sometimes returns a nested dict/object as "text" (raw JSON leaked in)
+                if not isinstance(text, str):
+                    text = json.dumps(text)
                 return {
                     "model": self.model,
-                    "text": parsed.get("text", raw),
+                    "text": text,
                     "tool_calls": _normalize_tool_calls(parsed.get("tool_calls", [])),
                     "latency_ms": latency_ms,
                     "raw_output": raw,

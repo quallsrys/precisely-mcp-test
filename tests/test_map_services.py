@@ -66,7 +66,8 @@ async def test_map_services_claude(label, prompt, claude_client, log_result):
 
 @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
 async def test_map_services_gemini(label, prompt, gemini_client, log_result):
-    result = gemini_client.ask(prompt)
+    # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+    result = gemini_client.ask(prompt, timeout=240)
     log_result({"llm": "gemini", "label": label, "prompt": prompt, "result": result})
 
     assert result["text"], f"[Gemini] No text for: {label}"
@@ -177,7 +178,7 @@ async def test_wms_capabilities_lists_layers_claude(claude_client):
 
 async def test_wms_capabilities_lists_layers_gemini(gemini_client):
     prompt = "Call the Precisely WMS GetCapabilities endpoint and list the available map layers."
-    result = gemini_client.ask(prompt)
+    result = gemini_client.ask(prompt, timeout=240)
 
     assert result["text"]
     tool_names = [t["name"] for t in result["tool_calls"]]
@@ -201,7 +202,7 @@ async def test_wmts_capabilities_lists_tile_layers_claude(claude_client):
 
 async def test_wmts_capabilities_lists_tile_layers_gemini(gemini_client):
     prompt = "Call the Precisely WMTS GetCapabilities endpoint and list the available tile layers and tile matrix sets."
-    result = gemini_client.ask(prompt)
+    result = gemini_client.ask(prompt, timeout=240)
 
     assert result["text"]
     tool_names = [t["name"] for t in result["tool_calls"]]

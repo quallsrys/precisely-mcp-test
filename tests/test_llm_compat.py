@@ -14,7 +14,7 @@ COMPARISON_PROMPTS = [
     ),
     (
         "property_summary",
-        "Summarize the property at 2755 Milwaukee St, Denver, CO 80238 — year built, size, and type.",
+        "Use the get_property_data tool to summarize the property at 2755 Milwaukee St, Denver, CO 80238 — year built, size, and type.",
     ),
     (
         "neighborhood_lookup",

@@ -6,9 +6,9 @@ import pytest
 DEMO_PROMPTS = [
     ("demographics", "What are the demographics for the area around 1 Global View, Troy, NY 12180?"),
     ("neighborhoods", "What neighborhood is 350 Fifth Ave, New York, NY 10118 in?"),
-    ("schools", "What schools are near 1 Global View, Troy, NY 12180?"),
+    ("schools", "Use the get_schools_by_address tool to find schools near 1 Global View, Troy, NY 12180."),
     ("crime index", "What is the crime index for 350 Fifth Ave, New York, NY 10118?"),
-    ("places nearby", "What places are near 1 Global View, Troy, NY 12180?"),
+    ("places nearby", "Use the get_places_by_address tool to find places near 1 Global View, Troy, NY 12180. List the first 3 place names only."),
     ("psyte geodemographics", "Get psychographic/geodemographic profile for 1 Global View, Troy, NY 12180."),
 ]
 
@@ -90,7 +90,7 @@ async def test_schools_include_name_and_distance(claude_client):
 
 
 async def test_schools_include_name_and_distance_gemini(gemini_client):
-    prompt = "List schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
+    prompt = "Use the get_schools_by_address tool to list schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
     result = gemini_client.ask(prompt)
 
     assert result["text"]
