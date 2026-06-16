@@ -76,7 +76,7 @@ async def test_demographic_tools_gemini(label, prompt, gemini_client, log_result
 
 
 async def test_schools_include_name_and_distance_claude(claude_client):
-    prompt = "List schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
+    prompt = "Use the get_schools_by_address tool to list schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
     result = claude_client.ask(prompt)
 
     assert result["text"]
@@ -104,7 +104,7 @@ async def test_schools_include_name_and_distance_gemini(gemini_client):
 
 
 async def test_demographics_population_data_claude(claude_client):
-    prompt = "What is the estimated population and median household income near 350 Fifth Ave, New York, NY 10118?"
+    prompt = "Use the get_demographics tool to get the estimated population and median household income near 350 Fifth Ave, New York, NY 10118."
     result = claude_client.ask(prompt)
 
     assert result["text"]
