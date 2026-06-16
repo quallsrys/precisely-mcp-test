@@ -129,21 +129,27 @@ The `nearest fire stations` test is notable — the prompt explicitly names the 
 
 ### Root cause
 
-**Unknown.** Possible explanations include:
+**Partially confirmed — two distinct issues:**
 
-1. Gemini choosing to answer from training data rather than calling a tool for certain query types
-2. Tool description ambiguity causing Gemini to not recognize the appropriate tool
-3. Gemini CLI reliability issues (the CLI is being deprecated June 18, 2026 in favor of Antigravity CLI)
+**Issue A — Gemini model behavior (confirmed):**
+`get spatial products` still fails on Antigravity CLI with the same symptom: Gemini returns a text response from its own knowledge and makes no tool call. Since this persists after the CLI migration, this is a confirmed Gemini model behavior, not a CLI issue. Gemini appears to recognize certain queries as answerable from training data and skips the tool call entirely.
 
-Root cause cannot be confirmed until tests are re-run against Antigravity CLI. If failures persist after migration, the issue is a Gemini model behavior, not a CLI issue.
+**Issue B — Timeout (agy performance):**
+`wms capabilities` tests time out at 240s on Antigravity CLI. The WMS GetCapabilities endpoint returns a large XML response (~50-120k chars). `agy` takes longer to process large tool responses than the old Gemini CLI did.
+
+The remaining 4 failures from June 16 (`addresses detailed`, `ogc collections`, `wms capabilities parametrized`, `nearest fire stations`) all passed on Antigravity — confirming those were Gemini CLI degradation in the final days before deprecation.
 
 ### How it was handled
 
-Logged as an open finding. No test changes made — failures are correctly reported as failures until root cause is confirmed.
+- 4/6 failures confirmed as Gemini CLI deprecation artifacts — resolved by Antigravity migration
+- `get spatial products` logged as confirmed Gemini model behavior (skips tool, answers from knowledge)
+- `wms capabilities` depth test logged as Antigravity timeout issue — may need timeout increase or test design change
 
 ### Next step
 
-Re-run these 6 tests after migrating `gemini_client.py` to Antigravity CLI (`agy`). Update this finding with results.
+For `get spatial products`: discuss with mentor whether routing assertion is meaningful for a known broken tool. Gemini declining to call a broken tool may be reasonable behavior.
+
+For `wms capabilities` timeout: investigate whether `agy` has a `--print-timeout` flag that can be extended, or increase subprocess timeout beyond 240s.
 
 ---
 
