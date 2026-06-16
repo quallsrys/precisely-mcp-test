@@ -38,7 +38,7 @@ EXPECTED_CONTENT = {
 
 
 @pytest.mark.parametrize("label,prompt", DEMO_PROMPTS)
-async def test_demographic_tools(label, prompt, claude_client, log_result):
+async def test_demographic_tools_claude(label, prompt, claude_client, log_result):
     result = claude_client.ask(prompt)
     log_result({"label": label, "prompt": prompt, "result": result})
 
@@ -75,7 +75,7 @@ async def test_demographic_tools_gemini(label, prompt, gemini_client, log_result
     )
 
 
-async def test_schools_include_name_and_distance(claude_client):
+async def test_schools_include_name_and_distance_claude(claude_client):
     prompt = "List schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
     result = claude_client.ask(prompt)
 
@@ -103,7 +103,7 @@ async def test_schools_include_name_and_distance_gemini(gemini_client):
     assert any(word in text_lower for word in ["north greenbush", "school", "district"])
 
 
-async def test_demographics_population_data(claude_client):
+async def test_demographics_population_data_claude(claude_client):
     prompt = "What is the estimated population and median household income near 350 Fifth Ave, New York, NY 10118?"
     result = claude_client.ask(prompt)
 

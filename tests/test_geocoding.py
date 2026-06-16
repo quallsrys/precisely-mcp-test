@@ -71,7 +71,7 @@ async def test_geocoding_gemini(label, prompt, gemini_client, log_result):
     )
 
 
-async def test_geocode_returns_coordinates(claude_client, golden_addresses):
+async def test_geocode_returns_coordinates_claude(claude_client, golden_addresses):
     addr = golden_addresses[0]
     prompt = f"Geocode this address and return the lat/lng: {addr['address']}"
     result = claude_client.ask(prompt)
@@ -99,7 +99,7 @@ async def test_geocode_returns_coordinates_gemini(gemini_client, golden_addresse
     assert "42.682" in text or "73.704" in text or addr["city"].lower() in text
 
 
-async def test_verify_address_deliverable(claude_client):
+async def test_verify_address_deliverable_claude(claude_client):
     prompt = "Is this address deliverable? 1 Global View, Troy, NY 12180"
     result = claude_client.ask(prompt)
 

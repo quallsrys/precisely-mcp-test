@@ -34,7 +34,7 @@ EXPECTED_WORKFLOW_CONTENT = {
 }
 
 
-async def test_property_purchase_due_diligence(claude_client, log_result):
+async def test_property_purchase_due_diligence_claude(claude_client, log_result):
     """Full due-diligence workflow: geocode → property data → risk assessment → demographics."""
     prompt = (
         "I'm considering buying a property at 1 Ocean Drive, Miami Beach, FL 33139. "
@@ -55,7 +55,7 @@ async def test_property_purchase_due_diligence(claude_client, log_result):
     )
 
 
-async def test_insurance_risk_workflow(claude_client, log_result):
+async def test_insurance_risk_workflow_claude(claude_client, log_result):
     """Insurance underwriting: property attributes → fire risk → flood risk → replacement cost."""
     prompt = (
         "I need to underwrite a homeowner's policy for 1 Market St, San Francisco, CA 94105. "
@@ -73,7 +73,7 @@ async def test_insurance_risk_workflow(claude_client, log_result):
     )
 
 
-async def test_address_data_enrichment(claude_client, log_result):
+async def test_address_data_enrichment_claude(claude_client, log_result):
     """Enrich a batch of addresses: geocode → verify → get neighborhood."""
     addresses = [
         "1 Global View, Troy, NY 12180",
@@ -96,7 +96,7 @@ async def test_address_data_enrichment(claude_client, log_result):
     assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["address_enrichment"])
 
 
-async def test_site_selection_workflow(claude_client, log_result):
+async def test_site_selection_workflow_claude(claude_client, log_result):
     """Site selection: demographics + crime + schools + places around a location."""
     prompt = (
         "I'm evaluating 1 Global View, Troy, NY 12180 as a potential retail location. "
@@ -115,7 +115,7 @@ async def test_site_selection_workflow(claude_client, log_result):
     )
 
 
-async def test_tax_jurisdiction_lookup(claude_client, log_result):
+async def test_tax_jurisdiction_lookup_claude(claude_client, log_result):
     """Tax jurisdiction workflow: geocode → lookup_tax_jurisdiction."""
     prompt = "What tax jurisdiction applies to 350 Fifth Ave, New York, NY 10118? Include state, county, and city tax rates if available."
     result = claude_client.ask(prompt)

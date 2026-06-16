@@ -38,7 +38,7 @@ EXPECTED_CONTENT = {
 
 
 @pytest.mark.parametrize("label,prompt", PROPERTY_PROMPTS)
-async def test_property_tools(label, prompt, claude_client, log_result):
+async def test_property_tools_claude(label, prompt, claude_client, log_result):
     result = claude_client.ask(prompt)
     log_result({"label": label, "prompt": prompt, "result": result})
 
@@ -75,7 +75,7 @@ async def test_property_tools_gemini(label, prompt, gemini_client, log_result):
     )
 
 
-async def test_property_data_has_expected_fields(claude_client):
+async def test_property_data_has_expected_fields_claude(claude_client):
     # Using residential address — commercial addresses (Precisely HQ, ESB) return no property attributes
     prompt = "Get full property data for 2755 Milwaukee St, Denver, CO 80238 including year built, square footage, and bedrooms."
     result = claude_client.ask(prompt)
@@ -105,7 +105,7 @@ async def test_property_data_has_expected_fields_gemini(gemini_client):
     assert any(word in text_lower for word in ["1927", "1,107", "644,300", "denver"])
 
 
-async def test_buildings_response(claude_client):
+async def test_buildings_response_claude(claude_client):
     prompt = "What buildings exist at 1 World Trade Center, New York, NY 10007?"
     result = claude_client.ask(prompt)
 

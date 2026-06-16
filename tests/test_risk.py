@@ -38,7 +38,7 @@ EXPECTED_CONTENT = {
 
 
 @pytest.mark.parametrize("label,prompt", RISK_PROMPTS)
-async def test_risk_tools(label, prompt, claude_client, log_result):
+async def test_risk_tools_claude(label, prompt, claude_client, log_result):
     result = claude_client.ask(prompt)
     log_result({"label": label, "prompt": prompt, "result": result})
 
@@ -75,7 +75,7 @@ async def test_risk_tools_gemini(label, prompt, gemini_client, log_result):
     )
 
 
-async def test_flood_risk_includes_zone(claude_client):
+async def test_flood_risk_includes_zone_claude(claude_client):
     prompt = "What FEMA flood zone is 1 Global View, Troy, NY 12180 in?"
     result = claude_client.ask(prompt)
 
@@ -99,7 +99,7 @@ async def test_flood_risk_includes_zone_gemini(gemini_client):
     assert any(word in text_lower for word in ["zone c", "1,374", "178", "flood"])
 
 
-async def test_multi_risk_summary(claude_client):
+async def test_multi_risk_summary_claude(claude_client):
     prompt = (
         "Give me a complete risk profile for 1 Market St, San Francisco, CA 94105. "
         "Include flood, earthquake, wildfire, and coastal risks."
