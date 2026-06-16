@@ -14,8 +14,8 @@ Phase 1 is complete and Phase 2 Gemini validation is done — both ahead of the 
 | Tools covered | 51 / 51 (100%) |
 | LLMs covered per tool | Claude + Gemini (both) |
 | Gemini tests | passing ✅ |
-| Claude tests | 25 / 47 passed (53%) — halted by API credit limit, 0 code failures |
-| LLMs validated | 1.5 of 3 (Gemini ✅, Claude 🟡 partial, GPT-4 🔜) |
+| Claude tests | 78 / 78 passed (100%) ✅ |
+| LLMs validated | 2 of 3 (Gemini ✅, Claude ✅, GPT-4 🔜) |
 | Tool categories covered | All 9 categories — see breakdown below |
 
 ---
@@ -80,25 +80,22 @@ Gemini sometimes returns a one-line summary instead of reporting specific data v
 
 ---
 
-## Claude Trial Results
+## Claude Baseline Results
 
-A personal Anthropic API key was used to run a partial Claude baseline today. Key findings:
+Full 78-test Claude baseline completed using Precisely enterprise Anthropic API key.
 
-- **25 / 47 Claude tests passed** before the account ran out of API credits
-- **0 code failures** — every failure was `"Your credit balance is too low"` (HTTP 400)
-- Tests passed across: geocoding, risk assessment, property, demographics, address extended, workflows, and LLM compat categories
-- Tests not yet reached: map services, spatial analysis, utilities (hit credit limit mid-run)
+- **78 / 78 Claude tests passed (100%)**
+- Suite completed in **~18 minutes** (vs ~44 minutes for Gemini — Claude is ~2.5x faster)
+- All 51 tools routed correctly across every category
+- Claude performs multi-step reasoning naturally — spatial queries explore tables before calling target tools
 
-**Technical blocker resolved:** The Claude client was rewritten to run the MCP agentic loop locally (fetch tools from localhost → call tools against local MCP server → feed results back to Claude API). This eliminates the need for a public-facing MCP URL or tunnel service. Claude now works the same way as the Gemini client.
-
-**Waiting on:** Precisely-issued Anthropic API key to complete the full 47-test Claude baseline.
+**Technical note:** The Claude client runs a local agentic loop (fetch tools from localhost → execute tool calls against local MCP server → feed results back to Claude API). No public-facing MCP URL or tunnel required.
 
 ---
 
 ## Current Blockers
 
-### 🟡 Anthropic API credits (medium priority)
-Claude client is fully working. 25/47 tests confirmed passing. Need a Precisely API key to complete the remaining 22 tests (map services, spatial, utilities).
+No remaining blockers for Phase 1. Both Claude and Gemini baselines are complete.
 
 ---
 
