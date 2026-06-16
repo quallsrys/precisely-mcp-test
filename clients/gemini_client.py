@@ -1,4 +1,4 @@
-"""Subprocess wrapper that drives the Gemini CLI for Precisely MCP tests."""
+"""Subprocess wrapper that drives the Antigravity CLI (agy) for Precisely MCP tests."""
 
 import json
 import os
@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 
 
-GEMINI_CMD = os.environ.get("GEMINI_CMD", "gemini")
+GEMINI_CMD = os.environ.get("GEMINI_CMD", "/Users/rystan.qualls/.local/bin/agy")
 GEMINI_DELAY_SECONDS = float(os.environ.get("GEMINI_DELAY_SECONDS", "10"))
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 SYSTEM_PROMPT_PATH = Path(__file__).parent.parent / "gemini.md"
@@ -89,7 +89,7 @@ class GeminiClient:
         try:
             t0 = time.perf_counter()
             result = subprocess.run(
-                [self.cmd, "-m", self.model, "-p", full_prompt],
+                [self.cmd, "--model", self.model, "--prompt", full_prompt],
                 capture_output=True,
                 text=True,
                 timeout=timeout,
