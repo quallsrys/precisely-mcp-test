@@ -1,16 +1,13 @@
 """
-Tests for tools with known server-side errors.
+Tests for tools that were previously broken server-side.
 
-These tools are registered and callable but fail due to MCP schema bugs or
-upstream API errors — not LLM routing failures. Tests assert only that the
-LLM correctly routes to the tool; content assertions are skipped.
+As of 2026-06-17, validate_phones, get_timezones, and get_spatial_products are
+confirmed working — full content assertions restored. lookup and summarize remain
+broken server-side (routing-only assertions, xfail on Gemini).
 
-Known issues (as of 2026-06-15):
-  validate_phones     — MCP schema error on all input formats
-  get_timezones       — MCP schema error: dstOffset/timestamp/utcOffset must be object
-  get_spatial_products — MCP schema error: recommendedStyle must be string
-  lookup              — MCP schema error: must have required property 'response'
-  summarize           — Upstream 500 error (DIS-1003)
+Known remaining issues (as of 2026-06-17):
+  lookup    — MCP schema error: must have required property 'response'
+  summarize — Upstream 500 error (DIS-1003)
 """
 
 import pytest
@@ -47,10 +44,22 @@ EXPECTED_TOOLS = {
     "summarize": "summarize",
 }
 
+# Real data verified 2026-06-17 against live Precisely API
+EXPECTED_CONTENT = {
+    # Real data: 817-557-7877 is a valid US mobile number on AT&T Wireless
+    "validate phones": ["valid", "at&t", "mobile", "8175577877"],
+    # Real data: 1 Global View, Troy NY → America/New_York, UTC offset -18000000ms
+    "get timezones": ["america/new_york", "eastern", "-18000000"],
+    # Real data: products include Flood Risk, Parcels, Crime Index, Property Attributes
+    "get spatial products": ["flood risk", "parcels", "crime index", "property"],
+}
+
+# These two remain broken server-side — routing-only assertions
+STILL_BROKEN = {"lookup", "summarize"}
+
 
 @pytest.mark.parametrize("label,prompt", BROKEN_TOOL_PROMPTS)
 async def test_broken_tools_routing_claude(label, prompt, claude_client, log_result):
-    """LLM should route to the correct tool even though the server returns an error."""
     result = claude_client.ask(prompt)
     log_result({"llm": "claude", "label": label, "prompt": prompt, "result": result})
 
@@ -61,25 +70,23 @@ async def test_broken_tools_routing_claude(label, prompt, claude_client, log_res
     assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
         f"Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
     )
-    # No content assertion — server-side error means response body is unreliable
 
+    if label not in STILL_BROKEN and label in EXPECTED_CONTENT:
+        text_lower = result["text"].lower()
+        assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"Response for '{label}' missing expected content {EXPECTED_CONTENT[label]}"
+        )
 
-# Gemini refuses to retry lookup and summarize after receiving schema/500 errors in prior session
-# calls. This is a compatibility difference from Claude (which always attempts routing).
-GEMINI_REFUSES_AFTER_ERROR = {"lookup", "summarize"}
 
 
 @pytest.mark.parametrize("label,prompt", BROKEN_TOOL_PROMPTS)
 async def test_broken_tools_routing_gemini(label, prompt, gemini_client, log_result):
-    """LLM should route to the correct tool even though the server returns an error."""
     result = gemini_client.ask(prompt)
     log_result({"llm": "gemini", "label": label, "prompt": prompt, "result": result})
 
     assert result["text"], f"[Gemini] No text response for: {label}"
 
-    if label in GEMINI_REFUSES_AFTER_ERROR:
-        # Gemini compatibility finding: refuses to call tools that returned errors
-        # in previous calls within the session. Claude always attempts routing.
+    if label in STILL_BROKEN:
         pytest.xfail(f"Gemini refuses to call {EXPECTED_TOOLS[label]} after prior session error — documented compatibility difference")
 
     assert result["tool_calls"], f"[Gemini] No tool calls for: {label} — LLM did not attempt to route"
@@ -88,4 +95,9 @@ async def test_broken_tools_routing_gemini(label, prompt, gemini_client, log_res
     assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
         f"[Gemini] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
     )
-    # No content assertion — server-side error means response body is unreliable
+
+    if label not in STILL_BROKEN and label in EXPECTED_CONTENT:
+        text_lower = result["text"].lower()
+        assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[Gemini] Response for '{label}' missing expected content {EXPECTED_CONTENT[label]}"
+        )

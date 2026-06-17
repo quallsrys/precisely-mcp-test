@@ -40,21 +40,21 @@ Every single Precisely MCP tool has at least one test for both Claude and Gemini
 | test_workflows.py | Multi-tool workflow chains across all categories |
 | test_llm_compat.py | Cross-LLM consistency checks |
 
-**Note on broken tools:** 5 tools have confirmed server-side bugs (MCP schema errors or upstream 500s). Their tests assert only that the LLM routes to the correct tool — content assertions are skipped because the server response is unreliable. These are engineering issues in the MCP server, not LLM failures.
+**Note on previously broken tools (updated 2026-06-17):** 3 of the 5 previously broken tools are now confirmed working — full content assertions restored. 2 remain broken server-side (routing-only).
 
-| Broken Tool | Error |
-|---|---|
-| `validate_phones` | MCP schema error on all input formats |
-| `get_timezones` | MCP schema error: dstOffset/timestamp/utcOffset must be object |
-| `get_spatial_products` | MCP schema error: recommendedStyle must be string |
-| `lookup` | MCP schema error: must have required property 'response' |
-| `summarize` | Upstream 500 error (DIS-1003) |
+| Tool | Status | Notes |
+|---|---|---|
+| `validate_phones` | ✅ Fixed | Returns valid/invalid status, carrier, E.164 format |
+| `get_timezones` | ✅ Fixed | Returns IANA timezone, UTC/DST offsets |
+| `get_spatial_products` | ✅ Fixed | Returns full product catalog |
+| `lookup` | ❌ Still broken | MCP schema error: must have required property 'response' |
+| `summarize` | ❌ Still broken | Upstream 500 error (DIS-1003) |
 
 ---
 
 ### 2. All expected values verified against real Precisely API calls
 
-Every expected content value in every test was verified by calling the live Precisely MCP server before being written into the test. No values were guessed or assumed from prior knowledge. This applies to all 46 working tools — specific values like FEMA zone codes, PSAP phone numbers, parcel IDs, OGC field names, and WMS layer names are all real data from the API.
+Every expected content value in every test was verified by calling the live Precisely MCP server before being written into the test. No values were guessed or assumed from prior knowledge. This applies to all 49 working tools — specific values like FEMA zone codes, PSAP phone numbers, parcel IDs, OGC field names, and WMS layer names are all real data from the API.
 
 Key test design:
 - **Parametrized tests** — each LLM must route to the right tool and return data containing verified keywords
