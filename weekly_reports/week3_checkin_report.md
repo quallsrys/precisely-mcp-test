@@ -85,11 +85,33 @@ risk / flood_risk                     openai  get_flood_risk_by_address (1)  18,
 risk / flood_risk                     llama   get_flood_risk_by_address (1)  555 / 85
 ```
 
-Token counts are real API values for Claude and OpenAI. Gemini shows N/A (agy CLI does not expose token metadata). Llama reports real counts from Ollama's usage API.
+Token counts are real API values for Claude, OpenAI, Gemini, and Llama.
 
 ---
 
-### 5. Gemini System Prompt Optimization
+### 5. Gemini Client Rewrite — SDK Direct Integration
+
+Replaced the `agy` CLI subprocess approach in `clients/gemini_client.py` with a direct integration using the `google-genai` SDK (v2.10.0).
+
+**Before:** `pytest → GeminiClient → subprocess(agy CLI) → Gemini API → parse stdout`
+Tool calls and token counts depended on Gemini including them in its text output — unreliable and sometimes hallucinated.
+
+**After:** `pytest → GeminiClient → google-genai SDK → Gemini API → structured response objects`
+The client now owns the agentic loop directly (same pattern as Claude, OpenAI, and Llama clients): fetch tools → send to LLM → execute MCP tool calls → feed results back → repeat. Tool call names and parameters come from `part.function_call`; token counts come from `response.usage_metadata`.
+
+Key implementation detail: Gemini's SDK uses a strict Pydantic schema for function declarations. A recursive sanitizer (`_sanitize_schema`) strips unsupported JSON Schema keywords (`oneOf`, `allOf`, `anyOf`, `$ref`, etc.) from MCP tool schemas before passing them to the SDK, and filters `required` arrays to only include properties that exist after flattening.
+
+**Verified result on geocode test:**
+- Tool calls: real structured objects from the API
+- Input tokens: 24,543 (real `usage_metadata.prompt_token_count`)
+- Output tokens: 39 (real `usage_metadata.candidates_token_count`)
+- Latency: 5.4 seconds
+
+`agy` is unaffected — it remains available for manual terminal use. Only the test suite changed.
+
+---
+
+### 6. Gemini System Prompt Optimization
 
 Removed the tool catalog section from `gemini.md` (51 tool descriptions, ~70 lines). The catalog was redundant — Gemini already receives tool schemas via the MCP protocol. Removing it saves **~18K input tokens per request** with no impact on routing quality, confirmed by before/after testing on geocode, buyer's report, and fraud detection prompts.
 
@@ -125,9 +147,11 @@ Token savings scale with task complexity:
 | LLM | Input tokens | Cost/request (est.) |
 |---|---|---|
 | Claude Sonnet 4.6 | ~12–28K | ~$0.04–$0.08 |
-| Gemini 2.5 Pro | ~45K | ~$0.007 |
+| Gemini 2.5 Pro | ~24–27K | ~$0.004 |
 | GPT-4o-mini | ~18–20K | ~$0.003 |
 | Llama 3.1 8B (Ollama) | ~400–1,400 | $0.00 (local) |
+
+*Gemini token counts are now real values from `usage_metadata` via the SDK rewrite (previously N/A from agy CLI).*
 
 ---
 

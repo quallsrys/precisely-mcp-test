@@ -1,143 +1,210 @@
-"""Subprocess wrapper that drives the Antigravity CLI (agy) for Precisely MCP tests."""
+"""Gemini client using google-genai SDK — drives Gemini against Precisely MCP server."""
 
 import json
 import os
-import subprocess
 import time
+import uuid
 from pathlib import Path
 
+import httpx
+from dotenv import load_dotenv
+from google import genai
+from google.genai import types
 
-GEMINI_CMD = os.environ.get("GEMINI_CMD", "/Users/rystan.qualls/.local/bin/agy")
-GEMINI_DELAY_SECONDS = float(os.environ.get("GEMINI_DELAY_SECONDS", "10"))
+load_dotenv()
+
+MCP_SERVER_URL = os.environ.get("PRECISELY_MCP_URL", "http://localhost:3000/mcp")
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
+GEMINI_DELAY_SECONDS = float(os.environ.get("GEMINI_DELAY_SECONDS", "5"))
 SYSTEM_PROMPT_PATH = Path(__file__).parent.parent / "gemini.md"
-import re as _re
-
-# Strips the MCP server prefix added by Gemini (mcp_precisely_) or Claude (mcp__precisely__)
-_MCP_PREFIX_RE = _re.compile(r"^mcp_{1,2}precisely_{1,2}", _re.IGNORECASE)
 
 
-class GeminiClientError(RuntimeError):
-    """Raised when the Gemini CLI fails so pytest surfaces the real cause."""
-    def __init__(self, reason: str, returncode: int, stderr: str, stdout: str):
-        self.reason = reason
-        self.returncode = returncode
-        self.stderr = stderr
-        self.stdout = stdout
-        super().__init__(
-            f"Gemini CLI error [{reason}] (exit {returncode})\n"
-            f"  stderr: {stderr[:500] or '(empty)'}\n"
-            f"  stdout: {stdout[:200] or '(empty)'}"
+def _mcp_request(method: str, params: dict | None = None) -> dict:
+    payload = {
+        "jsonrpc": "2.0",
+        "id": str(uuid.uuid4()),
+        "method": method,
+    }
+    if params:
+        payload["params"] = params
+
+    headers = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream"}
+    resp = httpx.post(MCP_SERVER_URL, json=payload, headers=headers, timeout=30, follow_redirects=True)
+    resp.raise_for_status()
+
+    content_type = resp.headers.get("content-type", "")
+    if "text/event-stream" in content_type:
+        for line in resp.text.splitlines():
+            if line.startswith("data:"):
+                return json.loads(line[5:].strip())
+        raise ValueError(f"No data line in SSE response: {resp.text[:200]}")
+
+    return resp.json()
+
+
+_GEMINI_ALLOWED_SCHEMA_KEYS = {"type", "description", "properties", "required", "items", "enum", "format"}
+
+
+def _sanitize_schema(schema: dict) -> dict:
+    """Recursively flatten and strip JSON Schema keywords that Gemini's SDK rejects."""
+    if not isinstance(schema, dict):
+        return schema
+
+    # Flatten oneOf/allOf/anyOf by merging all variant properties
+    if any(k in schema for k in ("oneOf", "allOf", "anyOf")):
+        merged_props: dict = {}
+        merged_required: list = []
+        for key in ("oneOf", "allOf", "anyOf"):
+            for variant in schema.get(key, []):
+                merged_props.update(variant.get("properties", {}))
+                merged_required.extend(variant.get("required", []))
+        schema = {"type": "object", "properties": merged_props}
+        if merged_required:
+            schema["required"] = list(dict.fromkeys(merged_required))
+
+    # Keep only keys Gemini accepts, then recurse into nested schemas
+    clean: dict = {}
+    for k, v in schema.items():
+        if k not in _GEMINI_ALLOWED_SCHEMA_KEYS:
+            continue
+        if k == "properties" and isinstance(v, dict):
+            clean[k] = {pk: _sanitize_schema(pv) for pk, pv in v.items()}
+        elif k == "items" and isinstance(v, dict):
+            clean[k] = _sanitize_schema(v)
+        else:
+            clean[k] = v
+
+    # Strip required entries that don't correspond to actual properties
+    if "required" in clean and "properties" in clean:
+        valid_props = set(clean["properties"].keys())
+        filtered = [r for r in clean["required"] if r in valid_props]
+        if filtered:
+            clean["required"] = filtered
+        else:
+            del clean["required"]
+
+    return clean
+
+
+def _list_tools() -> list[types.Tool]:
+    """Fetch MCP tools and convert to Gemini function declarations."""
+    result = _mcp_request("tools/list")
+    tools = result.get("result", {}).get("tools", [])
+
+    declarations = []
+    for t in tools:
+        schema = _sanitize_schema(t.get("inputSchema", {"type": "object", "properties": {}}))
+
+        declarations.append(
+            types.FunctionDeclaration(
+                name=t["name"],
+                description=t.get("description", ""),
+                parameters=schema,
+            )
         )
 
-
-def _classify_error(stderr: str, returncode: int) -> str:
-    """Return a short human-readable reason string from CLI stderr."""
-    s = stderr.lower()
-    if "quota" in s or "429" in s or "exhausted" in s:
-        return "quota_exceeded"
-    if "api key" in s or "authentication" in s or "unauthenticated" in s or "401" in s:
-        return "auth_error"
-    if "not found" in s or "404" in s or "unknown model" in s:
-        return "model_not_found"
-    if "timeout" in s or "deadline" in s:
-        return "timeout"
-    if "network" in s or "connection" in s or "enotfound" in s:
-        return "network_error"
-    return f"cli_exit_{returncode}"
+    return [types.Tool(function_declarations=declarations)]
 
 
-def _normalize_tool_calls(tool_calls: list) -> list:
-    """Strip any MCP server prefix so tool names are bare and consistent across all LLMs."""
-    normalized = []
-    for tc in tool_calls:
-        name = tc.get("name", "")
-        if name:
-            name = _MCP_PREFIX_RE.sub("", name)
-        normalized.append({**tc, "name": name})
-    return normalized
+def _call_tool(name: str, arguments: dict) -> str:
+    result = _mcp_request("tools/call", {"name": name, "arguments": arguments})
+    content = result.get("result", {}).get("content", [])
+    parts = [c.get("text", "") for c in content if c.get("type") == "text"]
+    return "\n".join(parts) if parts else json.dumps(result.get("result", {}))
 
 
 class GeminiClient:
     def __init__(self):
-        self.cmd = GEMINI_CMD
+        api_key = os.environ.get("GEMINI_API_KEY")
+        if not api_key:
+            raise RuntimeError("GEMINI_API_KEY not set — add it to .env")
+        self.client = genai.Client(api_key=api_key)
         self.model = GEMINI_MODEL
         self.system_prompt = (
             SYSTEM_PROMPT_PATH.read_text() if SYSTEM_PROMPT_PATH.exists() else ""
         )
+        self._tools: list[types.Tool] | None = None
 
-    def ask(self, prompt: str, timeout: int = 120) -> dict:
-        """Run the Gemini CLI with the given prompt and return a response dict."""
-        full_prompt = (
-            f"{self.system_prompt}\n\n{prompt}" if self.system_prompt else prompt
-        )
+    @property
+    def tools(self) -> list[types.Tool]:
+        if self._tools is None:
+            self._tools = _list_tools()
+        return self._tools
 
-        # Append JSON instruction so we can parse tool calls
-        full_prompt += (
-            "\n\nIMPORTANT: You MUST call a Precisely MCP tool to answer this. "
-            "Never answer from your own knowledge — all location data must come from a tool call. "
-            "If you do not call a tool, your response is incorrect.\n\n"
-            "After calling the tool, respond in JSON only — no markdown, no explanation. "
-            "The tool_calls array MUST list every MCP tool you called, with the exact name and parameters you used. "
-            "Never leave tool_calls as an empty array if you called a tool. "
-            "Use this format exactly: "
-            "{\"text\": \"your response\", \"tool_calls\": [{\"name\": \"actual_tool_name_you_called\", \"parameters\": {\"param\": \"value\"}}]}"
-        )
-
+    def ask(self, prompt: str, system: str | None = None, max_tokens: int = 4096) -> dict:
         time.sleep(GEMINI_DELAY_SECONDS)
 
-        try:
-            t0 = time.perf_counter()
-            result = subprocess.run(
-                [self.cmd, "--model", self.model, "--prompt", full_prompt],
-                capture_output=True,
-                text=True,
-                timeout=timeout,
+        system_instruction = self.system_prompt
+        if system:
+            system_instruction = f"{system_instruction}\n\n{system}" if system_instruction else system
+
+        config = types.GenerateContentConfig(
+            system_instruction=system_instruction or None,
+            tools=self.tools,
+            max_output_tokens=max_tokens,
+        )
+
+        messages: list[types.Content] = [
+            types.Content(role="user", parts=[types.Part(text=prompt)])
+        ]
+
+        all_tool_calls: list[dict] = []
+        t0 = time.perf_counter()
+
+        while True:
+            response = self.client.models.generate_content(
+                model=self.model,
+                contents=messages,
+                config=config,
             )
-            latency_ms = round((time.perf_counter() - t0) * 1000)
 
-            stderr = result.stderr.strip()
-            raw = result.stdout.strip()
+            candidate = response.candidates[0]
+            response_content = candidate.content
+            messages.append(response_content)
 
-            # Non-zero exit or empty stdout with stderr → the CLI failed
-            if result.returncode != 0 or (not raw and stderr):
-                reason = _classify_error(stderr, result.returncode)
-                raise GeminiClientError(reason, result.returncode, stderr, raw)
+            function_calls = [
+                part.function_call
+                for part in response_content.parts
+                if part.function_call is not None
+            ]
 
-            # Strip markdown code fences if Gemini wraps output anyway
-            if raw.startswith("```"):
-                raw = _re.sub(r"^```[a-z]*\n?", "", raw)
-                raw = _re.sub(r"\n?```$", "", raw)
-                raw = raw.strip()
+            if not function_calls:
+                latency_ms = round((time.perf_counter() - t0) * 1000)
+                text_parts = [
+                    part.text
+                    for part in response_content.parts
+                    if hasattr(part, "text") and part.text
+                ]
+                text = "\n".join(text_parts)
 
-            # Try to parse JSON response
-            try:
-                parsed = json.loads(raw)
-                text = parsed.get("text", raw)
-                # Gemini sometimes returns a nested dict/object as "text" (raw JSON leaked in)
-                if not isinstance(text, str):
-                    text = json.dumps(text)
+                usage = response.usage_metadata
                 return {
                     "model": self.model,
                     "text": text,
-                    "tool_calls": _normalize_tool_calls(parsed.get("tool_calls", [])),
+                    "tool_calls": all_tool_calls,
                     "latency_ms": latency_ms,
-                    "raw_output": raw,
-                    "stderr": stderr,
-                    "returncode": result.returncode,
-                }
-            except json.JSONDecodeError:
-                return {
-                    "model": self.model,
-                    "text": raw,
-                    "tool_calls": [],
-                    "latency_ms": latency_ms,
-                    "raw_output": raw,
-                    "stderr": stderr,
-                    "returncode": result.returncode,
+                    "stop_reason": str(candidate.finish_reason),
+                    "usage": {
+                        "input_tokens": usage.prompt_token_count if usage else None,
+                        "output_tokens": usage.candidates_token_count if usage else None,
+                    },
                 }
 
-        except subprocess.TimeoutExpired:
-            raise GeminiClientError(
-                "timeout", -1, f"No response after {timeout}s", ""
+            tool_response_parts = []
+            for fc in function_calls:
+                arguments = dict(fc.args) if fc.args else {}
+                all_tool_calls.append({"name": fc.name, "input": arguments})
+
+                output = _call_tool(fc.name, arguments)
+                tool_response_parts.append(
+                    types.Part(
+                        function_response=types.FunctionResponse(
+                            name=fc.name,
+                            response={"result": output},
+                        )
+                    )
+                )
+
+            messages.append(
+                types.Content(role="user", parts=tool_response_parts)
             )
