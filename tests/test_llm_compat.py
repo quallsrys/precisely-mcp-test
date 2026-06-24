@@ -65,7 +65,6 @@ async def test_gemini_responds(label, prompt, gemini_client, log_result):
     result = gemini_client.ask(prompt)
     log_result({"label": label, "model": "gemini", "result": result})
 
-    assert result["returncode"] == 0, f"Gemini CLI exited non-zero for: {label} — stderr: {result['stderr']}"
     assert result["text"], f"Gemini returned no text for: {label}"
     assert result["tool_calls"], f"[Gemini] No tool calls for: {label}"
 

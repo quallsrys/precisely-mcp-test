@@ -131,7 +131,7 @@ class GeminiClient:
             self._tools = _list_tools()
         return self._tools
 
-    def ask(self, prompt: str, system: str | None = None, max_tokens: int = 4096) -> dict:
+    def ask(self, prompt: str, system: str | None = None, max_tokens: int = 4096, timeout: int = 240) -> dict:
         time.sleep(GEMINI_DELAY_SECONDS)
 
         system_instruction = self.system_prompt
