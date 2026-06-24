@@ -120,3 +120,95 @@ async def test_serviceability_returns_status_gemini(gemini_client):
     text_lower = result["text"].lower()
     # Real data: serviceableAddress YES
     assert any(word in text_lower for word in ["yes", "serviceable", "available"])
+
+
+@pytest.mark.parametrize("label,prompt", ADDRESS_EXTENDED_PROMPTS)
+async def test_address_extended_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    if EXPECTED_CONTENT[label]:
+        text_lower = result["text"].lower()
+        assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[OpenAI] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+        )
+
+
+@pytest.mark.parametrize("label,prompt", ADDRESS_EXTENDED_PROMPTS)
+async def test_address_extended_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="geocoding")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text for: {label}"
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    if EXPECTED_CONTENT[label]:
+        text_lower = result["text"].lower()
+        assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+        )
+
+
+async def test_ground_view_income_data_openai(openai_client):
+    prompt = "What is the average household income and home value for the census block group at 1 Global View, Troy, NY 12180?"
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ground" in n.lower() or "demographic" in n.lower() for n in tool_names), (
+        f"[OpenAI] Expected ground view or demographics tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: avgHouseholdIncome 155473, avgHomeValue 375590
+    assert any(word in text_lower for word in ["155", "375", "income", "home value"])
+
+
+async def test_ground_view_income_data_llama(llama_client):
+    prompt = "What is the average household income and home value for the census block group at 1 Global View, Troy, NY 12180?"
+    result = llama_client.ask(prompt, category="geocoding")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ground" in n.lower() or "demographic" in n.lower() for n in tool_names), (
+        f"[Llama] Expected ground view or demographics tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: avgHouseholdIncome 155473, avgHomeValue 375590
+    assert any(word in text_lower for word in ["155", "375", "income", "home value"])
+
+
+async def test_serviceability_returns_status_openai(openai_client):
+    prompt = "Check broadband serviceability for 2755 Milwaukee St, Denver, CO 80238 and tell me if the address is serviceable."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("serviceab" in n.lower() for n in tool_names), f"[OpenAI] Expected serviceability tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: serviceableAddress YES
+    assert any(word in text_lower for word in ["yes", "serviceable", "available"])
+
+
+async def test_serviceability_returns_status_llama(llama_client):
+    prompt = "Check broadband serviceability for 2755 Milwaukee St, Denver, CO 80238 and tell me if the address is serviceable."
+    result = llama_client.ask(prompt, category="geocoding")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("serviceab" in n.lower() for n in tool_names), f"[Llama] Expected serviceability tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: serviceableAddress YES
+    assert any(word in text_lower for word in ["yes", "serviceable", "available"])

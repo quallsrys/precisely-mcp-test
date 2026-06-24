@@ -129,3 +129,97 @@ async def test_buildings_response_gemini(gemini_client):
     text_lower = result["text"].lower()
     # Real data: Mixed type, 42,570 sqft, elevation -5ft (below sea level)
     assert any(word in text_lower for word in ["42,570", "42570", "mixed", "world trade", "new york"])
+
+
+@pytest.mark.parametrize("label,prompt", PROPERTY_PROMPTS)
+async def test_property_tools_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[OpenAI] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+@pytest.mark.parametrize("label,prompt", PROPERTY_PROMPTS)
+async def test_property_tools_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="property")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text for: {label}"
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+async def test_property_data_has_expected_fields_openai(openai_client):
+    # Using residential address — commercial addresses (Precisely HQ, ESB) return no property attributes
+    prompt = "Get full property data for 2755 Milwaukee St, Denver, CO 80238 including year built, square footage, and bedrooms."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("property" in n.lower() or "parcel" in n.lower() for n in tool_names), (
+        f"[OpenAI] Expected property or parcel tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: yearBuilt 1927, 1,107 sqft, 2 bedrooms, market value $644,300
+    assert any(word in text_lower for word in ["1927", "1,107", "644,300", "denver"])
+
+
+async def test_property_data_has_expected_fields_llama(llama_client):
+    # Using residential address — commercial addresses (Precisely HQ, ESB) return no property attributes
+    prompt = "Get full property data for 2755 Milwaukee St, Denver, CO 80238 including year built, square footage, and bedrooms."
+    result = llama_client.ask(prompt, category="property")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("property" in n.lower() or "parcel" in n.lower() for n in tool_names), (
+        f"[Llama] Expected property or parcel tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: yearBuilt 1927, 1,107 sqft, 2 bedrooms, market value $644,300
+    assert any(word in text_lower for word in ["1927", "1,107", "644,300", "denver"])
+
+
+async def test_buildings_response_openai(openai_client):
+    prompt = "What buildings exist at 1 World Trade Center, New York, NY 10007?"
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("building" in n.lower() for n in tool_names), f"[OpenAI] Expected buildings tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: Mixed type, 42,570 sqft, elevation -5ft (below sea level)
+    assert any(word in text_lower for word in ["42,570", "42570", "mixed", "world trade", "new york"])
+
+
+async def test_buildings_response_llama(llama_client):
+    prompt = "What buildings exist at 1 World Trade Center, New York, NY 10007?"
+    result = llama_client.ask(prompt, category="property")
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("building" in n.lower() for n in tool_names), f"[Llama] Expected buildings tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: Mixed type, 42,570 sqft, elevation -5ft (below sea level)
+    assert any(word in text_lower for word in ["42,570", "42570", "mixed", "world trade", "new york"])

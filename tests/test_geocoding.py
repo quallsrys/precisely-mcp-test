@@ -123,3 +123,99 @@ async def test_verify_address_deliverable_gemini(gemini_client):
     text_lower = result["text"].lower()
     # Real data: NON_DELIVERABLE=N, GLOBAL_DELIVERY_INDICATOR=1, "1 GLOBAL VW, TROY NY 12180-8371"
     assert any(word in text_lower for word in ["deliverable", "global vw", "12180", "troy"])
+
+
+async def test_geocode_returns_coordinates_openai(openai_client, golden_addresses):
+    addr = golden_addresses[0]
+    prompt = f"Geocode this address and return the lat/lng: {addr['address']}"
+    result = openai_client.ask(prompt)
+
+    assert result["tool_calls"], "[OpenAI] Expected at least one tool call"
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("geocode" in n.lower() for n in tool_names), f"[OpenAI] Expected a geocode tool, got: {tool_names}"
+
+    text = result["text"].lower()
+    assert "42.682" in text or "73.704" in text or addr["city"].lower() in text
+
+
+async def test_verify_address_deliverable_openai(openai_client):
+    prompt = "Is this address deliverable? 1 Global View, Troy, NY 12180"
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("verify" in n.lower() for n in tool_names), f"[OpenAI] Expected verify_address tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in ["deliverable", "global vw", "12180", "troy"])
+
+
+async def test_geocode_returns_coordinates_llama(llama_client, golden_addresses):
+    addr = golden_addresses[0]
+    prompt = f"Geocode this address and return the lat/lng: {addr['address']}"
+    result = llama_client.ask(prompt, category="geocoding")
+
+    assert result["tool_calls"], "[Llama] Expected at least one tool call"
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("geocode" in n.lower() for n in tool_names), f"[Llama] Expected a geocode tool, got: {tool_names}"
+
+    text = result["text"].lower()
+    assert "42.682" in text or "73.704" in text or addr["city"].lower() in text
+
+
+async def test_verify_address_deliverable_llama(llama_client):
+    prompt = "Is this address deliverable? 1 Global View, Troy, NY 12180"
+    result = llama_client.ask(prompt, category="geocoding")
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("verify" in n.lower() for n in tool_names), f"[Llama] Expected verify_address tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in ["deliverable", "global vw", "12180", "troy"])
+
+
+# ---------------------------------------------------------------------------
+# OpenAI tests
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("label,prompt", GEOCODE_PROMPTS)
+async def test_geocoding_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text response for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[OpenAI] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Llama (Ollama) tests
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("label,prompt", GEOCODE_PROMPTS)
+async def test_geocoding_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="geocoding")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text response for: {label}"
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )

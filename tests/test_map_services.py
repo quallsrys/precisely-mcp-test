@@ -210,3 +210,169 @@ async def test_wmts_capabilities_lists_tile_layers_gemini(gemini_client):
     text_lower = result["text"].lower()
     # Real data: WMTS identifiers include address_fabric, buildings; TileMatrixSet WorldWebMercatorQuad_0_to_19
     assert any(word in text_lower for word in ["address_fabric", "buildings", "worldwebmercatorquad", "tile"])
+
+
+@pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+async def test_map_services_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[OpenAI] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+@pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+async def test_map_services_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="map_services")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text for: {label}"
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+async def test_ogc_functions_lists_spatial_ops_openai(openai_client):
+    prompt = "What spatial filter functions does the Precisely OGC API support?"
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ogc_functions" in n for n in tool_names), f"[OpenAI] Expected ogc_functions tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: s_within, s_contains, s_intersects
+    assert any(word in text_lower for word in ["s_within", "s_contains", "s_intersects", "within", "contains", "intersects"])
+
+
+async def test_ogc_functions_lists_spatial_ops_llama(llama_client):
+    prompt = "What spatial filter functions does the Precisely OGC API support?"
+    result = llama_client.ask(prompt, category="map_services")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ogc_functions" in n for n in tool_names), f"[Llama] Expected ogc_functions tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: s_within, s_contains, s_intersects
+    assert any(word in text_lower for word in ["s_within", "s_contains", "s_intersects", "within", "contains", "intersects"])
+
+
+async def test_ogc_collection_schema_field_names_openai(openai_client):
+    prompt = "List every field name in the schema for the risks/flood_risk OGC collection."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ogc_collection_schema" in n for n in tool_names), f"[OpenAI] Expected ogc_collection_schema tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: floodzone, mapname, statecode, prim_zone, bfe_elev
+    assert any(word in text_lower for word in ["floodzone", "mapname", "statecode", "prim_zone", "bfe_elev"])
+
+
+async def test_ogc_collection_schema_field_names_llama(llama_client):
+    prompt = "List every field name in the schema for the risks/flood_risk OGC collection."
+    result = llama_client.ask(prompt, category="map_services")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ogc_collection_schema" in n for n in tool_names), f"[Llama] Expected ogc_collection_schema tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: floodzone, mapname, statecode, prim_zone, bfe_elev
+    assert any(word in text_lower for word in ["floodzone", "mapname", "statecode", "prim_zone", "bfe_elev"])
+
+
+async def test_ogc_items_returns_geojson_openai(openai_client):
+    prompt = (
+        "Retrieve flood risk features from the risks/flood_risk OGC collection within bounding box "
+        "-122.4194,37.7749,-122.4094,37.7849 in San Francisco. Return up to 2 results and report "
+        "the statecode, mapname, and floodzone values."
+    )
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ogc_collection_items" in n for n in tool_names), f"[OpenAI] Expected ogc_collection_items tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: statecode "06" (California), mapname starts with "060298", floodzone "X"
+    assert any(word in text_lower for word in ["06", "0602980116", "floodzone", "statecode", "mapname"])
+
+
+async def test_ogc_items_returns_geojson_llama(llama_client):
+    prompt = (
+        "Retrieve flood risk features from the risks/flood_risk OGC collection within bounding box "
+        "-122.4194,37.7749,-122.4094,37.7849 in San Francisco. Return up to 2 results and report "
+        "the statecode, mapname, and floodzone values."
+    )
+    result = llama_client.ask(prompt, category="map_services")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("ogc_collection_items" in n for n in tool_names), f"[Llama] Expected ogc_collection_items tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: statecode "06" (California), mapname starts with "060298", floodzone "X"
+    assert any(word in text_lower for word in ["06", "0602980116", "floodzone", "statecode", "mapname"])
+
+
+async def test_wms_capabilities_lists_layers_openai(openai_client):
+    prompt = "Call the Precisely WMS GetCapabilities endpoint and list the available map layers."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("wms_request" in n for n in tool_names), f"[OpenAI] Expected wms_request tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: WMS layers include address_fabric, buildings, parcels
+    assert any(word in text_lower for word in ["address_fabric", "buildings", "parcels", "wms", "layer"])
+
+
+async def test_wms_capabilities_lists_layers_llama(llama_client):
+    prompt = "Call the Precisely WMS GetCapabilities endpoint and list the available map layers."
+    result = llama_client.ask(prompt, category="map_services")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("wms_request" in n for n in tool_names), f"[Llama] Expected wms_request tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: WMS layers include address_fabric, buildings, parcels
+    assert any(word in text_lower for word in ["address_fabric", "buildings", "parcels", "wms", "layer"])
+
+
+async def test_wmts_capabilities_lists_tile_layers_openai(openai_client):
+    prompt = "Call the Precisely WMTS GetCapabilities endpoint and list the available tile layers and tile matrix sets."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("wmts_request" in n for n in tool_names), f"[OpenAI] Expected wmts_request tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: WMTS identifiers include address_fabric, buildings; TileMatrixSet WorldWebMercatorQuad_0_to_19
+    assert any(word in text_lower for word in ["address_fabric", "buildings", "worldwebmercatorquad", "tile"])
+
+
+async def test_wmts_capabilities_lists_tile_layers_llama(llama_client):
+    prompt = "Call the Precisely WMTS GetCapabilities endpoint and list the available tile layers and tile matrix sets."
+    result = llama_client.ask(prompt, category="map_services")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("wmts_request" in n for n in tool_names), f"[Llama] Expected wmts_request tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: WMTS identifiers include address_fabric, buildings; TileMatrixSet WorldWebMercatorQuad_0_to_19
+    assert any(word in text_lower for word in ["address_fabric", "buildings", "worldwebmercatorquad", "tile"])

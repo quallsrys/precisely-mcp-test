@@ -125,3 +125,93 @@ async def test_multi_risk_summary_gemini(gemini_client):
     text_lower = result["text"].lower()
     # Real SF data: Zone SHX flood, fault 8.62mi, earthquake magnitude events
     assert any(word in text_lower for word in ["shx", "8.62", "fault", "flood", "earthquake"])
+
+
+@pytest.mark.parametrize("label,prompt", RISK_PROMPTS)
+async def test_risk_tools_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[OpenAI] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+@pytest.mark.parametrize("label,prompt", RISK_PROMPTS)
+async def test_risk_tools_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="risk")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text for: {label}"
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+async def test_flood_risk_includes_zone_openai(openai_client):
+    prompt = "What FEMA flood zone is 1 Global View, Troy, NY 12180 in?"
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("flood" in n.lower() for n in tool_names), f"[OpenAI] Expected flood tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: Zone C, elevation 178ft, 1,374ft from 100-year flood zone
+    assert any(word in text_lower for word in ["zone c", "1,374", "178", "flood"])
+
+
+async def test_flood_risk_includes_zone_llama(llama_client):
+    prompt = "What FEMA flood zone is 1 Global View, Troy, NY 12180 in?"
+    result = llama_client.ask(prompt, category="risk")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("flood" in n.lower() for n in tool_names), f"[Llama] Expected flood tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: Zone C, elevation 178ft, 1,374ft from 100-year flood zone
+    assert any(word in text_lower for word in ["zone c", "1,374", "178", "flood"])
+
+
+async def test_multi_risk_summary_openai(openai_client):
+    prompt = (
+        "Give me a complete risk profile for 1 Market St, San Francisco, CA 94105. "
+        "Include flood, earthquake, wildfire, and coastal risks."
+    )
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    assert len(result["tool_calls"]) >= 2, "[OpenAI] Expected multiple risk tools to be called"
+    text_lower = result["text"].lower()
+    # Real SF data: Zone SHX flood, fault 8.62mi, earthquake magnitude events
+    assert any(word in text_lower for word in ["shx", "8.62", "fault", "flood", "earthquake"])
+
+
+async def test_multi_risk_summary_llama(llama_client):
+    prompt = (
+        "Give me a complete risk profile for 1 Market St, San Francisco, CA 94105. "
+        "Include flood, earthquake, wildfire, and coastal risks."
+    )
+    result = llama_client.ask(prompt, category="risk")
+
+    assert result["text"]
+    assert len(result["tool_calls"]) >= 2, "[Llama] Expected multiple risk tools to be called"
+    text_lower = result["text"].lower()
+    # Real SF data: Zone SHX flood, fault 8.62mi, earthquake magnitude events
+    assert any(word in text_lower for word in ["shx", "8.62", "fault", "flood", "earthquake"])

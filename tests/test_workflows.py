@@ -219,3 +219,193 @@ async def test_tax_jurisdiction_lookup_gemini(gemini_client, log_result):
     tool_names = [t["name"] for t in result["tool_calls"]]
     assert any("tax" in n.lower() for n in tool_names), f"[Gemini] Expected tax tool, got: {tool_names}"
     # Content assertion skipped — lookup_tax_jurisdiction returns schema error for all addresses (broken tool)
+
+
+async def test_property_purchase_due_diligence_openai(openai_client, log_result):
+    """[OpenAI] Full due-diligence workflow: geocode → property data → risk assessment → demographics."""
+    prompt = (
+        "I'm considering buying a property at 1 Ocean Drive, Miami Beach, FL 33139. "
+        "Please: 1) verify the address, 2) get property details, 3) assess flood and coastal risk, "
+        "4) look up local demographics and schools. Give me a summary."
+    )
+    result = openai_client.ask(prompt, max_tokens=8192)
+    log_result({"llm": "openai", "test": "property_due_diligence", "result": result})
+
+    assert result["text"]
+    assert len(result["tool_calls"]) >= 3, (
+        f"[OpenAI] Expected at least 3 tool calls for full due-diligence, got {len(result['tool_calls'])}: "
+        f"{[t['name'] for t in result['tool_calls']]}"
+    )
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["property_due_diligence"]), (
+        f"[OpenAI] Due-diligence response missing expected content: {EXPECTED_WORKFLOW_CONTENT['property_due_diligence']}"
+    )
+
+
+async def test_insurance_risk_workflow_openai(openai_client, log_result):
+    """[OpenAI] Insurance underwriting: property attributes → fire risk → flood risk → replacement cost."""
+    prompt = (
+        "I need to underwrite a homeowner's policy for 1 Market St, San Francisco, CA 94105. "
+        "Get the property attributes, fire risk, flood risk, earthquake risk, and replacement cost estimate."
+    )
+    result = openai_client.ask(prompt, max_tokens=8192)
+    log_result({"llm": "openai", "test": "insurance_risk_workflow", "result": result})
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert len(tool_names) >= 3, f"[OpenAI] Expected multi-tool insurance workflow, got: {tool_names}"
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["insurance_risk_workflow"]), (
+        f"[OpenAI] Insurance workflow response missing expected content: {EXPECTED_WORKFLOW_CONTENT['insurance_risk_workflow']}"
+    )
+
+
+async def test_address_data_enrichment_openai(openai_client, log_result):
+    """[OpenAI] Enrich a batch of addresses: geocode → verify → get neighborhood."""
+    addresses = [
+        "1 Global View, Troy, NY 12180",
+        "350 Fifth Ave, New York, NY 10118",
+    ]
+    prompt = (
+        f"For each of these addresses, verify it and return the neighborhood it belongs to:\n"
+        + "\n".join(f"- {a}" for a in addresses)
+    )
+    result = openai_client.ask(prompt, max_tokens=8192)
+    log_result({"llm": "openai", "test": "address_enrichment", "result": result})
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("verify" in n.lower() or "geocode" in n.lower() or "neighborhood" in n.lower() for n in tool_names), (
+        f"[OpenAI] Expected address or neighborhood tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["address_enrichment"]), (
+        f"[OpenAI] Address enrichment response missing expected content: {EXPECTED_WORKFLOW_CONTENT['address_enrichment']}"
+    )
+
+
+async def test_site_selection_workflow_openai(openai_client, log_result):
+    """[OpenAI] Site selection: demographics + crime + schools + places around a location."""
+    prompt = (
+        "I'm evaluating 1 Global View, Troy, NY 12180 as a potential retail location. "
+        "Give me the local demographics, crime index, nearby schools, and notable places within 1 mile."
+    )
+    result = openai_client.ask(prompt, max_tokens=8192)
+    log_result({"llm": "openai", "test": "site_selection", "result": result})
+
+    assert result["text"]
+    assert len(result["tool_calls"]) >= 3, (
+        f"[OpenAI] Expected at least 3 tool calls for site selection, got: {[t['name'] for t in result['tool_calls']]}"
+    )
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["site_selection"]), (
+        f"[OpenAI] Site selection response missing expected content: {EXPECTED_WORKFLOW_CONTENT['site_selection']}"
+    )
+
+
+async def test_tax_jurisdiction_lookup_openai(openai_client, log_result):
+    """[OpenAI] Tax jurisdiction workflow: geocode → lookup_tax_jurisdiction."""
+    prompt = "What tax jurisdiction applies to 350 Fifth Ave, New York, NY 10118? Include state, county, and city tax rates if available."
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "test": "tax_jurisdiction", "result": result})
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("tax" in n.lower() for n in tool_names), f"[OpenAI] Expected tax tool, got: {tool_names}"
+    # Content assertion skipped — lookup_tax_jurisdiction returns schema error for all addresses (broken tool)
+
+
+async def test_property_purchase_due_diligence_llama(llama_client, log_result):
+    """[Llama] Full due-diligence workflow: verify → property data → risk → demographics."""
+    prompt = (
+        "I'm considering buying a property at 1 Ocean Drive, Miami Beach, FL 33139. "
+        "Please: 1) verify the address, 2) get property details, 3) assess flood and coastal risk, "
+        "4) look up local demographics and schools. Give me a summary."
+    )
+    result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+    log_result({"llm": "llama", "test": "property_due_diligence", "result": result})
+
+    assert result["text"]
+    assert len(result["tool_calls"]) >= 2, (
+        f"[Llama] Expected at least 2 tool calls for due-diligence, got {len(result['tool_calls'])}: "
+        f"{[t['name'] for t in result['tool_calls']]}"
+    )
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["property_due_diligence"]), (
+        f"[Llama] Due-diligence response missing expected content: {EXPECTED_WORKFLOW_CONTENT['property_due_diligence']}"
+    )
+
+
+async def test_insurance_risk_workflow_llama(llama_client, log_result):
+    """[Llama] Insurance underwriting: property attributes → fire risk → flood risk → earthquake risk."""
+    prompt = (
+        "I need to underwrite a homeowner's policy for 1 Market St, San Francisco, CA 94105. "
+        "Get the property attributes, fire risk, flood risk, and earthquake risk."
+    )
+    result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+    log_result({"llm": "llama", "test": "insurance_risk_workflow", "result": result})
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert len(tool_names) >= 2, f"[Llama] Expected multi-tool insurance workflow, got: {tool_names}"
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["insurance_risk_workflow"]), (
+        f"[Llama] Insurance workflow response missing expected content: {EXPECTED_WORKFLOW_CONTENT['insurance_risk_workflow']}"
+    )
+
+
+async def test_address_data_enrichment_llama(llama_client, log_result):
+    """[Llama] Enrich addresses: verify → get neighborhood."""
+    addresses = [
+        "1 Global View, Troy, NY 12180",
+        "350 Fifth Ave, New York, NY 10118",
+    ]
+    prompt = (
+        f"For each of these addresses, verify it and return the neighborhood it belongs to:\n"
+        + "\n".join(f"- {a}" for a in addresses)
+    )
+    result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+    log_result({"llm": "llama", "test": "address_enrichment", "result": result})
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("verify" in n.lower() or "geocode" in n.lower() or "neighborhood" in n.lower() for n in tool_names), (
+        f"[Llama] Expected address or neighborhood tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["address_enrichment"]), (
+        f"[Llama] Address enrichment response missing expected content: {EXPECTED_WORKFLOW_CONTENT['address_enrichment']}"
+    )
+
+
+async def test_site_selection_workflow_llama(llama_client, log_result):
+    """[Llama] Site selection: demographics + crime + schools + places."""
+    prompt = (
+        "I'm evaluating 1 Global View, Troy, NY 12180 as a potential retail location. "
+        "Give me the local demographics, crime index, nearby schools, and notable places within 1 mile."
+    )
+    result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+    log_result({"llm": "llama", "test": "site_selection", "result": result})
+
+    assert result["text"]
+    assert len(result["tool_calls"]) >= 2, (
+        f"[Llama] Expected at least 2 tool calls for site selection, got: {[t['name'] for t in result['tool_calls']]}"
+    )
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_WORKFLOW_CONTENT["site_selection"]), (
+        f"[Llama] Site selection response missing expected content: {EXPECTED_WORKFLOW_CONTENT['site_selection']}"
+    )
+
+
+async def test_tax_jurisdiction_lookup_llama(llama_client, log_result):
+    """[Llama] Tax jurisdiction workflow."""
+    prompt = "What tax jurisdiction applies to 350 Fifth Ave, New York, NY 10118?"
+    result = llama_client.ask(prompt, category="workflow")
+    log_result({"llm": "llama", "test": "tax_jurisdiction", "result": result})
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("tax" in n.lower() for n in tool_names), f"[Llama] Expected tax tool, got: {tool_names}"
+    # Content assertion skipped — lookup_tax_jurisdiction returns schema error for all addresses (broken tool)

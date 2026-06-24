@@ -116,3 +116,89 @@ async def test_find_nearest_returns_distance_gemini(gemini_client):
     text_lower = result["text"].lower()
     # Real data: San Francisco fire stations are very close — expect sub-1mi distance
     assert any(word in text_lower for word in ["fire", "station", "san francisco", "distance", "mi"])
+
+
+@pytest.mark.parametrize("label,prompt", SPATIAL_PROMPTS)
+async def test_spatial_tools_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[OpenAI] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+@pytest.mark.parametrize("label,prompt", SPATIAL_PROMPTS)
+async def test_spatial_tools_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="spatial")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text for: {label}"
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+async def test_list_tables_returns_known_tables_openai(openai_client):
+    prompt = "List all available Precisely spatial data tables."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("list_spatial" in n.lower() for n in tool_names), f"[OpenAI] Expected list_spatial_tables tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: known tables from list_spatial_tables call
+    assert any(word in text_lower for word in ["flood_risk", "buildings", "parcels", "demographics", "crime"])
+
+
+async def test_list_tables_returns_known_tables_llama(llama_client):
+    prompt = "List all available Precisely spatial data tables."
+    result = llama_client.ask(prompt, category="spatial")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("list_spatial" in n.lower() for n in tool_names), f"[Llama] Expected list_spatial_tables tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: known tables from list_spatial_tables call
+    assert any(word in text_lower for word in ["flood_risk", "buildings", "parcels", "demographics", "crime"])
+
+
+async def test_find_nearest_returns_distance_openai(openai_client):
+    prompt = "Find the nearest fire station to 1 Market St, San Francisco, CA 94105. Include the name and distance."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("nearest" in n.lower() for n in tool_names), f"[OpenAI] Expected find_nearest_candidates tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: San Francisco fire stations are very close — expect sub-1mi distance
+    assert any(word in text_lower for word in ["fire", "station", "san francisco", "distance", "mi"])
+
+
+async def test_find_nearest_returns_distance_llama(llama_client):
+    prompt = "Find the nearest fire station to 1 Market St, San Francisco, CA 94105. Include the name and distance."
+    result = llama_client.ask(prompt, category="spatial")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("nearest" in n.lower() for n in tool_names), f"[Llama] Expected find_nearest_candidates tool, got: {tool_names}"
+    text_lower = result["text"].lower()
+    # Real data: San Francisco fire stations are very close — expect sub-1mi distance
+    assert any(word in text_lower for word in ["fire", "station", "san francisco", "distance", "mi"])

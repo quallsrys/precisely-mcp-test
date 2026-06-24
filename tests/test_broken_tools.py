@@ -101,3 +101,47 @@ async def test_broken_tools_routing_gemini(label, prompt, gemini_client, log_res
         assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
             f"[Gemini] Response for '{label}' missing expected content {EXPECTED_CONTENT[label]}"
         )
+
+
+@pytest.mark.parametrize("label,prompt", BROKEN_TOOL_PROMPTS)
+async def test_broken_tools_routing_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text response for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label} — LLM did not attempt to route"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    if label not in STILL_BROKEN and label in EXPECTED_CONTENT:
+        text_lower = result["text"].lower()
+        assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[OpenAI] Response for '{label}' missing expected content {EXPECTED_CONTENT[label]}"
+        )
+
+
+@pytest.mark.parametrize("label,prompt", BROKEN_TOOL_PROMPTS)
+async def test_broken_tools_routing_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="broken")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text response for: {label}"
+
+    if label in STILL_BROKEN:
+        pytest.xfail(f"[Llama] {EXPECTED_TOOLS[label]} is broken server-side — routing-only not asserted")
+
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label} — LLM did not attempt to route"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    if label not in STILL_BROKEN and label in EXPECTED_CONTENT:
+        text_lower = result["text"].lower()
+        assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[Llama] Response for '{label}' missing expected content {EXPECTED_CONTENT[label]}"
+        )

@@ -131,3 +131,99 @@ async def test_demographics_population_data_gemini(gemini_client):
     text_lower = result["text"].lower()
     # Real data: 350 Fifth Ave block group — avgIncome $167,918, population 2,569
     assert any(word in text_lower for word in ["167", "2,569", "population", "income"])
+
+
+@pytest.mark.parametrize("label,prompt", DEMO_PROMPTS)
+async def test_demographic_tools_openai(label, prompt, openai_client, log_result):
+    result = openai_client.ask(prompt)
+    log_result({"llm": "openai", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[OpenAI] No text for: {label}"
+    assert result["tool_calls"], f"[OpenAI] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[OpenAI] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[OpenAI] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+@pytest.mark.parametrize("label,prompt", DEMO_PROMPTS)
+async def test_demographic_tools_llama(label, prompt, llama_client, log_result):
+    result = llama_client.ask(prompt, category="demographics")
+    log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+
+    assert result["text"], f"[Llama] No text for: {label}"
+    assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+        f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+    )
+
+    text_lower = result["text"].lower()
+    assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+        f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+    )
+
+
+async def test_schools_include_name_and_distance_openai(openai_client):
+    prompt = "Use the get_schools_by_address tool to list schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("school" in n.lower() for n in tool_names), (
+        f"[OpenAI] Expected a school tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: North Greenbush Common School District, North Greenbush School
+    assert any(word in text_lower for word in ["north greenbush", "school", "district"])
+
+
+async def test_schools_include_name_and_distance_llama(llama_client):
+    prompt = "Use the get_schools_by_address tool to list schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
+    result = llama_client.ask(prompt, category="demographics")
+
+    assert result["text"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("school" in n.lower() for n in tool_names), (
+        f"[Llama] Expected a school tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: North Greenbush Common School District, North Greenbush School
+    assert any(word in text_lower for word in ["north greenbush", "school", "district"])
+
+
+async def test_demographics_population_data_openai(openai_client):
+    prompt = "Use the get_demographics tool to get the estimated population and median household income near 350 Fifth Ave, New York, NY 10118."
+    result = openai_client.ask(prompt)
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("demographic" in n.lower() for n in tool_names), (
+        f"[OpenAI] Expected a demographics tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: 350 Fifth Ave block group — avgIncome $167,918, population 2,569
+    assert any(word in text_lower for word in ["167", "2,569", "population", "income"])
+
+
+async def test_demographics_population_data_llama(llama_client):
+    prompt = "Use the get_demographics tool to get the estimated population and median household income near 350 Fifth Ave, New York, NY 10118."
+    result = llama_client.ask(prompt, category="demographics")
+
+    assert result["text"]
+    assert result["tool_calls"]
+    tool_names = [t["name"] for t in result["tool_calls"]]
+    assert any("demographic" in n.lower() for n in tool_names), (
+        f"[Llama] Expected a demographics tool, got: {tool_names}"
+    )
+    text_lower = result["text"].lower()
+    # Real data: 350 Fifth Ave block group — avgIncome $167,918, population 2,569
+    assert any(word in text_lower for word in ["167", "2,569", "population", "income"])
