@@ -177,4 +177,32 @@ Tier 5 — Synthesis (always last)
 
 ---
 
+## Avoiding Model-Specific Bloat
+
+The temptation when a specific model has a quirk (e.g., Gemini stopping early) is to add model-specific logic — keep the task list in execution context for Gemini, add a reflection loop for GPT-4o-mini, etc. This is a maintenance trap. Model-specific branches in shared code mean:
+- Every new model needs its own case
+- Fixes for one model can silently slow down or bloat others
+- You can't tell whether a model is behaving correctly or just being compensated for
+
+The correct approach is to put universal behavioral requirements in `system_prompt.md` as rules that all models receive equally. One sentence, ~10 tokens, applies identically to every model. Gemini follows it because it's explicit. Claude follows it naturally anyway. GPT-4o-mini either follows it or reveals a capability gap — which is a finding, not a problem to paper over.
+
+---
+
+## The Real Job: Prevent Skipping Upfront
+
+The goal is not to detect skipped tools after execution and patch around them. The goal is to write instructions clear enough that models don't skip in the first place. That is a prompt engineering problem, not an architecture problem.
+
+The most direct version of the instruction:
+
+> "You have been given an explicit list of tools to call. Call every tool on the list. Do not skip any. Do not summarize until all tools have been called and their results are in your context."
+
+**How to use this in the benchmark:**
+1. Add this rule to `system_prompt.md`
+2. Rerun failing prompts (especially Gemini insurance/financial category)
+3. Models that still skip after this explicit instruction have a capability ceiling, not a prompt gap
+
+That distinction — fixable with better instructions vs. fundamental model limitation — is a meaningful research finding for the project. It tells you where to spend engineering effort and which models are actually viable for production use.
+
+---
+
 *Notes compiled June 25, 2026*
