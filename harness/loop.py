@@ -1,0 +1,113 @@
+"""Shared agentic execution loop. Drives any ModelAdapter; never branches on the model.
+
+Owns two things the per-client code did not:
+  - Metrics accumulation across EVERY round. The old clients reported only the final
+    round's token usage; this sums input/output tokens and times for all rounds.
+  - The refuse-to-terminate rule. The loop will not end while planned tools remain
+    uncalled — it nudges the model to finish its plan. Capped at MAX_NUDGES so a model
+    that simply won't comply still terminates, and the unfinished tools are recorded as
+    a capability signal rather than silently dropped. The harness never fabricates tool
+    arguments; the model still produces every call.
+"""
+
+import time
+from dataclasses import dataclass
+
+from harness import mcp
+from harness.adapters.base import ModelAdapter, ToolResult
+
+MAX_ROUNDS = 25   # hard ceiling on model round-trips, guards against non-terminating loops
+MAX_NUDGES = 3    # times we re-ask a model to finish its plan before giving up
+
+
+@dataclass
+class RunMetrics:
+    rounds: int = 0
+    tool_calls: int = 0
+    input_tokens: int = 0
+    output_tokens: int = 0
+    model_ms: float = 0.0
+    tool_ms: float = 0.0
+
+    def as_dict(self) -> dict:
+        return {
+            "rounds": self.rounds,
+            "tool_calls": self.tool_calls,
+            "input_tokens": self.input_tokens,
+            "output_tokens": self.output_tokens,
+            "model_ms": round(self.model_ms),
+            "tool_ms": round(self.tool_ms),
+        }
+
+
+def _nudge(remaining: list[str]) -> str:
+    return (
+        "You have not yet called these tools from your plan: "
+        + ", ".join(remaining)
+        + ". Call them now, or state explicitly why each cannot be called."
+    )
+
+
+def run_loop(
+    adapter: ModelAdapter,
+    system: str,
+    prompt: str,
+    plan: list[str],
+    tools,
+    max_tokens: int = 4096,
+) -> dict:
+    """Execute the prompt to completion. `plan` is the ordered tool list from the planner."""
+    # Put the committed plan in front of the model as a checklist it must complete.
+    if plan:
+        prompt = (
+            f"{prompt}\n\nYour plan for this request (call every tool, in order):\n"
+            + "\n".join(f"{i}. {name}" for i, name in enumerate(plan, 1))
+        )
+
+    messages = adapter.init_messages(prompt)
+    metrics = RunMetrics()
+    planned = list(plan)
+    called: set[str] = set()
+    text = ""
+    nudges = 0
+
+    while metrics.rounds < MAX_ROUNDS:
+        t0 = time.perf_counter()
+        turn = adapter.complete(system, messages, tools, max_tokens)
+        metrics.model_ms += (time.perf_counter() - t0) * 1000
+        metrics.rounds += 1
+        metrics.input_tokens += turn.input_tokens
+        metrics.output_tokens += turn.output_tokens
+        if turn.text:
+            text = turn.text
+
+        if not turn.tool_calls:
+            remaining = [p for p in planned if p not in called]
+            if not remaining or nudges >= MAX_NUDGES:
+                break
+            nudges += 1
+            adapter.add_user_message(messages, _nudge(remaining))
+            continue
+
+        adapter.add_assistant_turn(messages, turn)
+        results = []
+        for tc in turn.tool_calls:
+            called.add(tc.name)
+            t1 = time.perf_counter()
+            output = mcp.call_tool(tc.name, tc.arguments)
+            metrics.tool_ms += (time.perf_counter() - t1) * 1000
+            metrics.tool_calls += 1
+            results.append(ToolResult(call=tc, output=output))
+        adapter.add_tool_results(messages, results)
+
+    uncalled = [p for p in planned if p not in called]
+    return {
+        "model": adapter.model_id,
+        "text": text,
+        "plan": planned,
+        "tools_called": sorted(called),
+        "plan_uncalled": uncalled,      # planned but never executed — the capability-ceiling signal
+        "plan_complete": not uncalled,
+        "nudges": nudges,
+        "metrics": metrics.as_dict(),
+    }
