@@ -16,7 +16,7 @@ load_dotenv()
 MCP_SERVER_URL = os.environ.get("PRECISELY_MCP_URL", "http://localhost:3000/mcp")
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 GEMINI_DELAY_SECONDS = float(os.environ.get("GEMINI_DELAY_SECONDS", "5"))
-SYSTEM_PROMPT_PATH = Path(__file__).parent.parent / "gemini.md"
+SYSTEM_PROMPT_PATH = Path(__file__).parent.parent / "system_prompt.md"
 
 
 def _mcp_request(method: str, params: dict | None = None) -> dict:

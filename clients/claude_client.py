@@ -7,10 +7,12 @@ import uuid
 
 import anthropic
 import httpx
+from pathlib import Path
 
 
 MCP_SERVER_URL = os.environ.get("PRECISELY_MCP_URL", "http://localhost:3000/mcp")
 CLAUDE_MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-4-6")
+_SYSTEM_PROMPT_PATH = Path(__file__).parent.parent / "system_prompt.md"
 
 
 def _mcp_request(method: str, params: dict | None = None) -> dict:
@@ -88,6 +90,9 @@ class ClaudeClient:
         self.client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
         self.model = CLAUDE_MODEL
         self._tools: list[dict] | None = None
+        self.system_prompt = (
+            _SYSTEM_PROMPT_PATH.read_text() if _SYSTEM_PROMPT_PATH.exists() else ""
+        )
 
     @property
     def tools(self) -> list[dict]:
@@ -101,6 +106,10 @@ class ClaudeClient:
 
         t0 = time.perf_counter()
 
+        effective_system = self.system_prompt
+        if system:
+            effective_system = f"{effective_system}\n\n{system}" if effective_system else system
+
         while True:
             kwargs = {
                 "model": self.model,
@@ -108,8 +117,8 @@ class ClaudeClient:
                 "messages": messages,
                 "tools": self.tools,
             }
-            if system:
-                kwargs["system"] = system
+            if effective_system:
+                kwargs["system"] = effective_system
 
             response = self.client.messages.create(**kwargs)
 

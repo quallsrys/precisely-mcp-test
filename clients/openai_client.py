@@ -9,12 +9,14 @@ import time
 import httpx
 from openai import OpenAI
 from dotenv import load_dotenv
+from pathlib import Path
 load_dotenv()
 
 
 MCP_SERVER_URL = os.environ.get("PRECISELY_MCP_URL", "http://localhost:3000/mcp")
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
 OPENAI_DELAY_SECONDS = float(os.environ.get("OPENAI_DELAY_SECONDS", "5"))
+_SYSTEM_PROMPT_PATH = Path(__file__).parent.parent / "system_prompt.md"
 
 
 def _mcp_request(method: str, params: dict | None = None) -> dict:
@@ -82,6 +84,9 @@ class OpenAIClient:
         self.client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
         self.model = OPENAI_MODEL
         self._tools: list[dict] | None = None
+        self.system_prompt = (
+            _SYSTEM_PROMPT_PATH.read_text() if _SYSTEM_PROMPT_PATH.exists() else ""
+        )
 
     @property
     def tools(self) -> list[dict]:
@@ -92,9 +97,13 @@ class OpenAIClient:
     def ask(self, prompt: str, system: str | None = None, max_tokens: int = 4096) -> dict:
         time.sleep(OPENAI_DELAY_SECONDS)
 
-        messages = []
+        effective_system = self.system_prompt
         if system:
-            messages.append({"role": "system", "content": system})
+            effective_system = f"{effective_system}\n\n{system}" if effective_system else system
+
+        messages = []
+        if effective_system:
+            messages.append({"role": "system", "content": effective_system})
         messages.append({"role": "user", "content": prompt})
 
         all_tool_calls: list[dict] = []

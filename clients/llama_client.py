@@ -7,11 +7,13 @@ import uuid
 
 import httpx
 from openai import OpenAI
+from pathlib import Path
 
 
 MCP_SERVER_URL = os.environ.get("PRECISELY_MCP_URL", "http://localhost:3000/mcp")
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434/v1")
 LLAMA_MODEL = os.environ.get("LLAMA_MODEL", "llama3.1:8b")
+_SYSTEM_PROMPT_PATH = Path(__file__).parent.parent / "system_prompt.md"
 
 
 def _mcp_request(method: str, params: dict | None = None) -> dict:
@@ -95,6 +97,10 @@ class LlamaClient:
         self.client = OpenAI(base_url=OLLAMA_BASE_URL, api_key="ollama")
         self.model = LLAMA_MODEL
         self._all_tools: list[dict] | None = None
+        self.system_prompt = (
+            _SYSTEM_PROMPT_PATH.read_text() if _SYSTEM_PROMPT_PATH.exists() else
+            "You are a helpful assistant. Always call the appropriate tool for location, address, or geographic data — never answer from your own knowledge."
+        )
 
     @property
     def all_tools(self) -> list[dict]:
@@ -110,9 +116,10 @@ class LlamaClient:
         return [t for t in self.all_tools if t["function"]["name"] in allowed]
 
     def ask(self, prompt: str, system: str | None = None, max_tokens: int = 4096, category: str | None = None) -> dict:
-        messages = [{"role": "system", "content": "You are a helpful assistant. When the user asks about location, address, or geographic data, always call the appropriate tool — never answer from your own knowledge."}]
+        effective_system = self.system_prompt
         if system:
-            messages[0]["content"] += f"\n\n{system}"
+            effective_system = f"{effective_system}\n\n{system}" if effective_system else system
+        messages = [{"role": "system", "content": effective_system}]
         messages.append({"role": "user", "content": prompt})
         tools = self._filter_tools(category)
 
