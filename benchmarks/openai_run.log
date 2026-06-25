@@ -1,0 +1,84 @@
+
+============================================================
+Running 19 prompts on openai (delay=10.0s, timeout=300s)
+============================================================
+
+[01/19] openai / telecom_expansion_market_st
+         FAIL ❌  tools=5  overlap=38.5%  topics=3/5
+         tools: geocode, get_demographics, get_neighborhoods_by_address, get_property_data, get_serviceability
+
+[02/19] openai / telecom_commercial_property
+         FAIL ❌  tools=5  overlap=50.0%  topics=4/5
+         tools: get_address_family, get_places_by_address, get_property_attributes_by_address, get_property_data, get_serviceability
+
+[03/19] openai / telecom_address_correction
+         FAIL ❌  tools=1  overlap=0.0%  topics=5/5
+         tools: verify_address
+
+[04/19] openai / telecom_fraud_detection
+         FAIL ❌  tools=5  overlap=62.5%  topics=4/5
+         tools: get_buildings_by_address, get_demographics, get_neighborhoods_by_address, get_property_attributes_by_address, verify_address
+
+[05/19] openai / insurance_adjuster_summary
+         FAIL ❌  tools=3  overlap=42.9%  topics=5/5
+         tools: get_flood_risk_by_address, get_property_data, get_property_fire_risk
+
+[06/19] openai / insurance_cat_exposure
+         FAIL ❌  tools=3  overlap=25.0%  topics=5/5
+         tools: get_earth_risk, get_flood_risk_by_address, get_wildfire_risk_by_address
+
+[07/19] openai / insurance_storm_claim
+         FAIL ❌  tools=5  overlap=62.5%  topics=5/5
+         tools: get_earth_risk, get_flood_risk_by_address, get_historical_weather_risk, get_property_data, get_wildfire_risk_by_address
+
+[08/19] openai / insurance_agent_network
+         FAIL ❌  tools=12  overlap=37.5%  topics=5/5
+         tools: get_demographics, get_places_by_address, get_property_data
+
+[09/19] openai / financial_ownership_lookup
+         FAIL ❌  tools=4  overlap=50.0%  topics=3/5
+         tools: get_parcel_by_owner_detailed, get_parcels_by_address, get_property_attributes_by_address, get_property_data
+
+[10/19] openai / financial_multifamily_report
+         FAIL ❌  tools=5  overlap=55.6%  topics=5/5
+         tools: get_address_family, get_demographics, get_parcels_by_address, get_places_by_address, get_property_data
+
+[11/19] openai / financial_hazard_mortgage
+         FAIL ❌  tools=3  overlap=30.0%  topics=5/5
+         tools: get_earth_risk, get_flood_risk_by_address, get_property_data
+
+[12/19] openai / financial_merchant_enrichment
+         FAIL ❌  tools=3  overlap=27.3%  topics=3/5
+         tools: get_places_by_address, get_property_data, verify_address
+
+[13/19] openai / financial_loan_fraud
+         FAIL ❌  tools=4  overlap=27.3%  topics=4/5
+         tools: get_demographics, get_property_data, validate_phones, verify_address
+
+[14/19] openai / financial_branch_atm_optimization
+         FAIL ❌  tools=20  overlap=40.0%  topics=5/5
+         tools: get_demographics, get_ground_view_by_address, get_neighborhoods_by_address, get_parcels_by_address, get_places_by_address
+
+[15/19] openai / retail_distribution_chicago
+         FAIL ❌  tools=5  overlap=16.7%  topics=2/5
+         tools: get_property_data
+
+[16/19] openai / retail_commercial_intelligence_nyc
+         FAIL ❌  tools=5  overlap=35.7%  topics=5/5
+         tools: get_crime_index, get_demographics, get_parcels_by_address, get_places_by_address, get_property_data
+
+[17/19] openai / retail_site_evaluation
+         FAIL ❌  tools=4  overlap=33.3%  topics=4/5
+         tools: get_demographics, get_neighborhoods_by_address, get_places_by_address, get_property_data
+
+[18/19] openai / retail_zip_expansion
+         FAIL ❌  tools=9  overlap=20.0%  topics=3/5
+         tools: get_demographics, get_ground_view_by_address, get_property_data
+
+[19/19] openai / retail_risk_profile
+         FAIL ❌  tools=6  overlap=60.0%  topics=5/5
+         tools: get_crime_index, get_flood_risk_by_address, get_neighborhoods_by_address, get_property_data, get_property_fire_risk, get_wildfire_risk_by_address
+
+
+OPENAI COMPLETE: 0/19 passed (0%)
+Report saved: /Users/rystan.qualls/Desktop/precisely-mcp-test/benchmarks/comparison_results.md

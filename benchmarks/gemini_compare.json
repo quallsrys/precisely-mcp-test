@@ -1,0 +1,632 @@
+{
+  "llm": "gemini",
+  "run_at": "2026-06-25T00:52:42.839046",
+  "results": [
+    {
+      "passed": false,
+      "tool_names": [
+        "geocode",
+        "get_table_metadata",
+        "list_spatial_tables",
+        "search_at_location",
+        "summarize"
+      ],
+      "tool_count": 12,
+      "overlap_count": 4,
+      "overlap_pct": 30.8,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "demographics",
+        "serviceability",
+        "broadband"
+      ],
+      "text": "I have the property data for a sample of 1,000 buildings within the service area. Here is the breakdown of the building stock:\n\n*   **Building Types Identified:**\n    *   **R:** Residential\n    *   **B:** Business\n    *   **M:** Mixed-Use\n    *   **X:** Unclassified (This is the most common category, likely representing a mix of single-family homes, garages, and small miscellaneous structures).\n*   **Key Findings:** While the majority of individual building footprints are small-to-medium-sized unclassified structures, the sample contains a significant number of very large buildings classified as Residential, Business, and Mixed-Use, with footprints often exceeding 10,000 square feet.\n\n---\n\n### **Final Telecom Expansion Analysis & Recommendation**\n\nHere is a complete analysis of the 2-mile radius around **1600 Market St, Denver, CO**, based on the demographics, serviceability, and property data.\n\n**1. Demographics: A High-Value, High-Density Market**\nThe area is densely populated and affluent, making it an attractive market.\n*   **Total Population:** 120,441\n*   **Total Households:** 73,889\n*   **Median Household Income:** ~$107,000\n*   **Key Insight:** A remarkable **70.5% of households are renters**. This strongly indicates a high concentration of multi-dwelling units (MDUs), such as apartment and condo buildings.\n\n**2. Broadband Serviceability: A Saturated, Competitive Market**\nThe analysis of 1,000 locations in the area reveals that the market is fully served.\n*   **Serviceability:** **100%** of the sampled properties are already serviceable by a broadband provider.\n*   **Key Insight:** The opportunity in this area is not in covering unserved homes (\"greenfield\"), but in **competing directly with incumbent providers** to win over existing customers (\"brownfield\"). Your strategy must focus on offering superior speed, price, or customer service.\n\n**3. Property Data: A Target-Rich Environment**\nThe building footprint data confirms the demographic indicators and points to clear targets for a competitive strategy.\n*   **Building Stock:** The area is a mix of small structures and a significant number of **very large-footprint buildings** classified as residential, business, and mixed-use.\n*   **Key Insight:** These large `R` and `M` buildings are the high-density MDUs suggested by the demographic data. A single large residential building could represent hundreds of potential household customers. Similarly, the large `B` (Business) buildings are high-value commercial targets for enterprise services.\n\n### **Strategic Recommendation**\n\nBased on this data, the optimal strategy for telecom expansion in this area is to **focus on a targeted, competitive takeover of high-density buildings.**\n\n*   **Prioritize MDUs:** Identify the largest residential (`R`) and mixed-use (`M`) buildings. A single sales effort or buildout to one of these properties can yield a high number of customers with a lower cost-per-acquisition compared to serving single-family homes.\n*   **Target Commercial Buildings:** The large business (`B`) buildings represent high-value targets for enterprise-level services.\n*   **Compete on Service:** Since the area is fully served, your value proposition must be compelling. The high-income level of the residents suggests they may be willing to pay for premium, high-speed fiber services.\n\nIn summary, this is a lucrative but competitive market. A successful expansion will depend on a focused strategy that targets the most efficient and valuable customer concentrations in large residential and commercial buildings.",
+      "latency_ms": 127554,
+      "usage": {
+        "input_tokens": 146489,
+        "output_tokens": 789
+      },
+      "category": "telecom",
+      "label": "telecom_expansion_market_st",
+      "prompt": "Analyze the area around 1600 Market St, Denver, CO for telecom expansion potential. Use a travel boundary to define the service area, then pull demographics, housing density, income levels, broadband serviceability, and property data to identify high-value neighborhoods for network buildout.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "get_address_family",
+        "get_buildings_by_address",
+        "get_places_by_address",
+        "get_property_attributes_by_address",
+        "get_serviceability"
+      ],
+      "tool_count": 5,
+      "overlap_count": 5,
+      "overlap_pct": 50.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "building",
+        "serviceability",
+        "tenant",
+        "units"
+      ],
+      "text": "Based on the analysis of the commercial property at 1700 California St, Denver, CO 80202, here are the requested details:\n\n### Building Characteristics\n*   **Building ID**: B000CTRZOD8W\n*   **Building Type**: Business\n*   **Building Area**: 84,741 square feet\n*   **Elevation**: 5226.0 feet\n*   **Coordinates**:\n    *   Latitude: 39.7463\n    *   Longitude: -104.9897\n*   **FIPS Code**: 08031\n*   **Precisely ID**: P00003QQIOUC\n\n### Property Attributes\nNo specific property attributes, such as year built or lot size, were found for this address.\n\n### Address Family\nNo associated address units were found for the Precisely ID P00003QQIOUC. The building is represented as a single address in the database.\n\n### Places / Tenants\nNo places or tenant information was found at this address.\n\n### Broadband Serviceability\nThe location is serviceable for broadband.\n*   **Serviceable Address**: YES\n*   **Serviceability ID**: S000PNGHUBR7",
+      "latency_ms": 22659,
+      "usage": {
+        "input_tokens": 23496,
+        "output_tokens": 274
+      },
+      "category": "telecom",
+      "label": "telecom_commercial_property",
+      "prompt": "Analyze the commercial property at 1700 California St, Denver, CO 80202. Pull building characteristics, property attributes, address family to identify all units, places/tenants at the location, and broadband serviceability data to assess this building for network deployment.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "verify_address"
+      ],
+      "tool_count": 1,
+      "overlap_count": 0,
+      "overlap_pct": 0.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "address",
+        "oh",
+        "44022"
+      ],
+      "text": "I couldn't fully correct the address, but I was able to verify that the postal code '44022' corresponds to the city of Chagrin Falls, OH.",
+      "latency_ms": 8540,
+      "usage": {
+        "input_tokens": 23593,
+        "output_tokens": 37
+      },
+      "category": "telecom",
+      "label": "telecom_address_correction",
+      "prompt": "I have this address: '411 ? ??????-????? OH 44022'. Please fix this using Precisely MCP.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": true,
+      "tool_names": [
+        "get_buildings_by_address",
+        "get_crime_index",
+        "get_demographics",
+        "get_neighborhoods_by_address",
+        "get_property_attributes_by_address",
+        "verify_address"
+      ],
+      "tool_count": 6,
+      "overlap_count": 6,
+      "overlap_pct": 75.0,
+      "criterion_1_tool_overlap": true,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "address",
+        "risk",
+        "residential",
+        "property"
+      ],
+      "text": "Based on your request, I have performed a comprehensive fraud and identity validation analysis for the address **1615 SW 107th Ave, Miami, FL 33165-7344**. Here is the detailed risk profile:\n\n### 1. Address Verification\n\nThe address has been successfully verified with a 100% confidence score.\n\n*   **Formatted Address**: 1615 SW 107TH AVE, MIAMI FL 33165-7344, UNITED STATES OF AMERICA\n*   **Status**: Confirmed as a valid, deliverable address.\n*   **Precisely ID (PB_KEY)**: `P00005K6LK2Q`\n*   **Residential/Business Indicator**: The address is flagged as a **Business** location.\n\n### 2. Property and Building Analysis\n\nThe data strongly indicates that this is a commercial property, not a residential one.\n\n*   **Building Type**: The building is explicitly classified as **Business**.\n*   **Year Built**: 1987\n*   **Size**: The property is exceptionally large, with a building area of **97,979 sq. ft.** and a living area of **123,386 sq. ft.**\n*   **Residential Features**: Bedroom and bathroom counts were not applicable, which is typical for commercial buildings.\n\n**Conclusion**: If the application lists this as a personal residence, it is a significant red flag. The physical data points exclusively to a commercial establishment.\n\n### 3. Neighborhood and Demographic Profile\n\nThe property is located in the **University Park** neighborhood, which is characterized as an affluent suburban area.\n\n*   **PSYTE Segment**: The area is classified as \"**Contemporary Suburbia**\" (`05.3`), with household incomes in the top 20% and property values in the top 30% of the nation. The adult population is predominantly aged 50 and over.\n*   **Census Data**: The average household income in the census block group is **$151,587**, and the average home value is **$522,048**.\n*   **Neighborhood Composition**: While the immediate location is commercial, the surrounding University Park neighborhood is composed of **97.55% single-family residences**. There are 107 commercial properties in the area.\n*   **Mobility**: The area has a high drive score (4.5/5.0) and moderate walkability (3.7/5.0).\n\n### 4. Crime Risk Assessment\n\nThe location has an elevated risk for property crime compared to the national average.\n\n*   **Overall Crime Index**: **114** (Above Average)\n*   **Property Crime Index**: **119** (Above Average)\n*   **Violent Crime Index**: **90** (Below Average)\n\n**Risk Summary**: The primary risk factor from a crime perspective is the higher-than-average rate of property crime in the vicinity.\n\n---\n\n### **Overall Fraud Detection and Risk Profile Summary**\n\nThe subscriber application at **1615 SW 107th Ave** is associated with a legitimate, verified commercial address, not a residence.\n\n*   **Identity/Location Risk**: **High Risk** if the applicant claims this is their personal residence. The building's size, type, and official business indicator all contradict residential use.\n*   **Property Risk**: The location is in an area with **above-average property crime**, which should be factored into any risk model.\n*   **Legitimacy**: The location is a valid business establishment situated in a prosperous, primarily residential suburban neighborhood.\n\nThis profile suggests that while the address itself is legitimate, its use on a personal subscriber application is highly suspect and warrants further investigation.",
+      "latency_ms": 20791,
+      "usage": {
+        "input_tokens": 26800,
+        "output_tokens": 818
+      },
+      "category": "telecom",
+      "label": "telecom_fraud_detection",
+      "prompt": "Run fraud detection and identity validation for a new subscriber application at 1615 SW 107th Ave, Miami, FL 33165-7344. Verify the address, pull property attributes, building data, demographics, and neighborhood information to assess whether this is a legitimate residential or commercial location and generate a risk profile.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "get_buildings_by_address",
+        "get_earth_risk",
+        "get_flood_risk_by_address",
+        "get_historical_weather_risk",
+        "get_property_attributes_by_address",
+        "get_property_fire_risk",
+        "get_wildfire_risk_by_address"
+      ],
+      "tool_count": 7,
+      "overlap_count": 5,
+      "overlap_pct": 71.4,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "flood",
+        "fire",
+        "building",
+        "property",
+        "risk"
+      ],
+      "text": "\n### **Adjuster Summary: 2755 Milwaukee St, Denver, CO 80205**\n\nThis summary provides a comprehensive overview of the property, including its characteristics, building details, and an assessment of various environmental and hazard risks to support the claims adjustment process.\n\n**1. Property Characteristics**\n*   **Property Type**: Residential\n*   **Year Built**: 1927\n*   **Bedrooms**: 2\n*   **Bathrooms**: 1 (Full Bath)\n*   **Total Rooms**: 5\n*   **Living Area**: 1,107 sq. ft.\n\n**2. Building and Lot Details**\n*   **PreciselyID**: P00003PYY08O\n*   **Building ID**: B000CTRZO5A0\n*   **Building Area**: 1,559 sq. ft.\n*   **Elevation**: 5,291 feet\n*   **Coordinates**: 39.756814\u00b0 N, 104.952736\u00b0 W\n\n**3. Flood Risk Assessment**\n*   **FEMA Flood Zone**: X\n*   **Flood Risk**: The property is in Flood Zone X, which is an area of minimal flood hazard.\n*   **Distance to 500-Year Flood Zone**: 2,897 feet\n*   **Nearest Waterbody**: Burlington Ditch, located 15,209 feet away.\n\n**4. Fire Risk Assessment**\n*   **Wildfire Risk**: The property has a \"Minimal\" wildfire risk ranking. It is located over 22,000 feet from the nearest Wildland-Urban Interface.\n*   **Fire Department Proximity**: The property is located in Denver and is served by career fire departments.\n    *   **Nearest Fire Station**: 0.57 miles away, with an off-peak response time of approximately 2.6 minutes.\n    *   **Second Nearest Station**: 1.59 miles away, with an off-peak response time of approximately 5.2 minutes.\n    *   **Third Nearest Station**: 2.04 miles away, with an off-peak response time of approximately 9.4 minutes.\n\n**5. Nearby Hazard Information**\n\n*   **Earthquake Risk**:\n    *   **NEHRP Classification**: C (Sedimentary rocks of Oligocene to Cretaceous age, or younger coarse-grained sedimentary rocks).\n    *   **Nearest Fault**: The \"Southwest\" fault is the nearest, located 12.75 miles away.\n    *   **Historical Events**: There have been 9 earthquakes of magnitude 2 and 9 of magnitude 3 recorded in the vicinity. No events of magnitude 4 or higher have been recorded.\n\n*   **Historical Weather Risk**:\n    *   **Hail**: The area is at a \"high\" risk level for hail, with 425 historical events recorded.\n    *   **Wind**: The area is at a \"low\" risk level for severe wind, with 260 historical events recorded.\n    *   **Tornado**: No F2 or stronger tornadoes have been recorded in the immediate area.",
+      "latency_ms": 18948,
+      "usage": {
+        "input_tokens": 26504,
+        "output_tokens": 698
+      },
+      "category": "insurance",
+      "label": "insurance_adjuster_summary",
+      "prompt": "Generate an adjuster summary for the property at 2755 Milwaukee St, Denver, CO 80205. Include property characteristics, lot size, building details, flood risk assessment, fire risk, and nearby hazard information to support the claims process.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [],
+      "tool_count": 0,
+      "overlap_count": 0,
+      "overlap_pct": 0.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": false,
+      "criterion_3_topics_covered": false,
+      "keywords_hit": [],
+      "text": "ERROR: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+      "latency_ms": 0,
+      "usage": {},
+      "category": "insurance",
+      "label": "insurance_cat_exposure",
+      "prompt": "Analyze catastrophe exposure for properties in the 80219 ZIP code area of Denver. Assess flood risk zones, earthquake proximity, wildfire risk, and provide a comprehensive hazard profile for portfolio accumulation management.",
+      "status": "error",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "get_buildings_by_address",
+        "get_coastal_risk",
+        "get_earth_risk",
+        "get_flood_risk_by_address",
+        "get_historical_weather_risk",
+        "get_neighborhoods_by_address",
+        "get_parcels_by_address",
+        "get_property_attributes_by_address",
+        "get_wildfire_risk_by_address"
+      ],
+      "tool_count": 9,
+      "overlap_count": 5,
+      "overlap_pct": 62.5,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "flood",
+        "property",
+        "risk",
+        "damage",
+        "storm"
+      ],
+      "text": "Based on the storm damage claim for **789 Grape St, Denver, CO 80220**, here is a comprehensive triage report with property details, environmental risk assessment, and data to support severity prediction and fraud detection.\n\n### 1. Property Characteristics\n*   **PreciselyID:** P00003PZ1EGV\n*   **Year Built:** 1941\n*   **Living Area:** 2,857 sq ft\n*   **Total Building Area:** 2,857 sq ft\n*   **Rooms:** 8 rooms, including 5 bedrooms and 3 bathrooms.\n*   **Building ID (UBID):** 85FQP3HF+JV-1-0-0-1\n*   **Parcel APN:** 0606420013000\n\n### 2. Historical Weather & Storm Risk\nThe property is in an area with a history of storm-related events, which supports the possibility of legitimate damage.\n\n*   **Hail Risk:** The property is in a **high-risk** area for hail. There have been **425** historical hail events recorded.\n*   **Wind Risk:** The wind risk level is rated as **low**, with **260** historical wind events.\n*   **Tornado Risk:** There have been **0** historical F2+ tornado events.\n*   **Coastal/Hurricane Risk:** The property has no coastal risk exposure.\n\n### 3. Flood Zone Status\n*   **FEMA Flood Zone:** The property is in flood zone **X**.\n*   **Risk Level:** This is considered a minimal flood hazard area.\n*   **Distance to 100/500-Year Flood Zones:** -999999 feet, indicating it is not near a designated 100-year or 500-year flood zone.\n*   **Nearest Waterbody:** The nearest waterbody is **Cherry Creek**, located **9,093 feet** away.\n\n### 4. Other Environmental Risks\n*   **Wildfire Risk:** The wildfire risk for this location is **Minimal**. It is located approximately **28,660 feet** (about 5.4 miles) from a Wildland-Urban Interface area.\n*   **Earthquake Risk:** The property has experienced 9 historical earthquake events of magnitude 2 and 9 of magnitude 3. The nearest fault, named \"Southwest,\" is **12.82 miles** away. The NEHRP Site Classification is **\"C\"**.\n\n### 5. Neighborhood & Property Context\nThis data can provide context for the property's valuation and identify potential anomalies.\n\n*   **Neighborhood:** Hale\n*   **Neighborhood Average Year Built:** 1941 (The subject property's age is typical for the area).\n*   **Real Estate Trends:**\n    *   **Residential Sales Trend:** Down\n    *   **Residential Sales Price Trend:** Up\n*   **Walkability Score:** 3.6 (Higher than average)\n*   **Drive Score:** 4.5\n*   **Public Transit Score:** 3.5",
+      "latency_ms": 25297,
+      "usage": {
+        "input_tokens": 26749,
+        "output_tokens": 686
+      },
+      "category": "insurance",
+      "label": "insurance_storm_claim",
+      "prompt": "Help me triage a storm damage claim for the property at 789 Grape St, Denver, CO 80220. Pull the property details, assess environmental risks, check flood zone status, and provide data to support severity prediction and fraud detection.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "geocode",
+        "get_demographics",
+        "get_places_by_address",
+        "reverse_geocode"
+      ],
+      "tool_count": 15,
+      "overlap_count": 2,
+      "overlap_pct": 25.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "demographics",
+        "placement",
+        "zip",
+        "agent"
+      ],
+      "text": "Based on a comprehensive analysis of the 80202, 80203, and 80204 ZIP codes in Denver, here are the key findings and recommendations for optimizing insurance agent placement:\n\n### **ZIP Code 80202 (Downtown Denver / LoDo)**\n\nThis area, centered around coordinates `39.7513, -104.9971`, stands out as the most promising location for an insurance agency.\n\n*   **High-Value Demographics**: The population is classified in the \"Metro Diversity\" segment, with the highest average household income of the three ZIP codes at **$87,685** and an average home value of **$690,332**. This indicates a strong market for high-value personal lines, including homeowners, auto, and life insurance.\n*   **Thriving Commercial Hub**: This ZIP code is a dense commercial center. A search for points of interest reveals a significant number of businesses, including professional services (legal, tech), energy companies, and restaurants. This presents a prime opportunity for writing commercial insurance policies.\n*   **Representative Businesses**: Laramie Energy, LLC, Technologent, and Eldon E Silverman Attorney.\n\n### **ZIP Code 80203 (Capitol Hill / Speer)**\n\nLocated around `39.7316, -104.9826`, this ZIP code is an attractive area with a distinct demographic profile.\n\n*   **Young and Educated Population**: The area is characterized by the \"High Rise Hipsters\" segment, with a majority of single-person households and the highest percentage of residents with a bachelor's degree (**32.39%**).\n*   **Strong Growth Potential**: The average household income is a solid **$73,235**, and the average home value is **$464,665**. This demographic represents a key market of young professionals who will have an increasing need for a variety of insurance products as their careers and lives progress.\n\n### **ZIP Code 80204 (West Denver / Lincoln Park)**\n\nThis ZIP code, centered at `39.7355, -105.0182`, presents a more mixed but interesting opportunity.\n\n*   **Family-Oriented Demographics**: The area is primarily composed of \"Thrifty Families,\" with a demographic of early middle-aged adults and a majority of family households.\n*   **Contrasting Financials**: While the average household income is the lowest of the three at **$31,499**, the average home value is a surprisingly high **$625,000**. This could indicate an area in transition or a diverse mix of housing. The lower income levels suggest a market for more budget-conscious insurance products.\n\n### **Recommendations for Agent Placement**\n\n1.  **Top Priority Location: ZIP Code 80202**\n    *   **Strategy**: This is the ideal location for a full-service agency targeting both high-net-worth individuals and a diverse range of commercial clients. An agent here should be experienced in both personal and commercial lines to capitalize on the dense opportunities.\n    *   **Placement**: A professional office in a downtown high-rise or a visible ground-floor location would be optimal to attract both foot traffic and business clients.\n\n2.  **Secondary Growth Location: ZIP Code 80203**\n    *   **Strategy**: This area is perfect for an agent focused on building long-term relationships with a growing client base. The focus should be on personal lines for young professionals, with an emphasis on education and digital-first service.\n    *   **Placement**: A modern, accessible office with a less formal feel would resonate well with the local demographic.\n\n3.  **Niche Market Location: ZIP Code 80204**\n    *   **Strategy**: This market is best suited for an agent specializing in affordable family-focused insurance products. A community-oriented approach, potentially with bilingual services, would be highly effective.\n    *   **Placement**: A visible and accessible storefront in a local neighborhood center would be the most effective way to serve this community.\n\nIn conclusion, for maximizing premium generation and market penetration, **ZIP code 80202 is the premier choice** for establishing a flagship agency presence in Denver.",
+      "latency_ms": 56475,
+      "usage": {
+        "input_tokens": 39327,
+        "output_tokens": 934
+      },
+      "category": "insurance",
+      "label": "insurance_agent_network",
+      "prompt": "Analyze the Denver metropolitan area for insurance agent network optimization. Look at population density, demographics, property values, and points of interest around 80202, 80203, and 80204 ZIP codes to recommend optimal agent placement.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [],
+      "tool_count": 0,
+      "overlap_count": 0,
+      "overlap_pct": 0.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": false,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "ownership",
+        "parcel",
+        "assessed",
+        "property",
+        "value"
+      ],
+      "text": "I can look up property information for that address. However, I am unable to provide direct ownership details (such as the owner's name) due to data limitations.\n\nI can retrieve property attributes, assessed values, and parcel information which can help in analyzing the property and its characteristics. Would you like me to proceed with that?",
+      "latency_ms": 11689,
+      "usage": {
+        "input_tokens": 22200,
+        "output_tokens": 67
+      },
+      "category": "financial",
+      "label": "financial_ownership_lookup",
+      "prompt": "Look up property ownership information for 1200 Larimer St, Denver, CO and identify any common ownership patterns. Include assessed values, property types, and ownership details to help identify related holdings.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "geocode",
+        "get_address_family",
+        "get_buildings_by_address",
+        "get_demographics",
+        "get_parcels_by_address",
+        "get_places_by_address",
+        "get_property_data"
+      ],
+      "tool_count": 7,
+      "overlap_count": 6,
+      "overlap_pct": 66.7,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "building",
+        "parcel",
+        "demographics",
+        "address"
+      ],
+      "text": "Here is a comprehensive property report for 1200 Larimer St, Denver, CO 80204.\n\n### Property Overview\n*   **Address**: 1200 Larimer St, Denver, CO 80204\n*   **PreciselyID**: P00003QJZUCB\n*   **Property Type**: Business\n*   **FIPS Code**: 08031\n\n### Building Characteristics\n*   **Building ID**: B000CTRZOSNN\n*   **Universal Building ID (UBID)**: 85FPPXWX+24-7-6-4-8\n*   **Building Type**: Mixed Use\n*   **Building Area**: 94,537 sq. ft.\n*   **Coordinates**: 39.745199\u00b0 N, -105.002014\u00b0 W\n*   **Elevation**: 5204 feet\n\n### Parcel & Lot Details\n*   **Parcel ID**: C000CU7IRMS7\n*   **Assessor's Parcel Number (APN)**: 0233713021000\n*   **Parcel Area**: 675,764 sq. ft.\n*   **Parcel Coordinates**: 39.744764\u00b0 N, -105.003341\u00b0 W\n*   **Parcel Elevation**: 5205 feet\n\n### Address Family\nThe property at this address is not registered with any associated sub-addresses or units in the database.\n\n### Surrounding Area Demographics\nThe property is located in a neighborhood characterized by the following demographic profiles:\n\n**PSYTE Geodemographic Segment:**\n*   **Segment Code**: 04.1\n*   **Description**: Thriving Professional Neighborhoods\n*   **Profile**: The area consists of a mixed household composition, with the majority of the adult population under the age of 39. It ranks in the top 5-10% of households by income and the top 10-20% of properties by value.\n\n**Ground View (Census Block Group Data):**\n*   **Average Household Income**: $187,985\n*   **Education**: 53.9% of the population holds a bachelor's degree.\n*   **Average Home Value**: $645,714\n*   **Average Rent**: $2,947\n\n### Nearby Points of Interest\nThe following businesses and points of interest are located at 1200 Larimer St:\n\n1.  **Business Name**: THE REGENTS OF THE UNIVERSITY OF COLORADO\n    *   **Trade Name**: UNIVERSITY OF COLORADO-DENVER\n    *   **Industry**: University\n\n2.  **Business Name**: SIMPLY FRESH MARKET\n    *   **Industry**: Delicatessen (Eating Places)",
+      "latency_ms": 24717,
+      "usage": {
+        "input_tokens": 27134,
+        "output_tokens": 639
+      },
+      "category": "financial",
+      "label": "financial_multifamily_report",
+      "prompt": "Generate a comprehensive property report for the multi-family property at 1200 Larimer St, Denver, CO 80204. Include property ownership, assessed value, building characteristics, parcel and lot details, address family hierarchy, and surrounding area demographics and points of interest.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "get_earth_risk",
+        "get_flood_risk_by_address",
+        "get_historical_weather_risk",
+        "get_property_attributes_by_address",
+        "get_replacement_cost_by_address"
+      ],
+      "tool_count": 5,
+      "overlap_count": 4,
+      "overlap_pct": 40.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "flood",
+        "earthquake",
+        "risk",
+        "property",
+        "mortgage"
+      ],
+      "text": "Based on your request for a natural hazard and property assessment for the commercial real estate at 1999 Broadway, Denver, CO 80202, here is a summary of the findings:\n\n### Property Characteristics\n*   **Year Built:** 1984\n*   **Building Square Footage:** 793,250 sq. ft.\n*   **Living Square Footage:** 680,276 sq. ft.\n\n### Natural Hazard Risk Assessment\n\n**Flood Risk**\nThe property is in FEMA Flood Zone **X**, which is designated as an area of minimal flood hazard. \n*   **Distance to 100-Year Flood Zone:** 3,482 feet\n*   **Distance to 500-Year Flood Zone:** 3,621 feet\n*   **Address Elevation:** 5,225 feet\n*   **FEMA Map Panel:** 0800460201H, effective September 4, 2020.\n\nThis indicates a very low risk of flooding for this location, which is favorable for mortgage portfolio exposure.\n\n**Earthquake Risk**\nThe seismic risk for the property is assessed as follows:\n*   **NEHRP Site Classification:** **C** (Sedimentary rocks of Oligocene to Cretaceous age, or younger coarse-grained sedimentary rocks).\n*   **Nearest Fault:** 10.93 miles away.\n*   **Historical Activity:** There have been 9 earthquakes of magnitude 3 and 9 earthquakes of magnitude 2 recorded in the vicinity. There is no recorded history of earthquakes at magnitude 4 or higher.\n\nThis suggests a low to moderate seismic risk. The lack of major historical events and the distance to the nearest fault are positive indicators.\n\n**Environmental & Weather Hazards**\nBased on historical weather data, the property has the following risk levels:\n*   **Hail Risk:** **High** (425 historical events).\n*   **Wind Risk:** **Low** (260 historical events).\n*   **Tornado Risk:** No data available.\n\nThe high frequency of historical hail events presents a significant potential hazard to the property, which could impact insurance costs and maintenance.\n\n### Property Valuation Data\n\n*   **Replacement Cost:** Replacement cost data is not available for this address.\n\n### Summary for Mortgage Portfolio Exposure\n\nThe property at 1999 Broadway in Denver faces a very low risk from flooding and a low-to-moderate risk from earthquakes. However, the high frequency of hail events poses a notable environmental hazard that should be considered in the mortgage portfolio exposure analysis, as it can lead to property damage and increased insurance premiums. While specific valuation data like replacement cost is unavailable through this service, the property's significant size (793,250 sq. ft. building) indicates it is a high-value asset.",
+      "latency_ms": 20441,
+      "usage": {
+        "input_tokens": 24128,
+        "output_tokens": 611
+      },
+      "category": "financial",
+      "label": "financial_hazard_mortgage",
+      "prompt": "Assess natural hazard risks and their potential impact on commercial real estate near 1999 Broadway, Denver, CO 80202. Include flood risk, earthquake risk, environmental hazards, and property valuation data to evaluate mortgage portfolio exposure.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "find_nearest_candidates",
+        "get_places_by_address",
+        "get_property_attributes_by_address",
+        "get_table_metadata",
+        "list_spatial_tables",
+        "verify_address"
+      ],
+      "tool_count": 7,
+      "overlap_count": 4,
+      "overlap_pct": 36.4,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "address",
+        "location",
+        "points"
+      ],
+      "text": "Here is a comprehensive enrichment of the merchant location at 500 16th St Mall, Denver, CO 80202.\n\n### Address Validation\n\nThe address has been validated and standardized as:\n\n**500 16TH ST, DENVER CO 80202-4259, UNITED STATES OF AMERICA**\n\nThis is a commercial address, as indicated by the \"RESBUS\" code \"B\". The location is a high-rise building, and the address is a master location for multiple businesses.\n\n### Property Data\n\nThe property at this address has the following attributes:\n\n*   **Year Built**: 1997\n*   **Building Square Footage**: There are two building records for this address: one with 175,105 sq ft and another with 239,485 sq ft. This indicates a large, multi-use commercial property.\n\n### Business Data\n\nThere are 39 businesses registered at this address. Here is a sample of the businesses located at 500 16th St:\n\n*   **5280 Burger Bar**: A restaurant specializing in burgers.\n*   **Art Stir Denver**: An art gallery.\n*   **Auntie Anne's**: A retail bakery.\n*   **Austin Fresh Burger Bar Denver**: A food bar.\n*   **Blue Bridal Couture**: A wedding services provider.\n*   **Central Parking**: An automobile parking service.\n*   **Department of Clothing**: An apparel and accessories store.\n*   **Glass House**: An optical goods store.\n*   **H & M Denver Pavilions**: A family clothing store.\n*   **Hollywood Cowgirl**: A women's clothing store.\n*   **IT'SUGAR**: A candy, nut, and confectionery store.\n*   **Kealoha's BBQ, LLC**: A barbecue restaurant.\n*   **Ku Cha House of Tea**: A tea house.\n*   **Mavi Jeans**: A family clothing store.\n*   **Parking at Denver Pavilions**: An automobile parking service.\n*   **Que Rico Raspados**: A fast food restaurant.\n*   **Sock Em'**: A sporting goods and bicycle shop.\n*   **Spirit Halloween**: An antique art objects store.\n*   **Spring Communications**: A cellular telephone services provider.\n*   **Towne Park**: A parking garage.\n\n### Nearby Points of Interest\n\nThe following points of interest are located within 250 meters of the address:\n\n*   **Auntie Anne's**: Retail bakery.\n*   **Francesca's**: Women's clothing store.\n*   **H & V Pretzels, LLC**: Pastries.\n*   **Hollywood Cowgirl**: Women's clothing store.\n*   **Ku Cha House of Tea - Tea Shop Denver**: Tea house.\n*   **Parking at Denver Pavilions**: Automobile parking.\n*   **Regal Cinemas**: Cinema.\n*   **Regal UA Denver Pavilions**: Shopping center.\n*   **Towne Park**: Parking garage.\n*   **Vago Stores, Inc.**: Miscellaneous retail.\n\nThis detailed information provides a comprehensive location context for the merchant, indicating that it is a bustling commercial center with a wide variety of retail stores, restaurants, and entertainment options. This context is valuable for enriching card transactions and understanding customer behavior.",
+      "latency_ms": 41503,
+      "usage": {
+        "input_tokens": 47369,
+        "output_tokens": 729
+      },
+      "category": "financial",
+      "label": "financial_merchant_enrichment",
+      "prompt": "Resolve and enrich a merchant location at 500 16th St Mall, Denver, CO 80202. Validate the address, pull property and business data, identify nearby points of interest, and provide location context for card transaction enrichment.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "get_crime_index",
+        "get_demographics",
+        "get_earth_risk",
+        "get_flood_risk_by_address",
+        "get_parcels_by_address",
+        "get_wildfire_risk_by_address",
+        "verify_address"
+      ],
+      "tool_count": 7,
+      "overlap_count": 5,
+      "overlap_pct": 45.5,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "address",
+        "property",
+        "risk",
+        "verified",
+        "demographic"
+      ],
+      "text": "Based on the data, here is a comprehensive risk assessment for the loan applicant at 321 Pine St, Denver, CO 80203.\n\n### Executive Summary\n\n**High Risk Identified:** The primary risk factor is the address itself. The provided address, **321 Pine St, Denver, CO 80203**, could not be verified as a deliverable location. This is a significant red flag for identity and fraud checks.\n\n### Detailed Findings\n\n**1. Address Verification**\n\n*   **Status:** Failed to verify the specific address.\n*   **Details:** The verification tool could not match the address number \"321\" on Pine St. It returned a street-level match, indicating that while Pine St exists in Denver, the specific house number is not a recognized address.\n*   **Corrections:** The postal code was corrected from 80203 to **80260**.\n*   **Formatted Address Match:** PINE ST, DENVER CO 80260, UNITED STATES OF AMERICA.\n\n**2. Property and Risk Data**\n\n*   **Property Ownership:** No property parcel records were found for the address.\n*   **Demographic Profile:** No demographic data could be retrieved.\n*   **Crime Index:** No crime data was available.\n*   **Environmental Risks:** No flood, wildfire, or earthquake risk data could be found.\n\nThe inability to retrieve data for these checks is a direct result of the address being unverifiable.\n\n### Conclusion\n\nThe loan application has a **high risk of fraud** due to the unverifiable address. It is strongly recommended to reject the application or request a valid, verifiable residential address from the applicant before proceeding.",
+      "latency_ms": 20025,
+      "usage": {
+        "input_tokens": 24378,
+        "output_tokens": 362
+      },
+      "category": "financial",
+      "label": "financial_loan_fraud",
+      "prompt": "Run fraud detection and identity validation for a loan applicant at 321 Pine St, Denver, CO 80203. Cross-reference address verification, phone validation, property ownership records, and demographic data to generate a comprehensive risk assessment.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "geocode",
+        "get_demographics",
+        "get_neighborhoods_by_address",
+        "get_places_by_address",
+        "reverse_geocode"
+      ],
+      "tool_count": 21,
+      "overlap_count": 4,
+      "overlap_pct": 40.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "demographics",
+        "income",
+        "placement",
+        "zip",
+        "density"
+      ],
+      "text": "I have completed the analysis of the four Denver ZIP codes. Here is the final summary and my recommendations for branch and ATM network optimization.\n\n### **Analysis Summary of Denver ZIP Codes**\n\n**ZIP Code 80202 (Downtown Denver)**\n*   **Profile:** \"Metro Diversity.\" A high-density, urban core with a large daytime workforce and a significant residential population of young professionals.\n*   **Demographics:** Moderate average household income ($87,685) with high property values. The population is young, primarily under 50.\n*   **Neighborhood:** As a downtown area, it has extremely high walkability and public transit scores. The area is dominated by commercial properties (1,136) and high-density residences like condominiums (4,726).\n*   **Opportunity:** This area is a prime location for a **full-service branch** that can cater to the 1,100+ businesses and the dense residential population. The high foot traffic makes it an ideal location for **multiple ATMs**, especially in office building lobbies, near transit stations, and in retail corridors.\n\n**ZIP Code 80203 (Capitol Hill)**\n*   **Profile:** \"High Rise Hipsters.\" A dense, urban neighborhood that attracts a young, single, and educated demographic.\n*   **Demographics:** Lower-middle average household income ($73,235) with high property values. The majority of residents are under the age of 39.\n*   **Neighborhood:** Features good walkability and transit options. It is dominated by high-density housing (over 3,500 condos and 330 apartments) and has a moderate commercial presence with 199 commercial properties.\n*   **Opportunity:** This area is excellent for **ATMs** placed in commercial corridors and near large apartment complexes. Given the tech-savvy, younger demographic, a **smaller, digitally-focused advisory center or a \"cafe-style\" branch** would likely be more successful than a traditional branch.\n\n**ZIP Code 80204 (Sun Valley)**\n*   **Profile:** \"Thrifty Families.\" A community characterized by lower-income, family-oriented households.\n*   **Demographics:** A low average household income of $31,499. The population consists mainly of early-middle-aged adults and their families.\n*   **Neighborhood:** The area has surprisingly high walkability. The property mix includes single-family homes and a moderate number of commercial properties (74). This appears to be a neighborhood undergoing transition.\n*   **Opportunity:** This location is best suited for a **community-focused branch** offering services like financial literacy programs, second-chance banking, and small business support. ATM placement should prioritize convenience for residents, such as at **grocery stores or local community centers.** This is an opportunity to build a strong, loyal customer base through community engagement.\n\n**ZIP Code 80205 (Whittier)**\n*   **Profile:** \"Thriving Professional Neighborhoods.\" An affluent, primarily residential area.\n*   **Demographics:** A high average household income of $150,352. The population is composed of highly educated professional couples, mostly under 50.\n*   **Neighborhood:** The area has good walkability and is dominated by single-family homes (97%), with a low commercial density (35 properties).\n*   **Opportunity:** This wealthy demographic is a prime target for wealth management and investment services. A **full-service branch with a strong wealth advisory team** would be ideal, strategically located on a main commercial street that borders the neighborhood. Due to the residential nature of the area, ATM placement should be selective, focusing on small retail clusters or major thoroughfares.\n\n### **Final Recommendations**\n\n1.  **High-Density Urban Core (80202 - Downtown):** Place a flagship **full-service branch** to capture high-value business and consumer accounts. Augment this with **multiple ATMs** in high-traffic zones to maximize visibility and convenience.\n\n2.  **Young & Trendy Area (80203 - Capitol Hill):** Focus on a strong **ATM presence**. Consider a **smaller, modern advisory center** that emphasizes digital tools and financial planning to appeal to a younger clientele, rather than a large traditional branch.\n\n3.  **Community-Focused Area (80204 - Sun Valley):** Establish a **community-oriented branch** that provides essential banking services and financial education. This approach can build long-term loyalty and demonstrate a commitment to the community. Place **ATMs at key local hubs** like grocery stores.\n\n4.  **Affluent Residential Area (80205 - Whittier):** Target this high-income area with a **branch offering specialized wealth management and mortgage services.** The branch should be located on a commercial artery that serves the neighborhood without disrupting its residential character.",
+      "latency_ms": 125493,
+      "usage": {
+        "input_tokens": 46561,
+        "output_tokens": 1043
+      },
+      "category": "financial",
+      "label": "financial_branch_atm_optimization",
+      "prompt": "Analyze the Denver metro area for branch and ATM network optimization. Evaluate demographics, points of interest, population density, income levels, and neighborhood characteristics around ZIP codes 80202, 80203, 80204, and 80205 to recommend optimal placement.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "geocode",
+        "get_crime_index",
+        "get_demographics",
+        "get_flood_risk_by_address",
+        "get_property_attributes_by_address"
+      ],
+      "tool_count": 25,
+      "overlap_count": 3,
+      "overlap_pct": 50.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "property",
+        "flood",
+        "crime",
+        "demographics",
+        "chicago"
+      ],
+      "text": "Here is an analysis of the five distribution locations:\n\n### 1) 1000 S Canal St, Chicago, IL 60607\n\n*   **Coordinates:** Latitude: 41.8696, Longitude: -87.6395\n*   **Property Attributes:** Property attribute data is not available for this location.\n*   **Demographics:** The surrounding area has a high average household income of $191,694 and a high average home value of $439,923. 22.67% of the population has a bachelor's degree, and 13.95% are high school graduates.\n*   **Crime:** This location has a \"highest\" composite crime index of 426, with a \"high\" violent crime index of 197 and a \"highest\" property crime index of 473.\n*   **Flood Risk:** The property is in flood zone \"X\". The nearest 100-year flood zone is 1,077 feet away. The nearest water body, Lake Michigan, is 6,304 feet away.\n\n### 2) 8500 W Bryn Mawr Ave, Chicago, IL 60631\n\n*   **Coordinates:** Latitude: 41.9830, Longitude: -87.8410\n*   **Property Attributes:** The property was built in 1999.\n*   **Demographics:** The average household income in this area is $80,223, with an average home value of $318,907. 24.29% of residents have a bachelor's degree, and 27.29% are high school graduates.\n*   **Crime:** The composite crime index is \"above average\" at 147. The violent crime index is \"below average\" at 58, while the property crime index is \"high\" at 165.\n*   **Flood Risk:** This location is in flood zone \"X\". The nearest 100-year flood zone is 2,749 feet away, and the nearest 500-year flood zone is 2,677 feet away. The nearest water body is Willow Creek, 4,350 feet away.\n\n### 3) 2600 S Throop St, Chicago, IL 60608\n\n*   **Coordinates:** Latitude: 41.8453, Longitude: -87.6561\n*   **Property Attributes:** There are two buildings on this property, one built in 1974 and another built in 1927 with 9,600 square feet of living space.\n*   **Demographics:** The average household income is $81,592, and the average home value is $377,904. The area is categorized as \"Professional Pursuits\" by PSYTE. 15.87% of the population has a bachelor's degree, while 42.31% are high school graduates.\n*   **Crime:** All crime indices for this location are \"below average.\" The composite index is 78, the violent crime index is 75, and the property crime index is 79.\n*   **Flood Risk:** The property is in flood zone \"X\", with the nearest flood zone 912 feet away. The nearest water body, Lake Michigan, is 12,414 feet away.\n\n### 4) 9715 S Cottage Grove Ave, Chicago, IL 60628\n\n*   **Coordinates:** Latitude: 41.7181, Longitude: -87.6036\n*   **Property Attributes:** Property attribute data is not available for this location.\n*   **Demographics:** The average household income in this area is $74,899, with an average home value of $142,859. The PSYTE segment for this area is \"Retirement Residences.\" 6.42% of residents have a bachelor's degree, and 12.67% are high school graduates.\n*   **Crime:** The composite crime index is \"high\" at 208. The violent crime index is \"above average\" at 112, and the property crime index is \"high\" at 227.\n*   **Flood Risk:** This location is in flood zone \"X\" and is not within a 100-year or 500-year flood zone. The nearest water body is Lake Calumet, 8,734 feet away.\n\n### 5) 5555 Touhy Ave, Skokie, IL 60077\n\n*   **Coordinates:** Latitude: 42.0102, Longitude: -87.7686\n*   **Property Attributes:** Property attribute data is not available for this location.\n*   **Demographics:** The average household income is $115,432, and the average home value is $368,089. 14.84% of the population has a bachelor's degree, and 36.92% are high school graduates.\n*   **Crime:** All crime indices for this location are in the \"lowest\" category. The composite index is 7, the violent crime index is 4, and the property crime index is 8.\n*   **Flood Risk:** The property is in flood zone \"X\". The nearest 100-year flood zone is 4,198 feet away. The nearest water body is the Chicago River N Branch, 4,270 feet away.",
+      "latency_ms": 45484,
+      "usage": {
+        "input_tokens": 43902,
+        "output_tokens": 1269
+      },
+      "category": "retail",
+      "label": "retail_distribution_chicago",
+      "prompt": "Analyze these distribution locations: 1) 1000 S Canal St, Chicago, IL 60607, 2) 8500 W Bryn Mawr Ave, Chicago, IL 60631, 3) 2600 S Throop St, Chicago, IL 60608, 4) 9715 S Cottage Grove Ave, Chicago, IL 60628, 5) 5555 Touhy Ave, Skokie, IL 60077",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "geocode",
+        "get_address_family",
+        "get_buildings_by_address",
+        "get_crime_index",
+        "get_demographics",
+        "get_earth_risk",
+        "get_flood_risk_by_address",
+        "get_parcels_by_address",
+        "get_places_by_address",
+        "get_property_data"
+      ],
+      "tool_count": 11,
+      "overlap_count": 10,
+      "overlap_pct": 71.4,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "building",
+        "parcel",
+        "property",
+        "risk",
+        "address"
+      ],
+      "text": "Here is a comprehensive Commercial Property Intelligence Report for 1290 Avenue of the Americas, New York, NY 10104.\n\n### **1. Location & Identification**\n\n*   **Standardized Address**: 1290 AVENUE OF THE AMERICAS, NEW YORK NY 10104-0101, UNITED STATES OF AMERICA\n*   **Coordinates**:\n    *   Latitude: `40.7607`\n    *   Longitude: `-73.9788`\n*   **Parent PreciselyID (PBKEY)**: `P0000GL5VN9O`\n*   **Assessor's Parcel Number (APN)**: `1012670001`\n*   **FIPS Code**: `36061` (New York County)\n\n---\n\n### **2. Property & Building Profile**\n\n*   **Property Type**: Mixed-Use Commercial\n*   **Year Built**: 1963\n*   **Total Building Area**: 1,899,211 sq. ft.\n*   **Building Footprint Area**: 86,191 sq. ft.\n*   **Number of Stories**: Information not available.\n\n---\n\n### **3. Parcel & Lot Details**\n\n*   **Total Parcel Size (Acres)**: 2.0655 acres\n*   **Total Parcel Size (Square Feet)**: 91,106 sq. ft.\n*   **Lot Dimensions**: Specific lot dimensions are not available.\n\n---\n\n### **4. Valuation**\n\n*   **Total Assessed Value**: $525,394,800\n*   **Total Market Value**: $1,167,544,000\n*   **Last Sale Amount**: $1,246,450,000\n\n---\n\n### **5. Ownership**\n\n*   Specific ownership details are not available through this service.\n\n---\n\n### **6. Address Family Hierarchy**\n\nThe parent PreciselyID `P0000GL5VN9O` is associated with a total of 57 child addresses within the property's hierarchy. These represent various units or suites within the building.\n\n*   **Parent PBKEY**: `P0000GL5VN9O`\n*   **Child PBKEYs Include**: `P0000GL1ISJD`, `P0000GL1ISJF`, `P0000GL1ISJG`, `P0000GL1ISJH`, `P0000GL1ISJI`, `P0000GL1ISJJ`, `P0000GL1ISJK`, `P0000GL1ISJO`, and 49 others.\n\n---\n\n### **7. Tenant Directory**\n\nThere are 120 businesses registered at this location. Key tenants include major firms in finance, law, media, and real estate.\n\n**A selection of tenants includes:**\n*   **Finance & Investment**:\n    *   Morgan Stanley\n    *   Neuberger Berman\n    *   Equitable Holdings, Inc.\n    *   AXA NETWORK, LLC\n    *   Abbott Capital Private Equity Investors\n    *   HQ Capital Private Equity LLC\n    *   Vornado Realty Trust\n*   **Legal**:\n    *   Bryan Cave Leighton Paisner LLP\n    *   Selendy Gay PLLC\n*   **Media & Publishing**:\n    *   Hachette Book Group, Inc.\n    *   Sirius XM Radio LLC\n    *   Wenner Media\n    *   Grand Central Publishing\n*   **Corporate & Consulting**:\n    *   Cushman & Wakefield\n    *   Georgeson Inc.\n*   **Retail & Services**:\n    *   Popular Bank\n    *   TD Bank\n    *   Earl of Sandwich\n    *   Just Salad LLC\n\n---\n\n### **8. Location Risk Profile**\n\n*   **Flood Risk**: The property is in FEMA Flood Zone **X**, indicating a minimal flood hazard. It is located 4,895 feet from a 100-year flood zone.\n*   **Crime Risk**: Compared to the national average, the area has:\n    *   **Overall Crime Index**: `453` (Category: Highest)\n    *   **Property Crime Index**: `503` (Category: Highest)\n    *   **Violent Crime Index**: `208` (Category: High)\n*   **Earthquake Risk**: The property is located on a site with an NEHRP Classification of **'C'** (Sedimentary rock). There have been 11 minor earthquake events (Magnitude 0.0-4.9) recorded historically in the surrounding area.\n\n---\n\n### **9. Demographic Profile**\n\nThe property is located in a dense, affluent urban neighborhood.\n\n*   **PSYTE Geodemographic Segment**: The area is classified as **\"High Rise Hipsters\" (03.1)**, characterized by mixed-age, high-income couple households in high-value properties.\n*   **Census Block Group Data**:\n    *   **Average Household Income**: $209,829\n    *   **Average Home Value**: $1,811,147\n    *   **Educational Attainment (Bachelor's Degree)**: 59.4% of the population.",
+      "latency_ms": 42561,
+      "usage": {
+        "input_tokens": 119661,
+        "output_tokens": 1191
+      },
+      "category": "retail",
+      "label": "retail_commercial_intelligence_nyc",
+      "prompt": "Generate a comprehensive Commercial Property Intelligence Report for 1290 Avenue of the Americas, New York, NY 10104. Include full property attributes, building specifications and number of stories, total parcel size and lot dimensions, ownership details, assessed valuation, the parent PreciselyID (PBKEY) and all child PBKEYs within the address family hierarchy, a complete tenant directory of all businesses operating at the property, and a location risk and demographic profile.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "find_nearest_candidates",
+        "geocode",
+        "get_demographics",
+        "get_neighborhoods_by_address",
+        "get_property_attributes_by_address",
+        "get_table_metadata",
+        "list_spatial_tables"
+      ],
+      "tool_count": 7,
+      "overlap_count": 4,
+      "overlap_pct": 33.3,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "demographics",
+        "income",
+        "retail",
+        "recommendation",
+        "density"
+      ],
+      "text": "Based on a comprehensive analysis of the location at 500 16th St Mall, Denver, CO 80202, the site presents a **highly promising opportunity for a new retail store.** The combination of a prime downtown location, affluent demographics, excellent accessibility, and a vibrant existing retail ecosystem makes it a very attractive site.\n\n### **Recommendation: Suitable for a New Retail Store**\n\nThe data strongly supports the conclusion that this is a suitable location. The key factors are high foot traffic, a wealthy and educated customer base, and a synergistic mix of surrounding businesses. A retail concept that aligns with the affluent, urban-dweller or tourist demographic would be best positioned for success here.\n\n---\n\n### **Detailed Analysis**\n\nHere is a breakdown of the data that supports this recommendation:\n\n#### **Property and Location**\n\n*   **Address:** 500 16th St Mall, Denver, CO 80202\n*   **Coordinates:** 39.7438\u00b0 N, 104.9915\u00b0 W\n*   **Property Type:** The site is a large commercial property built in 1997, with over 175,000 sq. ft. of building space, located within the **Denver Pavilions shopping center.** This places it in an established and well-known retail hub.\n\n#### **Demographics and Income Levels**\n\nThe surrounding area is characterized by a high-income, well-educated population, indicating significant purchasing power.\n\n*   **Average Household Income:** **$250,083**\n*   **Average Home Value:** **$994,178**\n*   **Education:** **42.88%** of the population holds a bachelor's degree.\n*   **Average Rent:** $2,311\n\n#### **Neighborhood and Accessibility**\n\nThe Downtown Denver neighborhood is a vibrant, high-density urban environment with excellent accessibility, which is critical for a retail business.\n\n*   **Neighborhood Name:** Downtown Denver\n*   **Walkability Score:** **4.7 out of 5** (extremely walkable)\n*   **Public Transit Score:** **4.7 out of 5**\n*   **Bike Score:** 4.5 out of 5\n*   **Neighborhood Composition:** The area is dominated by commercial properties (1,136) and high-density residential units like condominiums (4,726), ensuring a steady stream of local customers and workers.\n\n#### **Nearby Points of Interest and Competitors**\n\nThe location is surrounded by a rich mix of retail, entertainment, and food and beverage establishments, which creates a strong draw for consumers. The analysis of businesses within 250 meters reveals a vibrant commercial landscape.\n\n*   **Shopping:** The site is part of the **Regal UA Denver Pavilions shopping center**, which is a major retail destination.\n*   **Apparel and Retail Competitors:**\n    *   **FRANCESCA'S** (Women's Clothing)\n    *   **HOLLYWOOD COWGIRL** (Women's Clothing)\n    *   **VAGO STORES, INC.** (Miscellaneous Retail)\n*   **Food and Drink:**\n    *   **AUNTIE ANNE'S**\n    *   **CINNABON**\n    *   **KU CHA HOUSE OF TEA**\n*   **Entertainment:**\n    *   **REGAL CINEMAS**\n\nThe presence of these popular brands indicates that this is a high-traffic area with a proven market for retail and entertainment. The existing businesses will likely generate positive externalities, contributing to the customer traffic for a new store.",
+      "latency_ms": 38095,
+      "usage": {
+        "input_tokens": 33898,
+        "output_tokens": 786
+      },
+      "category": "retail",
+      "label": "retail_site_evaluation",
+      "prompt": "Evaluate 500 16th St Mall, Denver, CO 80202 as a potential retail site. Analyze the surrounding demographics, income levels, population density, nearby points of interest and competitors, property details, and neighborhood characteristics to recommend whether this location is suitable for a new retail store.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "geocode",
+        "get_demographics",
+        "get_ground_view_by_address",
+        "get_places_by_address"
+      ],
+      "tool_count": 15,
+      "overlap_count": 4,
+      "overlap_pct": 40.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": false,
+      "keywords_hit": [
+        "zip"
+      ],
+      "text": "I am unable to complete your request at this time. The analysis requires a specific street address within each ZIP code to gather the necessary demographic, housing, and business data. My attempts to find a valid, representative address in each of the specified ZIP codes (80202, 80203, and 80204) were unsuccessful.\n\nIf you can provide a specific street address for each of these ZIP codes, I would be happy to perform the retail expansion analysis for you.",
+      "latency_ms": 39121,
+      "usage": {
+        "input_tokens": 29075,
+        "output_tokens": 104
+      },
+      "category": "retail",
+      "label": "retail_zip_expansion",
+      "prompt": "Analyze ZIP codes 80202, 80203, and 80204 in Denver for retail expansion opportunities. Compare demographics, household income, population density, housing characteristics, and existing points of interest across these areas to rank them by retail market potential.",
+      "status": "ok",
+      "llm": "gemini"
+    },
+    {
+      "passed": false,
+      "tool_names": [
+        "get_buildings_by_address",
+        "get_crime_index",
+        "get_flood_risk_by_address",
+        "get_places_by_address",
+        "get_property_attributes_by_address",
+        "get_property_fire_risk",
+        "get_wildfire_risk_by_address"
+      ],
+      "tool_count": 7,
+      "overlap_count": 6,
+      "overlap_pct": 60.0,
+      "criterion_1_tool_overlap": false,
+      "criterion_2_tool_called": true,
+      "criterion_3_topics_covered": true,
+      "keywords_hit": [
+        "flood",
+        "fire",
+        "crime",
+        "risk",
+        "mitigation"
+      ],
+      "text": "Based on a comprehensive analysis of the retail location at 2000 E Colfax Ave, Denver, CO 80206, here is a detailed risk profile:\n\n### **1. Property and Building Overview**\n\n*   **Property Type**: Mixed-Use Commercial\n*   **Year Built**: 1987\n*   **Building Area**: 10,143 sq. ft.\n*   **Living/Total Square Footage**: 10,983 sq. ft.\n*   **Building ID**: B000CTRZOYLI\n*   **Coordinates**: 39.739711\u00b0 N, 104.963036\u00b0 W\n*   **Elevation**: 5309 feet\n\n### **2. Environmental and Hazard Risk Analysis**\n\n#### **Flood Risk: Low**\n*   **FEMA Flood Zone**: The property is in Flood Zone **X**, which is an area of minimal flood hazard.\n*   **Proximity to Flood Plains**: The property is over 3,800 feet away from the nearest 500-year flood zone and is not near a 100-year flood zone.\n*   **Nearest Water Body**: The nearest water body, Cherry Creek, is 12,466 feet away.\n\n#### **Wildfire Risk: Minimal**\n*   **Overall Risk Ranking**: The property has an overall risk ranking of **0 (Minimal)** in both baseline and extreme weather models.\n*   **Risk Description**: The risk is categorized as \"Minimal\" due to its urban setting. It is located 29,473 feet (over 5 miles) from the nearest Wildland-Urban Interface.\n\n### **3. Safety and Security Analysis**\n\n#### **Fire Risk (Proximity): Low**\nThe property has excellent access to fire department services, significantly lowering the risk of extensive damage from a structural fire.\n*   **Nearest Fire Station**: **0.63 miles** away.\n*   **Response Time (Nearest Station)**: Approximately **2.6 to 3.4 minutes**, depending on traffic.\n*   **Additional Stations**: Two other fire stations are located within 1.5 miles.\n\n#### **Crime Index: High**\nCrime presents the most significant risk to this location. The property is in an area with crime rates that are among the highest when compared to the national average.\n*   **Composite Crime Index**: **487** (National Average = 100)\n*   **Property Crime Index**: **528** (Category: **Highest**)\n*   **Violent Crime Index**: **288** (Category: **Highest**)\n\n### **4. Tenant and Exposure Analysis**\n\nThe property is a multi-tenant retail location. Understanding the co-tenants is crucial for assessing operational and reputational exposure.\n*   **Primary Tenant**: Walgreens (Retail Pharmacy)\n*   **Other Tenants**:\n    *   Bank of the West (Financial Services)\n    *   Western Union (Financial Services)\n    *   24 Hours Garage Door Repair (Repair Services)\n\nThe presence of a major pharmacy and financial service providers creates consistent public foot traffic but may also increase exposure to property crimes like theft and vandalism.\n\n---\n\n### **Overall Risk Posture & Mitigation Recommendations**\n\n**Overall Risk Posture: Moderate-High**\n\nThe overall risk for this location is elevated, driven almost exclusively by the **high crime rates**. While the physical and environmental risks (flood, wildfire, fire safety) are minimal, the severe threat of property and violent crime requires significant attention and investment in security.\n\n#### **Mitigation Recommendations:**\n\n1.  **Enhanced Physical Security**:\n    *   **Surveillance**: Install high-resolution, night-vision security cameras covering all entry points, parking areas, and the building perimeter.\n    *   **Access Control**: Use reinforced doors and windows with shatter-resistant film. Implement robust locking mechanisms and consider a controlled access system for non-public areas.\n    *   **Lighting**: Ensure all exterior areas, including alleys and parking lots, are well-lit to deter criminal activity.\n\n2.  **Operational Security Protocols**:\n    *   **Staff Training**: Implement mandatory, regular training for all employees on loss prevention, de-escalation techniques, and emergency procedures for robbery and other security incidents.\n    *   **Cash Management**: Adopt strict cash handling procedures to minimize the amount of cash on hand, especially during closing hours.\n    *   **Security Personnel**: Given the \"Highest\" crime ratings, consider hiring professional security guards, particularly during evening hours and weekends.\n\n3.  **Insurance and Financial**:\n    *   **Policy Review**: Conduct a thorough review of the current insurance policy to ensure adequate coverage for theft, vandalism, and business interruption resulting from criminal activity.\n\nBy focusing resources on mitigating the significant crime risk, the overall risk profile of this otherwise low-risk property can be effectively managed.",
+      "latency_ms": 25864,
+      "usage": {
+        "input_tokens": 26382,
+        "output_tokens": 1060
+      },
+      "category": "retail",
+      "label": "retail_risk_profile",
+      "prompt": "Build a comprehensive risk profile for the retail location at 2000 E Colfax Ave, Denver, CO 80206. Include property characteristics, building details, flood zone, wildfire risk, fire risk, crime index, and nearby tenant exposure analysis. Summarize the overall risk posture with specific mitigation recommendations.",
+      "status": "ok",
+      "llm": "gemini"
+    }
+  ]
+}

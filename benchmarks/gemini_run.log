@@ -1,0 +1,86 @@
+
+============================================================
+Running 19 prompts on gemini (delay=10.0s, timeout=300s)
+============================================================
+
+[01/19] gemini / telecom_expansion_market_st
+         FAIL ❌  tools=12  overlap=30.8%  topics=3/5
+         tools: geocode, get_table_metadata, list_spatial_tables, search_at_location, summarize
+
+[02/19] gemini / telecom_commercial_property
+         FAIL ❌  tools=5  overlap=50.0%  topics=4/5
+         tools: get_address_family, get_buildings_by_address, get_places_by_address, get_property_attributes_by_address, get_serviceability
+
+[03/19] gemini / telecom_address_correction
+         FAIL ❌  tools=1  overlap=0.0%  topics=3/5
+         tools: verify_address
+
+[04/19] gemini / telecom_fraud_detection
+         PASS ✅  tools=6  overlap=75.0%  topics=4/5
+         tools: get_buildings_by_address, get_crime_index, get_demographics, get_neighborhoods_by_address, get_property_attributes_by_address, verify_address
+
+[05/19] gemini / insurance_adjuster_summary
+         FAIL ❌  tools=7  overlap=71.4%  topics=5/5
+         tools: get_buildings_by_address, get_earth_risk, get_flood_risk_by_address, get_historical_weather_risk, get_property_attributes_by_address, get_property_fire_risk, get_wildfire_risk_by_address
+
+[06/19] gemini / insurance_cat_exposure
+         ⚠️  ERROR: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+         FAIL ❌  tools=0  overlap=0.0%  topics=0/5
+         tools: none
+
+[07/19] gemini / insurance_storm_claim
+         FAIL ❌  tools=9  overlap=62.5%  topics=5/5
+         tools: get_buildings_by_address, get_coastal_risk, get_earth_risk, get_flood_risk_by_address, get_historical_weather_risk, get_neighborhoods_by_address, get_parcels_by_address, get_property_attributes_by_address, get_wildfire_risk_by_address
+
+[08/19] gemini / insurance_agent_network
+         FAIL ❌  tools=15  overlap=25.0%  topics=4/5
+         tools: geocode, get_demographics, get_places_by_address, reverse_geocode
+
+[09/19] gemini / financial_ownership_lookup
+         FAIL ❌  tools=0  overlap=0.0%  topics=5/5
+         tools: none
+
+[10/19] gemini / financial_multifamily_report
+         FAIL ❌  tools=7  overlap=66.7%  topics=4/5
+         tools: geocode, get_address_family, get_buildings_by_address, get_demographics, get_parcels_by_address, get_places_by_address, get_property_data
+
+[11/19] gemini / financial_hazard_mortgage
+         FAIL ❌  tools=5  overlap=40.0%  topics=5/5
+         tools: get_earth_risk, get_flood_risk_by_address, get_historical_weather_risk, get_property_attributes_by_address, get_replacement_cost_by_address
+
+[12/19] gemini / financial_merchant_enrichment
+         FAIL ❌  tools=7  overlap=36.4%  topics=3/5
+         tools: find_nearest_candidates, get_places_by_address, get_property_attributes_by_address, get_table_metadata, list_spatial_tables, verify_address
+
+[13/19] gemini / financial_loan_fraud
+         FAIL ❌  tools=7  overlap=45.5%  topics=5/5
+         tools: get_crime_index, get_demographics, get_earth_risk, get_flood_risk_by_address, get_parcels_by_address, get_wildfire_risk_by_address, verify_address
+
+[14/19] gemini / financial_branch_atm_optimization
+         FAIL ❌  tools=21  overlap=40.0%  topics=5/5
+         tools: geocode, get_demographics, get_neighborhoods_by_address, get_places_by_address, reverse_geocode
+
+[15/19] gemini / retail_distribution_chicago
+         FAIL ❌  tools=25  overlap=50.0%  topics=5/5
+         tools: geocode, get_crime_index, get_demographics, get_flood_risk_by_address, get_property_attributes_by_address
+
+[16/19] gemini / retail_commercial_intelligence_nyc
+         FAIL ❌  tools=11  overlap=71.4%  topics=5/5
+         tools: geocode, get_address_family, get_buildings_by_address, get_crime_index, get_demographics, get_earth_risk, get_flood_risk_by_address, get_parcels_by_address, get_places_by_address, get_property_data
+
+[17/19] gemini / retail_site_evaluation
+         FAIL ❌  tools=7  overlap=33.3%  topics=5/5
+         tools: find_nearest_candidates, geocode, get_demographics, get_neighborhoods_by_address, get_property_attributes_by_address, get_table_metadata, list_spatial_tables
+
+[18/19] gemini / retail_zip_expansion
+         FAIL ❌  tools=15  overlap=40.0%  topics=1/5
+         tools: geocode, get_demographics, get_ground_view_by_address, get_places_by_address
+
+[19/19] gemini / retail_risk_profile
+         FAIL ❌  tools=7  overlap=60.0%  topics=5/5
+         tools: get_buildings_by_address, get_crime_index, get_flood_risk_by_address, get_places_by_address, get_property_attributes_by_address, get_property_fire_risk, get_wildfire_risk_by_address
+
+
+GEMINI COMPLETE: 1/19 passed (5%)
+Report saved: /Users/rystan.qualls/Desktop/precisely-mcp-test/benchmarks/comparison_results.md
