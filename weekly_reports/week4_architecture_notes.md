@@ -205,4 +205,45 @@ That distinction — fixable with better instructions vs. fundamental model limi
 
 ---
 
+## Planning Strategy — Generalization Over Playbooks
+*(refines the "Explicit completion criteria" idea under "Improving Model Performance" above)*
+
+Considered, then rejected, scenario playbooks (e.g., "insurance question → these 8 tools"). Two reasons:
+
+1. **It overfits.** Playbooks only work for anticipated question types. Client #20 asks something off-script and the playbook adds nothing. The goal is for the model to figure out the best answer for ANY question from the tools available — not to recall a canned list.
+
+2. **It poisons the evaluation.** The 19 Cloud Native prompts are a held-out TEST SET (built by the mentor months ago to show MCP capabilities). Building playbooks around them means we can no longer tell whether the system generalizes or just memorized the answer key. Keeping those 19 prompts blind is what makes them a valid measurement.
+
+The deeper point: the project goal is to prove free / cheaper models can REASON over Precisely's tools as well as paid ones. Hardcoding scenarios would prove the playbook works, not the model — and it would collapse on the first unanticipated question. **The generic approach isn't a compromise; it is the test.**
+
+### The three levers that generalize
+
+1. **Tool descriptions (foundation).** The model's raw material. If descriptions are good, a capable model reasons about completeness and disambiguation on its own, for any phrasing.
+
+2. **A planning prompt that teaches a PROCESS, not answers.** Teach decomposition: *"Break the request into the dimensions a complete answer requires. For each dimension, include every tool that contributes. Prefer more coverage over less."* Meta-level guidance transfers to questions we never imagined.
+
+3. **A tool taxonomy as a MAP, not a script.** The dependency tiers (location → property → risk → enrichment → synthesis) describe the structure of the tool space — true regardless of the question. A map helps you navigate anywhere; a script only works for the trip it was written for. Ideally this lives in tool metadata, not a hardcoded table to maintain.
+
+*Optional amplifier:* a planning self-critique — one cheap no-tools call (*"Does this plan cover every dimension of the request? What's missing?"*). A generalizable way to "predict a need" without a lookup table.
+
+### Tool description audit (June 25) — descriptions are NOT the bottleneck
+
+Pulled all 51 descriptions from `tools/list` (names + descriptions only, no schemas):
+
+- Count: **51** | Avg: **983 chars (~250 tokens)** | Median: 683 | Min: 408 | Max: 4,688
+- **Zero** tools with a thin (<100 char) description
+
+The descriptions are already high quality — positive guidance ("Use this when…"), negative guidance ("Do NOT use when… use X instead"), cross-references to sibling tools, output schemas, and worked request examples.
+
+**Two implications:**
+
+1. **Plan quality is achievable from descriptions alone.** A capable model already has what it needs to reason about which tools give a complete picture and to disambiguate similar tools. This validates the no-playbook approach — the raw material for generalization is in place. The bottleneck, if any, is the planning *prompt*, not the tool metadata.
+
+2. **This is exactly why Llama overflows.** 51 descriptions ≈ **12,750 tokens** before schemas, system prompt, or user prompt load. Llama capped at **4,095** input tokens — suspiciously close to Ollama's default `num_ctx` of 4096. The richness that makes Claude and Gemini smart is precisely what blows the 8B model's context. Confirms **two-stage routing is mandatory for Llama**, not optional:
+   - **Planning call** sends SHORT summaries only (the first sentence of each description is a clean one-liner — auto-derivable, no manual maintenance).
+   - **Execution call** loads full schemas for the planned subset only.
+   - *Also worth testing:* bump Ollama `num_ctx` 4096 → 16384 (llama3.1 supports up to 128k). Complementary to two-stage routing, not a replacement — sending 12.7k tokens of descriptions to an 8B model is slow and dilutes attention even when it fits.
+
+---
+
 *Notes compiled June 25, 2026*
