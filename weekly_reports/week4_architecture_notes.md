@@ -246,4 +246,43 @@ The descriptions are already high quality — positive guidance ("Use this when�
 
 ---
 
+## Metrics & Instrumentation
+
+### What already exists
+Every client returns `latency_ms` and `usage` (`input_tokens`, `output_tokens`) per `ask()`.
+
+### The counting bug — fix before trusting any token number
+The agentic loop calls the model once per tool-use round, but the clients read `usage` only from the **final** response. A task with 10 tool calls makes 10+ round-trips and discards 9 of them. Because the message history *grows* each round (every tool result is appended and re-sent), the true billed input is the **sum** across rounds — often 3–5× the final call alone. Current numbers undercount, which weakens the cost story rather than strengthening it.
+
+### What to add
+1. **Accumulate usage across every loop iteration** — sum input + output tokens, count API round-trips. This is what's actually billed.
+2. **Split timing** — model latency per round vs. MCP tool latency per call. Shows whether time goes to model reasoning or data retrieval (the latter is Precisely's value, not overhead).
+3. **Cost estimate** — tokens × per-model rate = dollars per task. The headline customer number. (Llama local = $0.)
+4. **Run-level rollup** — total tokens, cost, wall-time per model across the 19 prompts.
+
+### Where it lives
+The **shared loop owns accumulation** — the adapter reports per-call usage/latency, the loop sums them into a run-level metrics object. Written once, not four times.
+
+---
+
+## Token Efficiency
+
+**Key insight:** all 51 tool schemas are re-sent on *every* iteration of the loop (~15–20k tokens with parameter schemas). A 10-round task pays that 10× — 150–200k input tokens just for tool definitions the model already saw.
+
+Prioritized:
+
+1. **Subset routing (highest impact — and it's the same mechanism that fixed Llama).** Plan with tool *names*, then execute sending only the ~6 planned schemas. ~85% off the tool-definition payload on every round, compounding across rounds. The Llama context fix and the #1 paid-model cost saver are the same change. *(Safety valve: if planning returns an empty/invalid plan, fall back to sending all tools so the system still works.)*
+
+2. **Prompt caching (near-free).** Tools + system prompt are byte-identical across rounds. Claude caches at 0.1× read / 1.25× write; Gemini has context caching; OpenAI caches automatically. A 10-round loop goes from 10× full price on the static prefix to 1× write + 9×0.1. Stacks with subset routing. *(Deferred past v1 — provider-specific.)*
+
+3. **Trim tool results before re-sending.** MCP outputs can be huge (GeoJSON FeatureCollections, WMS payloads). The full raw blob is re-sent in context every subsequent round. Cap size or extract the fields actually used — carefully, so needed data isn't dropped. *(Deferred past v1.)*
+
+4. **Execution-time schema compression.** During execution the model already chose the tool — it needs the parameters, not the 400–4,700-char "when to use / Do NOT use / examples" prose. Keep rich descriptions for *planning*, strip them for *execution*. *(Deferred past v1.)*
+
+5. **Iteration cap.** Claude ran 34 tool calls on some prompts — plan-driven execution naturally bounds this instead of running open-ended.
+
+Rough combined effect: subset routing + caching ≈ ~90% off tool-definition input cost, the dominant line item on multi-step tasks.
+
+---
+
 *Notes compiled June 25, 2026*
