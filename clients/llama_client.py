@@ -8,6 +8,9 @@ import uuid
 import httpx
 from openai import OpenAI
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 MCP_SERVER_URL = os.environ.get("PRECISELY_MCP_URL", "http://localhost:3000/mcp")

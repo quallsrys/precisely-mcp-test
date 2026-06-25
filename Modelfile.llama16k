@@ -1,0 +1,17 @@
+# 16k-context build of llama3.1:8b.
+#
+# The base llama3.1:8b loads with num_ctx=4096 (Ollama default), which overflows
+# when the full Precisely MCP tool-schema payload (~12.7k tokens of descriptions)
+# is sent — the model receives a truncated prompt and makes zero tool calls.
+#
+# Recreate the model with:
+#   ollama create llama3.1:8b-16k -f Modelfile.llama16k
+#
+# Verify the loaded context with:
+#   ollama ps        # CONTEXT column should read 16384
+#
+# llama3.1 supports up to 128k context; 16k is a balance of headroom vs. memory
+# (~+1.6GB KV cache over the 4k default on an 8B model).
+
+FROM llama3.1:8b
+PARAMETER num_ctx 16384
