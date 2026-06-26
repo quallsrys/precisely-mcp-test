@@ -10,8 +10,16 @@ generalizes to any request rather than memorizing anticipated ones.
 
 import json
 import re
+from dataclasses import dataclass
 
 from harness.adapters.base import ModelAdapter
+
+
+@dataclass
+class PlanResult:
+    names: list[str]
+    input_tokens: int = 0
+    output_tokens: int = 0
 
 TAXONOMY = """\
 The Precisely MCP tools fall into dependency tiers; earlier tiers feed later ones:
@@ -72,11 +80,11 @@ def _parse_plan(text: str, valid_names: set[str]) -> list[str]:
     return plan
 
 
-def make_plan(adapter: ModelAdapter, prompt: str, raw_tools: list[dict], max_tokens: int = 1024) -> list[str]:
-    """Ask the model for an ordered tool plan.
+def make_plan(adapter: ModelAdapter, prompt: str, raw_tools: list[dict], max_tokens: int = 1024) -> PlanResult:
+    """Ask the model for an ordered tool plan plus the planning call's token usage.
 
-    Returns [] if planning fails — the caller falls back to sending all tools so the
-    system still works.
+    Returns PlanResult(names=[], ...) if planning fails — the caller falls back to
+    sending all tools so the system still works.
     """
     valid_names = {t["name"] for t in raw_tools}
     tool_list = "\n".join(f"- {t['name']} — {_one_liner(t.get('description', ''))}" for t in raw_tools)
@@ -84,4 +92,5 @@ def make_plan(adapter: ModelAdapter, prompt: str, raw_tools: list[dict], max_tok
     user = PLANNING_TEMPLATE.format(prompt=prompt, tool_list=tool_list, taxonomy=TAXONOMY)
     messages = adapter.init_messages(user)
     turn = adapter.complete(PLANNING_SYSTEM, messages, tools=None, max_tokens=max_tokens)
-    return _parse_plan(turn.text, valid_names)
+    names = _parse_plan(turn.text, valid_names)
+    return PlanResult(names=names, input_tokens=turn.input_tokens, output_tokens=turn.output_tokens)
