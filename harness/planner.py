@@ -21,6 +21,7 @@ class PlanResult:
     input_tokens: int = 0
     output_tokens: int = 0
 
+
 TAXONOMY = """\
 The Precisely MCP tools fall into dependency tiers; earlier tiers feed later ones:
   1. Location    — verify_address, geocode, reverse_geocode, autocomplete_address (establish/confirm the location first)
