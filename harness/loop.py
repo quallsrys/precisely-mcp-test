@@ -48,16 +48,21 @@ def _nudge(remaining: list[str]) -> str:
     )
 
 
-def run_loop(
+def iter_loop(
     adapter: ModelAdapter,
     system: str,
     prompt: str,
     plan: list[str],
     tools,
     max_tokens: int = 4096,
-) -> dict:
-    """Execute the prompt to completion. `plan` is the ordered tool list from the planner."""
-    # Put the committed plan in front of the model as a checklist it must complete.
+    plan_tokens: tuple[int, int] = (0, 0),
+):
+    """Execute the prompt to completion, yielding events as they happen.
+
+    Events: round, tool_call, tool_result, answer, done. The final event is always
+    'done' and carries the run result + summed metrics. `plan_tokens` seeds the metrics
+    with the planning call's usage so cost accounting is honest.
+    """
     if plan:
         prompt = (
             f"{prompt}\n\nYour plan for this request (call every tool, in order):\n"
@@ -66,6 +71,8 @@ def run_loop(
 
     messages = adapter.init_messages(prompt)
     metrics = RunMetrics()
+    metrics.input_tokens += plan_tokens[0]
+    metrics.output_tokens += plan_tokens[1]
     planned = list(plan)
     called: set[str] = set()
     text = ""
@@ -78,8 +85,12 @@ def run_loop(
         metrics.rounds += 1
         metrics.input_tokens += turn.input_tokens
         metrics.output_tokens += turn.output_tokens
+        yield {"type": "round", "n": metrics.rounds,
+               "tokens": {"in": turn.input_tokens, "out": turn.output_tokens}}
+
         if turn.text:
             text = turn.text
+            yield {"type": "answer", "text": turn.text}
 
         if not turn.tool_calls:
             remaining = [p for p in planned if p not in called]
@@ -93,21 +104,47 @@ def run_loop(
         results = []
         for tc in turn.tool_calls:
             called.add(tc.name)
+            yield {"type": "tool_call", "name": tc.name, "arguments": tc.arguments}
             t1 = time.perf_counter()
-            output = mcp.call_tool(tc.name, tc.arguments)
-            metrics.tool_ms += (time.perf_counter() - t1) * 1000
+            try:
+                output = mcp.call_tool(tc.name, tc.arguments)
+                ok = True
+            except Exception as e:                      # tool failure -> observation, not crash
+                output = f"ERROR calling {tc.name}: {e}"
+                ok = False
+            ms = (time.perf_counter() - t1) * 1000
+            metrics.tool_ms += ms
             metrics.tool_calls += 1
+            yield {"type": "tool_result", "name": tc.name,
+                   "ms": round(ms), "ok": ok, "preview": output[:500]}
             results.append(ToolResult(call=tc, output=output))
         adapter.add_tool_results(messages, results)
 
     uncalled = [p for p in planned if p not in called]
-    return {
+    yield {
+        "type": "done",
         "model": adapter.model_id,
         "text": text,
         "plan": planned,
         "tools_called": sorted(called),
-        "plan_uncalled": uncalled,      # planned but never executed — the capability-ceiling signal
+        "plan_uncalled": uncalled,
         "plan_complete": not uncalled,
         "nudges": nudges,
         "metrics": metrics.as_dict(),
     }
+
+
+def run_loop(
+    adapter: ModelAdapter,
+    system: str,
+    prompt: str,
+    plan: list[str],
+    tools,
+    max_tokens: int = 4096,
+) -> dict:
+    """Drain iter_loop and return the final 'done' payload (backward-compatible shape)."""
+    result = {}
+    for event in iter_loop(adapter, system, prompt, plan, tools, max_tokens):
+        if event["type"] == "done":
+            result = {k: v for k, v in event.items() if k != "type"}
+    return result
