@@ -59,9 +59,10 @@ def iter_loop(
 ):
     """Execute the prompt to completion, yielding events as they happen.
 
-    Events: round, tool_call, tool_result, answer, done. The final event is always
-    'done' and carries the run result + summed metrics. `plan_tokens` seeds the metrics
-    with the planning call's usage so cost accounting is honest.
+    Events: round, tool_call, tool_result, answer, done. `answer` may fire more than
+    once (any turn that produces text); the last one matches done["text"]. The final
+    event is always 'done' and carries the run result + summed metrics. `plan_tokens`
+    seeds the metrics with the planning call's usage so cost accounting is honest.
     """
     if plan:
         prompt = (

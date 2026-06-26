@@ -1,7 +1,5 @@
 """Unit tests for the event loop — no network, no API keys (mcp.call_tool is patched)."""
 
-import pytest
-
 from harness import loop
 from harness.adapters.base import ModelAdapter, ToolCall, Turn
 
