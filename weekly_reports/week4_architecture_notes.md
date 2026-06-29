@@ -285,4 +285,42 @@ Rough combined effect: subset routing + caching ≈ ~90% off tool-definition inp
 
 ---
 
+## Pricing — List vs. Enterprise (research, June 25)
+
+**Key finding: no provider publishes an enterprise per-token rate.** Enterprise pricing is a confidential, negotiated discount off list, plus published discount *mechanisms*. So the harness can't hardcode a "true enterprise" number — it uses verified **list rates** (the only publicly verifiable, demo-safe anchor) keyed by exact model id, with a configurable `ENTERPRISE_DISCOUNT` knob to plug in Precisely's actual negotiated rate.
+
+### Verified list rates (USD per 1M tokens, in → out)
+
+| Provider | Model | Input | Output |
+|---|---|---|---|
+| Anthropic | Opus 4.8 | 5.00 | 25.00 |
+| Anthropic | Sonnet 4.6 | 3.00 | 15.00 |
+| Anthropic | Haiku 4.5 | 1.00 | 5.00 |
+| OpenAI | gpt-5.5 | 5.00 | 30.00 |
+| OpenAI | gpt-5.4 | 2.50 | 15.00 |
+| OpenAI | gpt-5.4-mini | 0.75 | 4.50 |
+| OpenAI | gpt-5.4-nano | 0.20 | 1.25 |
+| OpenAI | gpt-4o-mini *(legacy)* | 0.15 | 0.60 |
+| Google | Gemini 2.5 Pro (≤200k) | 1.25 | 10.00 |
+| Google | Gemini 2.5 Pro (>200k) | 2.50 | 15.00 |
+| Google | Gemini 2.5 Flash | 0.30 | 2.50 |
+| Local | Llama (self-hosted) | 0 | 0 |
+
+### Published enterprise levers (these are real and countable)
+
+- **Batch API: −50%** across all three providers (for async/non-interactive workloads).
+- **Prompt caching:** Claude cached input −90% (read 0.1×, write 1.25×); OpenAI cached input ≈ −75% (pay 25% of input rate); Gemini context caching available.
+- **Committed / provisioned throughput:** Vertex CUDs and Azure OpenAI PTUs run −20% to −65% with 1-month / 1-year commits.
+- **Negotiated volume:** reported ~25–45% off list for committed spend (e.g., OpenAI ~30% off above ~$10k/mo) — via sales, confidential.
+
+### Implications
+
+- `gpt-4o-mini` (what the benchmark used) is **legacy**; 2026 OpenAI models are gpt-5.x. Standardize the lineup before re-baselining.
+- The biggest enterprise lever for *our* workload is **prompt caching** — because the harness re-sends tool schemas every round, caching the static prefix is where the savings are. Ties directly to the Token Efficiency section above.
+- For customer demos, show **list price** (verifiable) and note that Precisely's negotiated rate would be lower; set `ENTERPRISE_DISCOUNT` to model it.
+
+*Sources: provider pricing pages (platform.claude.com, developers.openai.com, ai.google.dev) and the cached claude-api model table, June 2026.*
+
+---
+
 *Notes compiled June 25, 2026*
