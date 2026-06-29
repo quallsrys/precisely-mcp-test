@@ -1,5 +1,7 @@
 """Unit tests for Harness.run_stream — adapter and raw_tools injected, mcp patched."""
 
+import pytest
+
 from harness import harness as harness_mod
 from harness.harness import Harness
 from harness.planner import PlanResult
@@ -65,8 +67,30 @@ def test_harness_mode_emits_planning_and_plan_with_cost(monkeypatch):
     done = events[-1]
     assert done["mode"] == "harness"
     assert done["tools_sent"] == 1                      # subset routing: only planned tool
+    assert adapter.tools_formatted == [RAW_TOOLS[0]]    # exactly the planned tool was sent
     assert done["metrics"]["input_tokens"] == 200 + 50 + 30   # planning + both rounds
     assert done["cost_usd"] >= 0
+
+
+def test_empty_plan_falls_back_to_all_tools(monkeypatch):
+    # Planning returned nothing -> send all tools so the run still works.
+    monkeypatch.setattr(harness_mod, "make_plan",
+                        lambda a, p, t: PlanResult([], 120, 6))
+    monkeypatch.setattr(harness_mod.mcp, "call_tool", lambda n, a: "OK")
+    adapter = ScriptedAdapter([Turn("Answer.", [], 25, 4, None)])
+
+    events = list(_harness(adapter).run_stream("flood risk", mode="harness"))
+    done = events[-1]
+
+    assert done["tools_sent"] == len(RAW_TOOLS)         # fallback: all tools
+    assert adapter.tools_formatted == RAW_TOOLS
+    assert done["metrics"]["input_tokens"] == 120 + 25  # planning tokens still counted
+
+
+def test_invalid_mode_raises(monkeypatch):
+    adapter = ScriptedAdapter([Turn("Answer.", [], 1, 1, None)])
+    with pytest.raises(ValueError):
+        list(_harness(adapter).run_stream("x", mode="harnes"))
 
 
 def test_naive_mode_skips_planning_and_sends_all_tools(monkeypatch):

@@ -35,7 +35,11 @@ PRICING = {
 }
 
 
+VALID_MODES = ("harness", "naive")
+
+
 def _make_adapter(model: str, model_id: str | None) -> ModelAdapter:
+    """Import only the SDK for the requested model (paid SDKs aren't needed for a local Llama run)."""
     if model == "claude":
         from harness.adapters.claude import ClaudeAdapter
         return ClaudeAdapter(model_id)
@@ -60,12 +64,14 @@ class Harness:
     def __init__(self, model: str, model_id: str | None = None, *,
                  adapter: ModelAdapter | None = None, raw_tools: list[dict] | None = None):
         self.name = model
-        self.adapter = adapter or _make_adapter(model, model_id)
+        self.adapter: ModelAdapter = adapter or _make_adapter(model, model_id)
         self.raw_tools = raw_tools if raw_tools is not None else mcp.list_raw_tools()
         self.system_prompt = _SYSTEM_PROMPT_PATH.read_text() if _SYSTEM_PROMPT_PATH.exists() else ""
 
     def run_stream(self, prompt: str, mode: str = "harness", max_tokens: int = 4096):
         """Yield events for one run. mode is 'harness' (plan + subset) or 'naive' (all tools)."""
+        if mode not in VALID_MODES:
+            raise ValueError(f"Unknown mode '{mode}'. Choose from: {', '.join(VALID_MODES)}")
         if mode == "harness":
             yield {"type": "planning"}
             pr = make_plan(self.adapter, prompt, self.raw_tools)
