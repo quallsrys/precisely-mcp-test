@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harness Comparison — Precisely MCP</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root { font-family: -apple-system, system-ui, sans-serif; }
+    body { margin: 0; background: #0f1116; color: #e6e8eb; }
+    header { padding: 16px 24px; border-bottom: 1px solid #232733; }
+    h1 { font-size: 18px; margin: 0; }
+    .controls { padding: 16px 24px; display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+    textarea { flex: 1; min-width: 320px; min-height: 56px; background: #161922; color: #e6e8eb;
+               border: 1px solid #2a2f3a; border-radius: 8px; padding: 10px; font-size: 14px; }
+    .models { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+    label.model { font-size: 13px; opacity: 0.9; }
+    label.model[aria-disabled="true"] { opacity: 0.4; }
+    button { background: #3b82f6; color: white; border: 0; border-radius: 8px; padding: 10px 18px;
+             font-size: 14px; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 24px 24px; }
+    .panel { background: #161922; border: 1px solid #2a2f3a; border-radius: 10px; padding: 16px; }
+    .panel h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 10px; color: #9aa4b2; }
+    .steps { font-size: 12px; font-family: ui-monospace, monospace; color: #9aa4b2; max-height: 180px;
+             overflow: auto; border: 1px solid #232733; border-radius: 6px; padding: 8px; margin-bottom: 12px; }
+    .step.err { color: #f87171; }
+    .step.ok { color: #34d399; }
+    .answer { font-size: 14px; line-height: 1.5; }
+    .answer table { border-collapse: collapse; }
+    .answer th, .answer td { border: 1px solid #2a2f3a; padding: 4px 8px; }
+    .metrics { margin-top: 12px; font-size: 12px; color: #9aa4b2; font-family: ui-monospace, monospace; }
+    .delta { padding: 12px 24px; font-size: 13px; color: #cbd5e1; }
+    .pill { display: inline-block; background: #232733; border-radius: 999px; padding: 2px 8px; margin: 2px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header><h1>Harness vs Naive — Precisely MCP comparison</h1></header>
+
+  <div class="controls">
+    <textarea id="prompt" placeholder="e.g. Assess wildfire and flood risk for 950 Josephine St, Denver CO, for an insurance adjuster."></textarea>
+    <div>
+      <div class="models" id="models"></div>
+      <button id="run">Run comparison</button>
+    </div>
+  </div>
+
+  <div class="delta" id="delta"></div>
+
+  <div class="panels">
+    <div class="panel"><h2>Harness</h2><div class="steps" id="steps-harness"></div>
+      <div class="answer" id="answer-harness"></div><div class="metrics" id="metrics-harness"></div></div>
+    <div class="panel"><h2>Naive</h2><div class="steps" id="steps-naive"></div>
+      <div class="answer" id="answer-naive"></div><div class="metrics" id="metrics-naive"></div></div>
+  </div>
+
+  <script>
+    const doneState = {};
+
+    async function loadModels() {
+      const res = await fetch('/api/models');
+      const models = await res.json();
+      const box = document.getElementById('models');
+      const firstAvailable = models.find(x => x.available);
+      models.forEach((m) => {
+        const lab = document.createElement('label');
+        lab.className = 'model';
+        if (!m.available) lab.setAttribute('aria-disabled', 'true');
+        const checked = m.available && m === firstAvailable ? 'checked' : '';
+        const dis = m.available ? '' : 'disabled';
+        const tag = m.available ? '' : ` (${m.reason})`;
+        lab.innerHTML = `<input type="radio" name="model" value="${m.name}" ${checked} ${dis}> ${m.name}${tag}`;
+        box.appendChild(lab);
+      });
+    }
+
+    function step(panel, text, cls) {
+      const el = document.getElementById('steps-' + panel);
+      const d = document.createElement('div');
+      d.className = 'step' + (cls ? ' ' + cls : '');
+      d.textContent = text;
+      el.appendChild(d);
+      el.scrollTop = el.scrollHeight;
+    }
+
+    function handle(panel, ev) {
+      if (ev.type === 'planning') step(panel, '⋯ planning');
+      else if (ev.type === 'plan') step(panel, '✓ plan: ' + ev.plan.join(' → '));
+      else if (ev.type === 'round') step(panel, '↻ round ' + ev.n + '  (' + ev.tokens.in + ' in / ' + ev.tokens.out + ' out)');
+      else if (ev.type === 'tool_call') step(panel, '→ ' + ev.name);
+      else if (ev.type === 'tool_result') step(panel, (ev.ok ? '✓ ' : '✗ ') + ev.name + '  ' + ev.ms + 'ms', ev.ok ? 'ok' : 'err');
+      else if (ev.type === 'answer') document.getElementById('answer-' + panel).innerHTML = marked.parse(ev.text || '');
+      else if (ev.type === 'error') step(panel, '✗ ERROR: ' + ev.message, 'err');
+      else if (ev.type === 'done') {
+        const m = ev.metrics || {};
+        const secs = ((m.model_ms || 0) + (m.tool_ms || 0)) / 1000;
+        document.getElementById('metrics-' + panel).textContent =
+          `tools: ${(ev.tools_called || []).join(', ') || 'none'}  |  ` +
+          `${(m.input_tokens || 0).toLocaleString()} in / ${(m.output_tokens || 0).toLocaleString()} out  |  ` +
+          `${m.rounds || 0} rounds  |  $${ev.cost_usd}  |  ${secs.toFixed(1)}s  |  sent ${ev.tools_sent}/${ev.tools_available} tools`;
+        doneState[panel] = ev;
+        renderDelta();
+      }
+    }
+
+    function renderDelta() {
+      if (!doneState.harness || !doneState.naive) return;
+      const h = doneState.harness, n = doneState.naive;
+      const pct = (a, b) => b ? Math.round((a - b) / b * 100) : 0;
+      const dCost = pct(h.cost_usd, n.cost_usd);
+      const dTok = pct(h.metrics.input_tokens, n.metrics.input_tokens);
+      const dTools = (h.tools_called || []).length - (n.tools_called || []).length;
+      document.getElementById('delta').innerHTML =
+        `<b>Delta (harness vs naive):</b> ` +
+        `<span class="pill">cost ${dCost >= 0 ? '+' : ''}${dCost}%</span>` +
+        `<span class="pill">input tokens ${dTok >= 0 ? '+' : ''}${dTok}%</span>` +
+        `<span class="pill">tools ${dTools >= 0 ? '+' : ''}${dTools}</span>`;
+    }
+
+    function openStream(panel, model, prompt) {
+      const url = `/api/stream?model=${encodeURIComponent(model)}&mode=${panel}&prompt=${encodeURIComponent(prompt)}`;
+      const es = new EventSource(url);
+      es.onmessage = (e) => {
+        const ev = JSON.parse(e.data);
+        handle(panel, ev);
+        if (ev.type === 'done' || ev.type === 'error') es.close();
+      };
+      es.onerror = () => es.close();
+    }
+
+    document.getElementById('run').addEventListener('click', () => {
+      const prompt = document.getElementById('prompt').value.trim();
+      const model = (document.querySelector('input[name=model]:checked') || {}).value;
+      if (!prompt || !model) return;
+      ['harness', 'naive'].forEach(p => {
+        document.getElementById('steps-' + p).innerHTML = '';
+        document.getElementById('answer-' + p).innerHTML = '';
+        document.getElementById('metrics-' + p).textContent = '';
+        delete doneState[p];
+      });
+      document.getElementById('delta').innerHTML = '';
+      openStream('harness', model, prompt);
+      openStream('naive', model, prompt);
+    });
+
+    loadModels();
+  </script>
+</body>
+</html>
