@@ -6,40 +6,193 @@
   <title>Harness Comparison — Precisely MCP</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    :root { font-family: -apple-system, system-ui, sans-serif; }
-    body { margin: 0; background: #0f1116; color: #e6e8eb; }
-    header { padding: 16px 24px; border-bottom: 1px solid #232733; }
-    h1 { font-size: 18px; margin: 0; }
-    .controls { padding: 16px 24px; display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
-    textarea { flex: 1; min-width: 320px; min-height: 56px; background: #161922; color: #e6e8eb;
-               border: 1px solid #2a2f3a; border-radius: 8px; padding: 10px; font-size: 14px; }
-    .models { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
-    label.model { font-size: 13px; opacity: 0.9; }
-    label.model[aria-disabled="true"] { opacity: 0.4; }
-    button { background: #3b82f6; color: white; border: 0; border-radius: 8px; padding: 10px 18px;
-             font-size: 14px; cursor: pointer; }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 24px 24px; }
-    .panel { background: #161922; border: 1px solid #2a2f3a; border-radius: 10px; padding: 16px; }
-    .panel h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 10px; color: #9aa4b2; }
-    .steps { font-size: 12px; font-family: ui-monospace, monospace; color: #9aa4b2; max-height: 180px;
-             overflow: auto; border: 1px solid #232733; border-radius: 6px; padding: 8px; margin-bottom: 12px; }
-    .step.err { color: #f87171; }
-    .step.ok { color: #34d399; }
-    .answer { font-size: 14px; line-height: 1.5; }
-    .answer table { border-collapse: collapse; }
-    .answer th, .answer td { border: 1px solid #2a2f3a; padding: 4px 8px; }
-    .metrics { margin-top: 12px; font-size: 12px; color: #9aa4b2; font-family: ui-monospace, monospace; }
-    .delta { padding: 12px 24px; font-size: 13px; color: #cbd5e1; }
-    .pill { display: inline-block; background: #232733; border-radius: 999px; padding: 2px 8px; margin: 2px; font-size: 12px; }
+    /* Precisely brand palette
+       Navy    #001B4C   Deep purple  #39006A   Purple  #7F16E0
+       Magenta #E5007E   Amber        #FAB511   Orange  #FC7E08
+       Gray    #D7DAE9 */
+    :root {
+      font-family: -apple-system, system-ui, sans-serif;
+      --bg:         #00112e;
+      --surface:    #001640;
+      --surface-2:  #0a2355;
+      --border:     #0d2d6b;
+      --purple:     #7F16E0;
+      --purple-dim: #39006A;
+      --magenta:    #E5007E;
+      --amber:      #FAB511;
+      --text:       #e8eaf2;
+      --text-dim:   #D7DAE9;
+      --ok:         #34d399;
+      --err:        #E5007E;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); }
+
+    /* ── Header ── */
+    header {
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+    }
+    .logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+    .logo-sep { color: var(--border); font-size: 18px; }
+    h1 { font-size: 15px; margin: 0; font-weight: 500; color: var(--text-dim); }
+
+    /* ── Controls ── */
+    .controls {
+      padding: 16px 24px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    textarea {
+      flex: 1;
+      min-width: 320px;
+      min-height: 52px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      resize: vertical;
+    }
+    textarea:focus { outline: none; border-color: var(--purple); }
+    textarea::placeholder { color: #4a5a80; }
+    .run-col { display: flex; flex-direction: column; gap: 10px; }
+    .models { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    label.model { font-size: 13px; color: var(--text-dim); cursor: pointer; }
+    label.model[aria-disabled="true"] { opacity: 0.35; cursor: default; }
+    input[type="radio"] { accent-color: var(--purple); }
+    button {
+      background: var(--purple);
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: background 0.15s;
+    }
+    button:hover:not(:disabled) { background: #9b35f5; }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* ── Delta bar ── */
+    .delta {
+      padding: 10px 24px;
+      font-size: 13px;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      min-height: 38px;
+    }
+    .delta b { color: var(--text); }
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 10px;
+      margin: 2px 3px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .pill-savings { background: #0d3a1a; color: #34d399; border: 1px solid #1a5c2a; }
+    .pill-cost    { background: #2a0d1a; color: var(--magenta); border: 1px solid #4a1530; }
+    .pill-neutral { background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border); }
+
+    /* ── Panels ── */
+    .panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 16px 24px 24px;
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .panel h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+      font-weight: 700;
+    }
+    .panel-harness h2 { color: var(--purple); }
+    .panel-naive h2 { color: var(--amber); }
+    .badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .panel-harness .badge { background: #2a0d5a; color: var(--purple); border: 1px solid #4a1580; }
+    .panel-naive .badge   { background: #2a1e00; color: var(--amber);  border: 1px solid #5a3f00; }
+
+    .steps {
+      font-size: 12px;
+      font-family: ui-monospace, 'SF Mono', monospace;
+      color: #7a8aaa;
+      max-height: 180px;
+      overflow: auto;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+    }
+    .step { margin-bottom: 2px; }
+    .step.err { color: var(--err); }
+    .step.ok  { color: var(--ok); }
+
+    .answer { font-size: 14px; line-height: 1.6; color: var(--text); }
+    .answer table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+    .answer th { background: var(--surface-2); color: var(--text-dim); }
+    .answer th, .answer td { border: 1px solid var(--border); padding: 5px 10px; }
+    .answer code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+
+    .metrics {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: #4a5a80;
+      font-family: ui-monospace, 'SF Mono', monospace;
+      line-height: 1.8;
+    }
+    .metrics span { color: var(--text-dim); }
   </style>
 </head>
 <body>
-  <header><h1>Harness vs Naive — Precisely MCP comparison</h1></header>
+  <header>
+    <span class="logo">Precisely</span>
+    <span class="logo-sep">|</span>
+    <h1>MCP Harness — Harness vs Naive comparison</h1>
+  </header>
 
   <div class="controls">
     <textarea id="prompt" placeholder="e.g. Assess wildfire and flood risk for 950 Josephine St, Denver CO, for an insurance adjuster."></textarea>
-    <div>
+    <div class="run-col">
       <div class="models" id="models"></div>
       <button id="run">Run comparison</button>
     </div>
@@ -48,10 +201,24 @@
   <div class="delta" id="delta"></div>
 
   <div class="panels">
-    <div class="panel"><h2>Harness</h2><div class="steps" id="steps-harness"></div>
-      <div class="answer" id="answer-harness"></div><div class="metrics" id="metrics-harness"></div></div>
-    <div class="panel"><h2>Naive</h2><div class="steps" id="steps-naive"></div>
-      <div class="answer" id="answer-naive"></div><div class="metrics" id="metrics-naive"></div></div>
+    <div class="panel panel-harness">
+      <div class="panel-header">
+        <h2>Harness</h2>
+        <span class="badge">plan + subset routing</span>
+      </div>
+      <div class="steps" id="steps-harness"></div>
+      <div class="answer" id="answer-harness"></div>
+      <div class="metrics" id="metrics-harness"></div>
+    </div>
+    <div class="panel panel-naive">
+      <div class="panel-header">
+        <h2>Naive</h2>
+        <span class="badge">all tools, no plan</span>
+      </div>
+      <div class="steps" id="steps-naive"></div>
+      <div class="answer" id="answer-naive"></div>
+      <div class="metrics" id="metrics-naive"></div>
+    </div>
   </div>
 
   <script>
@@ -84,7 +251,7 @@
     }
 
     function handle(panel, ev) {
-      if (ev.type === 'planning') step(panel, '⋯ planning');
+      if (ev.type === 'planning') step(panel, '⋯ planning…');
       else if (ev.type === 'plan') step(panel, '✓ plan: ' + ev.plan.join(' → '));
       else if (ev.type === 'round') step(panel, '↻ round ' + ev.n + '  (' + ev.tokens.in + ' in / ' + ev.tokens.out + ' out)');
       else if (ev.type === 'tool_call') step(panel, '→ ' + ev.name);
@@ -94,10 +261,14 @@
       else if (ev.type === 'done') {
         const m = ev.metrics || {};
         const secs = ((m.model_ms || 0) + (m.tool_ms || 0)) / 1000;
-        document.getElementById('metrics-' + panel).textContent =
-          `tools: ${(ev.tools_called || []).join(', ') || 'none'}  |  ` +
-          `${(m.input_tokens || 0).toLocaleString()} in / ${(m.output_tokens || 0).toLocaleString()} out  |  ` +
-          `${m.rounds || 0} rounds  |  $${ev.cost_usd}  |  ${secs.toFixed(1)}s  |  sent ${ev.tools_sent}/${ev.tools_available} tools`;
+        const metricsEl = document.getElementById('metrics-' + panel);
+        metricsEl.innerHTML =
+          `tools called: <span>${(ev.tools_called || []).join(', ') || 'none'}</span><br>` +
+          `tokens: <span>${(m.input_tokens || 0).toLocaleString()} in / ${(m.output_tokens || 0).toLocaleString()} out</span>  ` +
+          `rounds: <span>${m.rounds || 0}</span>  ` +
+          `cost: <span>$${ev.cost_usd ?? 'n/a'}</span>  ` +
+          `time: <span>${secs.toFixed(1)}s</span><br>` +
+          `tools sent: <span>${ev.tools_sent}/${ev.tools_available}</span>`;
         doneState[panel] = ev;
         renderDelta();
       }
@@ -108,13 +279,20 @@
       const h = doneState.harness, n = doneState.naive;
       const pct = (a, b) => b ? Math.round((a - b) / b * 100) : 0;
       const dCost = pct(h.cost_usd, n.cost_usd);
-      const dTok = pct(h.metrics.input_tokens, n.metrics.input_tokens);
+      const dTok  = pct(h.metrics.input_tokens, n.metrics.input_tokens);
       const dTools = (h.tools_called || []).length - (n.tools_called || []).length;
+
+      const pill = (label, val, unit='') => {
+        const cls = val < 0 ? 'pill-savings' : val > 0 ? 'pill-cost' : 'pill-neutral';
+        const sign = val > 0 ? '+' : '';
+        return `<span class="pill ${cls}">${label} ${sign}${val}${unit}</span>`;
+      };
+
       document.getElementById('delta').innerHTML =
-        `<b>Delta (harness vs naive):</b> ` +
-        `<span class="pill">cost ${dCost >= 0 ? '+' : ''}${dCost}%</span>` +
-        `<span class="pill">input tokens ${dTok >= 0 ? '+' : ''}${dTok}%</span>` +
-        `<span class="pill">tools ${dTools >= 0 ? '+' : ''}${dTools}</span>`;
+        `<b>Delta — harness vs naive:</b>  ` +
+        pill('cost', dCost, '%') +
+        pill('input tokens', dTok, '%') +
+        pill('tools called', dTools);
     }
 
     function openStream(panel, model, prompt) {
@@ -135,7 +313,7 @@
       ['harness', 'naive'].forEach(p => {
         document.getElementById('steps-' + p).innerHTML = '';
         document.getElementById('answer-' + p).innerHTML = '';
-        document.getElementById('metrics-' + p).textContent = '';
+        document.getElementById('metrics-' + p).innerHTML = '';
         delete doneState[p];
       });
       document.getElementById('delta').innerHTML = '';
