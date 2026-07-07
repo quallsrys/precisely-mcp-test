@@ -1,13 +1,18 @@
 """Interactive CLI for the harness — ask the Precisely MCP tools anything, on any model.
 
-    python -m harness.cli                      # interactive, starts on claude
-    python -m harness.cli gemini               # interactive, starts on gemini
-    python -m harness.cli claude "flood risk at 950 Josephine St, Denver CO"   # one-shot
+    python -m harness.cli                                   # interactive, claude (default model)
+    python -m harness.cli gemini                            # interactive, gemini (default model)
+    python -m harness.cli claude --id claude-opus-4-8       # interactive, a specific model id
+    python -m harness.cli openai --id gpt-5.4-mini "flood risk at 950 Josephine St, Denver CO"
 
 Interactive commands:
-    /model <claude|gemini|openai|llama>   switch model (keeps the session going)
-    /help                                 show commands
-    /quit                                 exit
+    /model <claude|gemini|openai|llama> [exact-model-id]   switch model (and optionally pin the id)
+    /help                                                  show commands
+    /quit                                                  exit
+
+Default model ids live in .env (CLAUDE_MODEL, OPENAI_MODEL, GEMINI_MODEL, LLAMA_MODEL).
+Pass an exact id here to override per session. Cost uses list price unless ENTERPRISE_DISCOUNT
+is set in .env.
 """
 
 import sys
@@ -15,20 +20,22 @@ import sys
 from harness import Harness
 from harness.harness import VALID_MODELS
 
-# Cache one Harness per model so switching back doesn't re-fetch the tool list.
-_cache: dict[str, Harness] = {}
+# Cache one Harness per (provider, model_id) so switching back doesn't re-fetch the tool list.
+_cache: dict[tuple, Harness] = {}
 
 
-def _get(model: str) -> Harness:
-    if model not in _cache:
-        print(f"  (loading {model} + MCP tools…)")
-        _cache[model] = Harness(model)
-    return _cache[model]
+def _get(model: str, model_id: str | None) -> Harness:
+    key = (model, model_id)
+    if key not in _cache:
+        label = f"{model}:{model_id}" if model_id else f"{model} (default model)"
+        print(f"  (loading {label} + MCP tools…)")
+        _cache[key] = Harness(model, model_id)
+    return _cache[key]
 
 
-def _ask(model: str, prompt: str) -> None:
+def _ask(model: str, model_id: str | None, prompt: str) -> None:
     try:
-        harness = _get(model)
+        harness = _get(model, model_id)
     except Exception as e:
         print(f"  ⚠️  could not start {model}: {e}\n")
         return
@@ -46,19 +53,25 @@ def _ask(model: str, prompt: str) -> None:
 
     m = r["metrics"]
     secs = (m["model_ms"] + m["tool_ms"]) / 1000
+    if r["cost_usd"] is None:
+        cost = f"cost n/a ({r['model']} not in pricing table)"
+    else:
+        cost = f"${r['cost_usd']} ({r['cost_basis']})"
     flag = "" if r["plan_complete"] else f"  ⚠ never called: {', '.join(r['plan_uncalled'])}"
+
     print("\n" + "─" * 64)
+    print(f"model: {r['model']}")
+    print(f"tools called: {', '.join(r['tools_called']) or 'none'}")
     print(
-        f"tools called: {', '.join(r['tools_called']) or 'none'}\n"
         f"{m['input_tokens']:,} in / {m['output_tokens']:,} out tokens  |  "
-        f"{m['rounds']} rounds  |  ${r['cost_usd']}  |  {secs:.1f}s{flag}"
+        f"{m['rounds']} rounds  |  {cost}  |  {secs:.1f}s{flag}"
     )
     print()
 
 
-def _repl(model: str) -> None:
+def _repl(model: str, model_id: str | None) -> None:
     print("Precisely MCP harness — interactive. /help for commands, /quit to exit.")
-    print(f"Model: {model}")
+    print(f"Model: {model}" + (f" ({model_id})" if model_id else " (default)"))
     while True:
         try:
             line = input(f"\n{model}> ").strip()
@@ -72,33 +85,39 @@ def _repl(model: str) -> None:
             print("bye")
             return
         if line == "/help":
-            print(f"  /model <{'|'.join(VALID_MODELS)}>   switch model")
-            print("  /quit                                  exit")
+            print(f"  /model <{'|'.join(VALID_MODELS)}> [exact-model-id]   switch model")
+            print("  /quit                                                  exit")
             continue
         if line.startswith("/model"):
             parts = line.split()
-            if len(parts) == 2 and parts[1] in VALID_MODELS:
+            if len(parts) >= 2 and parts[1] in VALID_MODELS:
                 model = parts[1]
-                print(f"  switched to {model}")
+                model_id = parts[2] if len(parts) >= 3 else None
+                print(f"  switched to {model}" + (f":{model_id}" if model_id else " (default model)"))
             else:
-                print(f"  usage: /model <{'|'.join(VALID_MODELS)}>")
+                print(f"  usage: /model <{'|'.join(VALID_MODELS)}> [exact-model-id]")
             continue
         if line.startswith("/"):
             print("  unknown command — /help for options")
             continue
-        _ask(model, line)
+        _ask(model, model_id, line)
 
 
 def main() -> None:
     args = sys.argv[1:]
     model = "claude"
+    model_id = None
+
     if args and args[0] in VALID_MODELS:
         model = args.pop(0)
+    if args and args[0] == "--id":
+        args.pop(0)
+        model_id = args.pop(0) if args else None
 
-    if args:  # one-shot: remaining args are the prompt
-        _ask(model, " ".join(args))
+    if args:  # remaining args are a one-shot prompt
+        _ask(model, model_id, " ".join(args))
     else:
-        _repl(model)
+        _repl(model, model_id)
 
 
 if __name__ == "__main__":
