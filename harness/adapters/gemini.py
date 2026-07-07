@@ -57,7 +57,10 @@ class GeminiAdapter(ModelAdapter):
 
     def __init__(self, model_id: str | None = None):
         self.model_id = model_id or os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
-        self.client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+        self.client = genai.Client(
+            api_key=os.environ["GEMINI_API_KEY"],
+            http_options=types.HttpOptions(timeout=300_000),  # 5 min; Pro thinking can be slow
+        )
         self.delay = float(os.environ.get("GEMINI_DELAY_SECONDS", "5"))
 
     def format_tools(self, raw_tools):

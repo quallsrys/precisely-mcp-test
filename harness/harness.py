@@ -124,7 +124,8 @@ class Harness:
                                plan_names, tools, max_tokens, plan_tokens=plan_tokens):
             if event["type"] == "done":
                 m = event["metrics"]
-                event["cost_usd"] = _estimate_cost(self.name, m["input_tokens"], m["output_tokens"])
+                event["cost_usd"] = _estimate_cost(self.adapter.model_id, m["input_tokens"], m["output_tokens"])
+                event["cost_basis"] = "list" if ENTERPRISE_DISCOUNT == 0 else f"enterprise (-{ENTERPRISE_DISCOUNT:.0%})"
                 event["model_name"] = self.name
                 event["tools_sent"] = len(subset)
                 event["tools_available"] = len(self.raw_tools)
@@ -137,15 +138,4 @@ class Harness:
         for event in self.run_stream(prompt, mode=mode, max_tokens=max_tokens):
             if event["type"] == "done":
                 result = {k: v for k, v in event.items() if k != "type"}
-
-        # 3. Execute.
-        result = run_loop(self.adapter, self.system_prompt, prompt, plan, tools, max_tokens)
-
-        # 4. Annotate with routing + cost.
-        m = result["metrics"]
-        result["model_name"] = self.name
-        result["tools_sent"] = len(subset)
-        result["tools_available"] = len(self.raw_tools)
-        result["cost_usd"] = _estimate_cost(self.adapter.model_id, m["input_tokens"], m["output_tokens"])
-        result["cost_basis"] = "list" if ENTERPRISE_DISCOUNT == 0 else f"enterprise (-{ENTERPRISE_DISCOUNT:.0%})"
         return result
