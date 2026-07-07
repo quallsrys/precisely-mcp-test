@@ -39,10 +39,26 @@ def _harness(model: str) -> Harness:
     return Harness(model, raw_tools=_get_raw_tools())
 
 
+_DEFAULT_MODEL_IDS = {
+    "claude": "claude-sonnet-4-6",
+    "openai": "gpt-4o-mini",
+    "gemini": "gemini-2.5-pro",
+    "llama":  "llama3.1:8b-16k",
+}
+
+_MODEL_ID_ENV = {
+    "claude": "CLAUDE_MODEL",
+    "openai": "OPENAI_MODEL",
+    "gemini": "GEMINI_MODEL",
+    "llama":  "LLAMA_MODEL",
+}
+
+
 def get_available_models() -> list[dict]:
     """Report each model's availability so the UI can disable unconfigured ones."""
     out = []
     for name in VALID_MODELS:
+        model_id = os.environ.get(_MODEL_ID_ENV[name], _DEFAULT_MODEL_IDS[name])
         if name == "claude":
             ok = bool(os.environ.get("ANTHROPIC_API_KEY"))
             reason = "" if ok else "ANTHROPIC_API_KEY not set"
@@ -59,7 +75,7 @@ def get_available_models() -> list[dict]:
                 ok, reason = True, ""
             except Exception:
                 ok, reason = False, "Ollama not reachable"
-        out.append({"name": name, "available": ok, "reason": reason})
+        out.append({"name": name, "model_id": model_id, "available": ok, "reason": reason})
     return out
 
 

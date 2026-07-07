@@ -6,110 +6,181 @@
   <title>Harness Comparison — Precisely MCP</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    /* Precisely brand palette
-       Navy    #001B4C   Deep purple  #39006A   Purple  #7F16E0
-       Magenta #E5007E   Amber        #FAB511   Orange  #FC7E08
-       Gray    #D7DAE9 */
+    /* Precisely brand — light mode
+       Purple #7F16E0  Navy #001B4C  Amber #FAB511  Magenta #E5007E */
     :root {
       font-family: -apple-system, system-ui, sans-serif;
-      --bg:         #00112e;
-      --surface:    #001640;
-      --surface-2:  #0a2355;
-      --border:     #0d2d6b;
-      --purple:     #7F16E0;
-      --purple-dim: #39006A;
-      --magenta:    #E5007E;
-      --amber:      #FAB511;
-      --text:       #e8eaf2;
-      --text-dim:   #D7DAE9;
-      --ok:         #34d399;
-      --err:        #E5007E;
+      --bg:           #F5F6FA;
+      --surface:      #FFFFFF;
+      --border:       #E2E4EE;
+      --purple:       #7F16E0;
+      --purple-tint:  #F3EAFF;
+      --purple-dim:   #39006A;
+      --navy:         #001B4C;
+      --amber:        #FAB511;
+      --amber-tint:   #FFF9E6;
+      --magenta:      #E5007E;
+      --text:         #001B4C;
+      --text-mid:     #3D4A6B;
+      --text-dim:     #8B93A8;
+      --ok:           #059669;
+      --err:          #E5007E;
     }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--text); }
 
     /* ── Header ── */
     header {
-      padding: 14px 24px;
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 52px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: var(--surface);
+      gap: 16px;
     }
-    .logo {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--purple);
-    }
-    .logo-sep { color: var(--border); font-size: 18px; }
-    h1 { font-size: 15px; margin: 0; font-weight: 500; color: var(--text-dim); }
+    .logo { font-size: 15px; font-weight: 800; letter-spacing: 1px; color: var(--purple); text-transform: uppercase; }
+    .header-sep { width: 1px; height: 20px; background: var(--border); }
+    .header-title { font-size: 14px; color: var(--text-mid); font-weight: 400; }
 
     /* ── Controls ── */
     .controls {
-      padding: 16px 24px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      flex-wrap: wrap;
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
+
+    /* Model cards */
+    .model-cards { display: flex; gap: 12px; flex-wrap: wrap; }
+    .model-card {
+      position: relative;
+      width: 160px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      user-select: none;
+    }
+    .model-card:hover:not(.disabled) {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(127,22,224,0.08);
+    }
+    .model-card.selected {
+      border-color: var(--purple);
+      background: var(--purple-tint);
+      box-shadow: 0 0 0 3px rgba(127,22,224,0.12);
+    }
+    .model-card.disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .model-card input[type="radio"] { display: none; }
+    .card-provider {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+    .model-card.selected .card-provider { color: var(--purple); }
+    .card-model-id {
+      font-size: 11px;
+      font-family: ui-monospace, 'SF Mono', monospace;
+      color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-unavailable {
+      font-size: 10px;
+      color: var(--err);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .card-check {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--purple);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .model-card.selected .card-check { display: flex; }
+    .card-check::after {
+      content: '';
+      width: 6px;
+      height: 4px;
+      border-left: 1.5px solid white;
+      border-bottom: 1.5px solid white;
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    /* Prompt row */
+    .prompt-row { display: flex; gap: 12px; align-items: flex-start; }
     textarea {
       flex: 1;
-      min-width: 320px;
-      min-height: 52px;
-      background: var(--surface);
+      min-height: 48px;
+      max-height: 120px;
+      background: var(--bg);
       color: var(--text);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: 8px;
       padding: 10px 12px;
       font-size: 14px;
+      font-family: inherit;
       resize: vertical;
+      transition: border-color 0.15s;
     }
     textarea:focus { outline: none; border-color: var(--purple); }
-    textarea::placeholder { color: #4a5a80; }
-    .run-col { display: flex; flex-direction: column; gap: 10px; }
-    .models { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-    label.model { font-size: 13px; color: var(--text-dim); cursor: pointer; }
-    label.model[aria-disabled="true"] { opacity: 0.35; cursor: default; }
-    input[type="radio"] { accent-color: var(--purple); }
+    textarea::placeholder { color: var(--text-dim); }
     button {
       background: var(--purple);
       color: white;
       border: 0;
       border-radius: 8px;
-      padding: 10px 20px;
+      padding: 10px 22px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      letter-spacing: 0.3px;
+      white-space: nowrap;
       transition: background 0.15s;
     }
-    button:hover:not(:disabled) { background: #9b35f5; }
+    button:hover:not(:disabled) { background: #6a10c4; }
     button:disabled { opacity: 0.45; cursor: not-allowed; }
 
     /* ── Delta bar ── */
     .delta {
       padding: 10px 24px;
       font-size: 13px;
-      color: var(--text-dim);
+      color: var(--text-mid);
       border-bottom: 1px solid var(--border);
-      min-height: 38px;
+      background: var(--surface);
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .delta b { color: var(--text); }
+    .delta-label { font-weight: 600; color: var(--text); margin-right: 4px; }
     .pill {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       border-radius: 999px;
-      padding: 2px 10px;
-      margin: 2px 3px;
+      padding: 3px 10px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
+      border: 1px solid transparent;
     }
-    .pill-savings { background: #0d3a1a; color: #34d399; border: 1px solid #1a5c2a; }
-    .pill-cost    { background: #2a0d1a; color: var(--magenta); border: 1px solid #4a1530; }
-    .pill-neutral { background: var(--surface-2); color: var(--text-dim); border: 1px solid var(--border); }
+    .pill-savings { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
+    .pill-cost    { background: #FFF1F5; color: var(--magenta); border-color: #FECDD3; }
+    .pill-neutral { background: var(--bg); color: var(--text-mid); border-color: var(--border); }
 
     /* ── Panels ── */
     .panels {
@@ -121,79 +192,76 @@
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 18px;
     }
     .panel-header {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
-    .panel h2 {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 0;
-      font-weight: 700;
-    }
+    .panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.8px; margin: 0; font-weight: 700; }
     .panel-harness h2 { color: var(--purple); }
-    .panel-naive h2 { color: var(--amber); }
+    .panel-naive h2   { color: #B45309; }
     .badge {
       font-size: 10px;
-      padding: 2px 7px;
+      padding: 2px 8px;
       border-radius: 999px;
       font-weight: 600;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
-    .panel-harness .badge { background: #2a0d5a; color: var(--purple); border: 1px solid #4a1580; }
-    .panel-naive .badge   { background: #2a1e00; color: var(--amber);  border: 1px solid #5a3f00; }
+    .panel-harness .badge { background: var(--purple-tint); color: var(--purple); border: 1px solid #DDD0F8; }
+    .panel-naive .badge   { background: var(--amber-tint);  color: #92400E;       border: 1px solid #FDE68A; }
 
     .steps {
       font-size: 12px;
       font-family: ui-monospace, 'SF Mono', monospace;
-      color: #7a8aaa;
+      color: var(--text-dim);
       max-height: 180px;
-      overflow: auto;
+      overflow-y: auto;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 8px 10px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .step { margin-bottom: 2px; }
+    .step { margin-bottom: 2px; line-height: 1.5; }
     .step.err { color: var(--err); }
     .step.ok  { color: var(--ok); }
 
     .answer { font-size: 14px; line-height: 1.6; color: var(--text); }
-    .answer table { border-collapse: collapse; width: 100%; margin: 8px 0; }
-    .answer th { background: var(--surface-2); color: var(--text-dim); }
-    .answer th, .answer td { border: 1px solid var(--border); padding: 5px 10px; }
-    .answer code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+    .answer table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 13px; }
+    .answer th { background: var(--bg); color: var(--text-mid); font-weight: 600; text-align: left; }
+    .answer th, .answer td { border: 1px solid var(--border); padding: 6px 10px; }
+    .answer code { background: var(--bg); padding: 1px 5px; border-radius: 4px; font-size: 12px; border: 1px solid var(--border); }
+    .answer h3, .answer h4 { color: var(--navy); }
 
     .metrics {
-      margin-top: 12px;
-      padding-top: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
       border-top: 1px solid var(--border);
       font-size: 11px;
-      color: #4a5a80;
+      color: var(--text-dim);
       font-family: ui-monospace, 'SF Mono', monospace;
-      line-height: 1.8;
+      line-height: 2;
     }
-    .metrics span { color: var(--text-dim); }
+    .metrics .metric-val { color: var(--text-mid); font-weight: 500; }
   </style>
 </head>
 <body>
   <header>
     <span class="logo">Precisely</span>
-    <span class="logo-sep">|</span>
-    <h1>MCP Harness — Harness vs Naive comparison</h1>
+    <span class="header-sep"></span>
+    <span class="header-title">MCP Harness — Harness vs Naive comparison</span>
   </header>
 
   <div class="controls">
-    <textarea id="prompt" placeholder="e.g. Assess wildfire and flood risk for 950 Josephine St, Denver CO, for an insurance adjuster."></textarea>
-    <div class="run-col">
-      <div class="models" id="models"></div>
+    <div class="model-cards" id="model-cards"></div>
+    <div class="prompt-row">
+      <textarea id="prompt" placeholder="e.g. Assess wildfire and flood risk for 950 Josephine St, Denver CO, for an insurance adjuster."></textarea>
       <button id="run">Run comparison</button>
     </div>
   </div>
@@ -224,21 +292,41 @@
   <script>
     const doneState = {};
 
+    const PROVIDER_LABELS = { claude: 'Claude', openai: 'OpenAI', gemini: 'Gemini', llama: 'Llama' };
+
     async function loadModels() {
       const res = await fetch('/api/models');
       const models = await res.json();
-      const box = document.getElementById('models');
-      const firstAvailable = models.find(x => x.available);
+      const box = document.getElementById('model-cards');
+      let firstAvailable = null;
+
       models.forEach((m) => {
-        const lab = document.createElement('label');
-        lab.className = 'model';
-        if (!m.available) lab.setAttribute('aria-disabled', 'true');
-        const checked = m.available && m === firstAvailable ? 'checked' : '';
-        const dis = m.available ? '' : 'disabled';
-        const tag = m.available ? '' : ` (${m.reason})`;
-        lab.innerHTML = `<input type="radio" name="model" value="${m.name}" ${checked} ${dis}> ${m.name}${tag}`;
-        box.appendChild(lab);
+        const card = document.createElement('label');
+        card.className = 'model-card' + (m.available ? '' : ' disabled');
+        card.innerHTML = `
+          <input type="radio" name="model" value="${m.name}" ${m.available ? '' : 'disabled'}>
+          <div class="card-check"></div>
+          <div class="card-provider">${PROVIDER_LABELS[m.name] || m.name}</div>
+          <div class="card-model-id">${m.model_id || '—'}</div>
+          ${!m.available ? `<div class="card-unavailable">${m.reason}</div>` : ''}
+        `;
+
+        if (m.available) {
+          card.addEventListener('click', () => {
+            document.querySelectorAll('.model-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+          });
+          if (!firstAvailable) {
+            firstAvailable = card;
+          }
+        }
+        box.appendChild(card);
       });
+
+      if (firstAvailable) {
+        firstAvailable.classList.add('selected');
+        firstAvailable.querySelector('input').checked = true;
+      }
     }
 
     function step(panel, text, cls) {
@@ -263,12 +351,12 @@
         const secs = ((m.model_ms || 0) + (m.tool_ms || 0)) / 1000;
         const metricsEl = document.getElementById('metrics-' + panel);
         metricsEl.innerHTML =
-          `tools called: <span>${(ev.tools_called || []).join(', ') || 'none'}</span><br>` +
-          `tokens: <span>${(m.input_tokens || 0).toLocaleString()} in / ${(m.output_tokens || 0).toLocaleString()} out</span>  ` +
-          `rounds: <span>${m.rounds || 0}</span>  ` +
-          `cost: <span>$${ev.cost_usd ?? 'n/a'}</span>  ` +
-          `time: <span>${secs.toFixed(1)}s</span><br>` +
-          `tools sent: <span>${ev.tools_sent}/${ev.tools_available}</span>`;
+          `tools called: <span class="metric-val">${(ev.tools_called || []).join(', ') || 'none'}</span><br>` +
+          `tokens: <span class="metric-val">${(m.input_tokens || 0).toLocaleString()} in / ${(m.output_tokens || 0).toLocaleString()} out</span>  ` +
+          `rounds: <span class="metric-val">${m.rounds || 0}</span>  ` +
+          `cost: <span class="metric-val">$${ev.cost_usd ?? 'n/a'}</span>  ` +
+          `time: <span class="metric-val">${secs.toFixed(1)}s</span><br>` +
+          `tools sent: <span class="metric-val">${ev.tools_sent}/${ev.tools_available}</span>`;
         doneState[panel] = ev;
         renderDelta();
       }
@@ -282,14 +370,14 @@
       const dTok  = pct(h.metrics.input_tokens, n.metrics.input_tokens);
       const dTools = (h.tools_called || []).length - (n.tools_called || []).length;
 
-      const pill = (label, val, unit='') => {
+      const pill = (label, val, unit = '') => {
         const cls = val < 0 ? 'pill-savings' : val > 0 ? 'pill-cost' : 'pill-neutral';
         const sign = val > 0 ? '+' : '';
         return `<span class="pill ${cls}">${label} ${sign}${val}${unit}</span>`;
       };
 
       document.getElementById('delta').innerHTML =
-        `<b>Delta — harness vs naive:</b>  ` +
+        `<span class="delta-label">Δ harness vs naive:</span>` +
         pill('cost', dCost, '%') +
         pill('input tokens', dTok, '%') +
         pill('tools called', dTools);
