@@ -207,6 +207,58 @@ add the key qualifier: *include a tool only if the request clearly calls for tha
 don't add tools for dimensions the request doesn't mention.* This curbs over-selection without a
 hard cap.
 
+### 6. Model Showdown — multi-LLM harness comparison
+A second tab (alongside "Harness vs Naive") that runs the **same prompt through 2–4 different
+LLMs, all in harness mode**, so you can compare models directly instead of only harness-vs-naive
+on one model. No backend changes were needed — `/api/stream` already takes `model`, `mode`, and
+`model_id` independently, so a showdown is just N parallel `mode=harness` streams keyed by model
+name.
+
+It renders three things once all runs finish:
+- **Winners tiles** — cheapest / fewest input tokens / fastest, each naming the winning model.
+- **Leaderboard table** — cost, input/output tokens, time, tools called, rounds, plan complete.
+  Each cell shows not just the value but **how much worse it is than the best** (best cell is
+  green + "best"; others show `+N%` for cost/tokens/speed, `+N` for tool count). Relative-to-best
+  scales cleanly to 3–4 models and reads as a direct pairwise diff when only 2 are selected.
+- **Tools × models matrix** — rows = every tool any model called, columns = models, ✓ where used;
+  tools only one model chose are highlighted, exposing routing divergence between LLMs.
+
+Model selection uses multi-select cards (2–4), each keeping its own model-id dropdown; the shared
+prompt box carries across both tabs.
+
+### 7. Prominent metrics summary (stat tiles)
+The harness-vs-naive delta bar was rebuilt from small pills into **stat tiles** that show the
+**actual numbers next to the percentages**, filling the previously empty horizontal space. Each
+tile leads with a large delta % and lists the real harness vs naive values beneath it:
+- **cost** (hero tile) — e.g. `$0.0031 harness / $0.0128 naive`, the true bottom line
+- **input tokens** — the savings *mechanism* (fewer tool schemas per round)
+- **total tokens** and **tools called**
+
+Rationale for the metric choice: input tokens is what the harness actually reduces and it
+dominates the count, but cost is the honest bottom line (output tokens bill ~3–5× more per token
+even though there are far fewer). So cost is the headline and input tokens explains *why*. Model
+cards and hint text are now centered.
+
+---
+
+## Analysis: Why Claude's Token Count Runs 3–4× OpenAI/Gemini
+
+Observed in showdown runs: on the same prompt, Claude often reports 3–4× the tokens of OpenAI or
+Gemini. This is **real and accurate**, not a metering bug. All counts are the providers' own
+reported usage (`usage.input_tokens` etc.), summed across every round in `loop.py`.
+
+The driver is **input tokens re-billed per round**. Every round re-sends the full growing context
+(system + tool schemas + history + tool results), so total input ≈ context size × number of
+rounds. Claude tends to call tools **one per round** (sequential), while OpenAI/Gemini often emit
+several tool calls in a single round — so a 7-tool task might be 7 rounds for Claude vs 2 for the
+others, re-billing the accumulating context far more times.
+
+Caveat for demos: this is the **uncached** figure. Anthropic prompt caching (~90% off repeated
+input) would help Claude *most*, since it re-sends the most context — but OpenAI and Gemini have
+their own caching we also aren't counting, so today's numbers are "list price, no caching, for
+everyone" (consistent, if not the floor). Lowering Claude's cost further is possible via prompt
+caching or nudging it toward parallel tool calls (fewer rounds); neither is implemented yet.
+
 ---
 
 ## Errors Encountered & How We Solved Them
@@ -237,3 +289,7 @@ model asked for a short structured output.
 - [ ] Fix Llama narration — try llama3.2, stronger execution instruction in system prompt
 - [ ] Standardize OpenAI model — drop legacy gpt-4o-mini, pick from gpt-5.x lineup
 - [ ] Get Precisely's enterprise discount rate for accurate cost demos
+- [ ] Evaluate prompt caching (esp. Anthropic) to lower Claude's cost — decide whether to model
+      caching for all providers so the showdown stays apples-to-apples
+- [ ] Consider hand-written one-line tool descriptions (or an override map for the ambiguous
+      risk/property clusters) to improve planning quality; measure before/after
