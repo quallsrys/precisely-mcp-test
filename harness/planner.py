@@ -47,8 +47,8 @@ Available tools (name — what it does):
 
 Think about what a COMPLETE answer requires:
 - Break the request into the distinct dimensions it asks about (location, property, each kind of risk, demographics, etc.).
-- For each dimension, include every tool that contributes. A risk question usually spans several hazard tools; a property question spans physical, legal, and ownership data.
-- Prefer more coverage over less — anticipate data the user would reasonably need next.
+- For each dimension, include every tool that directly contributes — but only if the request clearly calls for that dimension.
+- Prefer coverage over gaps, but do not add tools for dimensions the request does not mention.
 - Respect the tier order: establish location before property/risk; synthesize last.
 
 Return ONLY a JSON array of tool names in execution order, nothing else.

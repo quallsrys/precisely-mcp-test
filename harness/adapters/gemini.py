@@ -96,16 +96,23 @@ class GeminiAdapter(ModelAdapter):
         if self.delay:
             time.sleep(self.delay)
 
-        config = types.GenerateContentConfig(
+        config_kwargs = dict(
             system_instruction=system or None,
             tools=tools or None,
             max_output_tokens=max_tokens,
         )
+        # Planning calls (tools=None) ask only for a short JSON array. Gemini 2.5 Pro is a
+        # thinking model and, left unbounded, will spend the entire output budget on
+        # "thoughts" — hitting MAX_TOKENS with parts=None and returning an empty plan
+        # (which then falls back to sending ALL tools). Cap thinking so the JSON fits.
+        if not tools:
+            config_kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=128)
+        config = types.GenerateContentConfig(**config_kwargs)
         resp = self.client.models.generate_content(model=self.model_id, contents=messages, config=config)
         content = resp.candidates[0].content
 
         tool_calls, text_parts = [], []
-        for part in content.parts:
+        for part in content.parts or []:
             if getattr(part, "function_call", None):
                 fc = part.function_call
                 tool_calls.append(ToolCall(name=fc.name, arguments=dict(fc.args) if fc.args else {}))

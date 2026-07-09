@@ -34,9 +34,9 @@ def _get_raw_tools() -> list[dict]:
     return _RAW_TOOLS
 
 
-def _harness(model: str) -> Harness:
+def _harness(model: str, model_id: str | None = None) -> Harness:
     """Build a Harness sharing the cached tool list (overridable in tests)."""
-    return Harness(model, raw_tools=_get_raw_tools())
+    return Harness(model, model_id=model_id or None, raw_tools=_get_raw_tools())
 
 
 _DEFAULT_MODEL_IDS = {
@@ -95,12 +95,13 @@ def create_app() -> Flask:
         model = request.args.get("model", "claude")
         mode = request.args.get("mode", "harness")
         prompt = request.args.get("prompt", "")
+        model_id = request.args.get("model_id", "").strip() or None
 
         def generate():
             try:
                 if model not in VALID_MODELS:
                     raise ValueError(f"unknown model '{model}'")
-                for event in _harness(model).run_stream(prompt, mode=mode):
+                for event in _harness(model, model_id).run_stream(prompt, mode=mode):
                     yield f"data: {json.dumps(event)}\n\n"
             except Exception as e:
                 yield f"data: {json.dumps({'type': 'error', 'where': 'run', 'message': str(e)})}\n\n"

@@ -36,22 +36,34 @@ VALID_MODELS = ("claude", "gemini", "openai", "llama")
 # input ~75-90%, but those aren't modeled here yet (the loop doesn't batch or cache).
 PRICING = {
     # Anthropic
-    "claude-opus-4-8": (5.00, 25.00),
-    "claude-sonnet-4-6": (3.00, 15.00),
-    "claude-haiku-4-5": (1.00, 5.00),
-    "claude-fable-5": (10.00, 50.00),
-    # OpenAI (gpt-5.x current; gpt-4o-mini is legacy)
-    "gpt-5.5": (5.00, 30.00),
-    "gpt-5.4": (2.50, 15.00),
-    "gpt-5.4-mini": (0.75, 4.50),
-    "gpt-5.4-nano": (0.20, 1.25),
-    "gpt-4o-mini": (0.15, 0.60),
-    # Google (Gemini 2.5 Pro shown at the <=200k-token tier; >200k is 2.50/15.00)
-    "gemini-2.5-pro": (1.25, 10.00),
-    "gemini-2.5-flash": (0.30, 2.50),
+    "claude-fable-5":           (10.00, 50.00),
+    "claude-opus-4-8":          ( 5.00, 25.00),
+    "claude-opus-4-7":          ( 5.00, 25.00),
+    "claude-sonnet-5":          ( 3.00, 15.00),
+    "claude-sonnet-4-6":        ( 3.00, 15.00),
+    "claude-sonnet-4-5-20250929":( 3.00, 15.00),
+    "claude-haiku-4-5-20251001":( 1.00,  5.00),
+    # OpenAI — list price per 1M tokens (input, output)
+    "gpt-5.5":        ( 5.00, 30.00),
+    "gpt-5.4":        ( 2.50, 15.00),
+    "gpt-5.4-mini":   ( 0.75,  4.50),
+    "gpt-5.4-nano":   ( 0.20,  1.25),
+    "gpt-5":          (10.00, 40.00),
+    "gpt-4o":         ( 2.50, 10.00),
+    "gpt-4o-mini":    ( 0.15,  0.60),
+    "gpt-4.1":        ( 2.00,  8.00),
+    "gpt-4.1-mini":   ( 0.40,  1.60),
+    "gpt-4.1-nano":   ( 0.10,  0.40),
+    # Google — Gemini 2.x at <=200k-token tier; 3.x preview pricing not yet published
+    "gemini-2.5-pro":        (1.25, 10.00),
+    "gemini-2.5-flash":      (0.30,  2.50),
+    "gemini-2.5-flash-lite": (0.10,  0.40),
+    "gemini-2.0-flash":      (0.10,  0.40),
+    "gemini-3.1-pro-preview":(2.00, 12.00),
+    "gemini-3.5-flash":      (1.50,  9.00),
     # Local — zero marginal cost
     "llama3.1:8b-16k": (0.0, 0.0),
-    "llama3.1:8b": (0.0, 0.0),
+    "llama3.1:8b":     (0.0, 0.0),
     "llama3.2:latest": (0.0, 0.0),
 }
 
@@ -111,7 +123,11 @@ class Harness:
             pr = make_plan(self.adapter, prompt, self.raw_tools)
             yield {"type": "plan", "plan": pr.names,
                    "tokens": {"in": pr.input_tokens, "out": pr.output_tokens}}
-            subset = [t for t in self.raw_tools if t["name"] in set(pr.names)] if pr.names else self.raw_tools
+            if pr.names:
+                subset = [t for t in self.raw_tools if t["name"] in set(pr.names)]
+            else:
+                subset = self.raw_tools
+                yield {"type": "plan_warning", "message": "Planner returned no tools — falling back to full tool set"}
             plan_names = pr.names
             plan_tokens = (pr.input_tokens, pr.output_tokens)
         else:  # naive

@@ -44,7 +44,8 @@ class OpenAIAdapter(ModelAdapter):
 
     def complete(self, system, messages, tools, max_tokens):
         call_messages = ([{"role": "system", "content": system}] if system else []) + messages
-        kwargs = {"model": self.model_id, "max_tokens": max_tokens, "messages": call_messages}
+        tokens_key = "max_completion_tokens" if self.model_id.startswith(("gpt-5", "o1", "o3", "o4")) else "max_tokens"
+        kwargs = {"model": self.model_id, tokens_key: max_tokens, "messages": call_messages}
         if tools:
             kwargs["tools"] = tools
 
