@@ -44,6 +44,15 @@ class ModelAdapter(ABC):
     name: str       # short id, e.g. "claude"
     model_id: str   # concrete model string, e.g. "claude-sonnet-4-6"
 
+    def throttle(self) -> None:
+        """Optional pre-call pacing for rate-limit friendliness.
+
+        The loop and planner call this *before* starting the latency timer, so a
+        provider's self-imposed spacing (e.g. Gemini free-tier delay) is never counted
+        as model latency and never skews a cross-model comparison. Default: no delay.
+        """
+        return None
+
     @abstractmethod
     def format_tools(self, raw_tools: list[dict]) -> Any:
         """Convert raw MCP tool dicts into this provider's tool/function format."""

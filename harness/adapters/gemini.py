@@ -92,10 +92,13 @@ class GeminiAdapter(ModelAdapter):
         ]
         messages.append(types.Content(role="user", parts=parts))
 
-    def complete(self, system, messages, tools, max_tokens):
+    def throttle(self):
+        # Space out calls to stay under Gemini rate limits. Runs outside the loop's
+        # latency timer so it never inflates the reported model_ms (see base.throttle).
         if self.delay:
             time.sleep(self.delay)
 
+    def complete(self, system, messages, tools, max_tokens):
         config_kwargs = dict(
             system_instruction=system or None,
             tools=tools or None,

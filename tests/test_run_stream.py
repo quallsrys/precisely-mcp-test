@@ -55,6 +55,7 @@ def test_harness_mode_emits_planning_and_plan_with_cost(monkeypatch):
         Turn("", [ToolCall("geocode", {}, "t1")], 50, 5, None),
         Turn("Answer.", [], 30, 8, None),
     ])
+    adapter.model_id = "gpt-4o-mini"  # a priced id so cost is computed (fake-1 isn't in PRICING)
 
     events = list(_harness(adapter).run_stream("flood risk", mode="harness"))
     types = [e["type"] for e in events]

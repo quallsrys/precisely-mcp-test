@@ -26,7 +26,7 @@ def test_models_endpoint_returns_json():
 
 def test_stream_endpoint_emits_sse_done_event(monkeypatch):
     # Replace the harness factory with a fake that yields one done event.
-    def fake_factory(model):
+    def fake_factory(model, model_id=None):
         class FakeHarness:
             def run_stream(self, prompt, mode="harness", max_tokens=4096):
                 yield {"type": "done", "text": "hi", "mode": mode, "metrics": {}, "cost_usd": 0.0}

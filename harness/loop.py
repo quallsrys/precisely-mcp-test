@@ -66,8 +66,9 @@ def iter_loop(
     """
     if plan:
         prompt = (
-            f"{prompt}\n\nYour plan for this request (call every tool, in order):\n"
-            + "\n".join(f"{i}. {name}" for i, name in enumerate(plan, 1))
+            f"{prompt}\n\nYour plan — call these tools, batching any that don't "
+            f"depend on each other into a single turn:\n"
+            + "\n".join(f"- {name}" for name in plan)
         )
 
     messages = adapter.init_messages(prompt)
@@ -80,6 +81,7 @@ def iter_loop(
     nudges = 0
 
     while metrics.rounds < MAX_ROUNDS:
+        adapter.throttle()  # provider pacing, kept out of the timed span below
         t0 = time.perf_counter()
         turn = adapter.complete(system, messages, tools, max_tokens)
         metrics.model_ms += (time.perf_counter() - t0) * 1000

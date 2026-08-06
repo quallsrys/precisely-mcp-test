@@ -1,13 +1,16 @@
 """
-Tests for tools that were previously broken server-side.
+Tests for tools that were previously labeled "broken server-side."
 
-As of 2026-06-17, validate_phones, get_timezones, and get_spatial_products are
-confirmed working — full content assertions restored. lookup and summarize remain
-broken server-side (routing-only assertions, xfail on Gemini).
+As of 2026-08-05 all five WORK. None were Precisely outages — every one was a
+client-side bug in our own MCP wrapper (a wrong Accept header, or an output schema that
+didn't match the real API shape). Fixes are in dis-locate-apis-v2 (precisely/spatial.py
++ mcp_servers/tools/output_schemas.py).
 
-Known remaining issues (as of 2026-06-17):
-  lookup    — MCP schema error: must have required property 'response'
-  summarize — Upstream 500 error (DIS-1003)
+These tests only check LLM *routing* (does the model call the right tool). They never
+validated a tool's output shape, which is exactly why the schema bugs hid here. The real
+regression guard lives with the schemas: dis-locate-apis-v2/test_output_schemas_live.py
+calls each tool and validates its response against TOOL_OUTPUT_SCHEMAS — run that before
+a demo.
 """
 
 import pytest
@@ -54,8 +57,9 @@ EXPECTED_CONTENT = {
     "get spatial products": ["flood risk", "parcels", "crime index", "property"],
 }
 
-# These two remain broken server-side — routing-only assertions
-STILL_BROKEN = {"lookup", "summarize"}
+# All five now work (fixed 2026-08-05). Kept as a named set so the routing tests below
+# stay structurally unchanged; empty means no tool is treated as broken / xfailed.
+STILL_BROKEN = set()
 
 
 @pytest.mark.parametrize("label,prompt", BROKEN_TOOL_PROMPTS)

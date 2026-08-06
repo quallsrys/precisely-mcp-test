@@ -416,22 +416,8 @@
 
   <script>
     const PROVIDER_LABELS = { claude: 'Claude', openai: 'OpenAI', gemini: 'Gemini', llama: 'Llama' };
-
-    const PROVIDER_MODELS = {
-      claude: [
-        'claude-sonnet-4-6', 'claude-sonnet-5', 'claude-opus-4-8',
-        'claude-opus-4-7', 'claude-haiku-4-5-20251001', 'claude-fable-5',
-      ],
-      openai: [
-        'gpt-4o-mini', 'gpt-4o', 'gpt-4.1', 'gpt-4.1-mini', 'gpt-4.1-nano',
-        'gpt-5', 'gpt-5.4', 'gpt-5.4-mini', 'gpt-5.5',
-      ],
-      gemini: [
-        'gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.5-flash-lite',
-        'gemini-2.0-flash', 'gemini-3-pro-preview', 'gemini-3.1-pro-preview', 'gemini-3.5-flash',
-      ],
-      llama: ['llama3.1:8b-16k', 'llama3.1:8b', 'llama3.2:latest'],
-    };
+    // The model menu is server-driven: /api/models returns each provider's candidate
+    // models already live-validated ({id, usable, reason}), so dead ids show up disabled.
 
     const MAX_SHOWDOWN = 4;
     let AVAILABLE = [];              // raw /api/models response
@@ -455,8 +441,11 @@
       const card = document.createElement('label');
       card.className = 'model-card' + (m.available ? '' : ' disabled');
       card.dataset.model = m.name;
-      const options = (PROVIDER_MODELS[m.name] || [m.model_id]).map(id =>
-        `<option value="${id}" ${id === m.model_id ? 'selected' : ''}>${id}</option>`
+      const modelList = m.models && m.models.length ? m.models : [{ id: m.model_id, usable: true }];
+      const options = modelList.map(o =>
+        `<option value="${o.id}" ${o.id === m.model_id ? 'selected' : ''}`
+        + `${o.usable ? '' : ' disabled'}${o.reason ? ` title="${o.reason}"` : ''}>`
+        + `${o.id}${o.usable ? '' : ' — ' + (o.reason || 'unavailable')}</option>`
       ).join('');
       card.innerHTML = `
         <div class="card-check"></div>
@@ -484,7 +473,7 @@
     }
 
     async function loadModels() {
-      const res = await fetch('/api/models');
+      const res = await fetch('/api/models?validate=1');
       AVAILABLE = await res.json();
 
       const compareBox = document.getElementById('cards-compare');

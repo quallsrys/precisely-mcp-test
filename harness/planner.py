@@ -63,22 +63,37 @@ def _one_liner(description: str, limit: int = 140) -> str:
     return sentence[:limit].rstrip()
 
 
-def _parse_plan(text: str, valid_names: set[str]) -> list[str]:
-    """Extract a JSON array of tool names from the model's planning text."""
-    match = re.search(r"\[.*\]", text, re.DOTALL)
-    if not match:
-        return []
-    try:
-        names = json.loads(match.group(0))
-    except json.JSONDecodeError:
-        return []
-
+def _dedup(names, valid_names: set[str]) -> list[str]:
     seen, plan = set(), []
     for n in names:
         if isinstance(n, str) and n in valid_names and n not in seen:
             seen.add(n)
             plan.append(n)
     return plan
+
+
+def _parse_plan(text: str, valid_names: set[str]) -> list[str]:
+    """Extract an ordered tool plan from the model's planning text.
+
+    Preferred path is the clean JSON array we ask for. Small local models (Llama) often
+    narrate the plan as prose instead ("I'll use geocode, then get_flood_risk..."), which
+    would otherwise parse as empty and force the all-tools fallback — and that overflows
+    Llama's context. So if there's no usable array, scan the model's own text for real
+    tool names in order of appearance. Only exact tool names match, so prose can't inject
+    a bogus tool.
+    """
+    match = re.search(r"\[.*\]", text, re.DOTALL)
+    if match:
+        try:
+            plan = _dedup(json.loads(match.group(0)), valid_names)
+            if plan:
+                return plan
+        except json.JSONDecodeError:
+            pass
+
+    # Fallback: names mentioned in the narration, first-occurrence order.
+    ordered = [m.group(0) for m in re.finditer(r"[A-Za-z_][A-Za-z0-9_]*", text)]
+    return _dedup(ordered, valid_names)
 
 
 def make_plan(adapter: ModelAdapter, prompt: str, raw_tools: list[dict], max_tokens: int = 1024) -> PlanResult:
@@ -92,6 +107,7 @@ def make_plan(adapter: ModelAdapter, prompt: str, raw_tools: list[dict], max_tok
 
     user = PLANNING_TEMPLATE.format(prompt=prompt, tool_list=tool_list, taxonomy=TAXONOMY)
     messages = adapter.init_messages(user)
+    adapter.throttle()  # same provider pacing as the execution loop
     turn = adapter.complete(PLANNING_SYSTEM, messages, tools=None, max_tokens=max_tokens)
     names = _parse_plan(turn.text, valid_names)
     return PlanResult(names=names, input_tokens=turn.input_tokens, output_tokens=turn.output_tokens)
