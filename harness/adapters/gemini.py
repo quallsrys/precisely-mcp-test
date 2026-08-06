@@ -61,7 +61,9 @@ class GeminiAdapter(ModelAdapter):
             api_key=os.environ["GEMINI_API_KEY"],
             http_options=types.HttpOptions(timeout=300_000),  # 5 min; Pro thinking can be slow
         )
-        self.delay = float(os.environ.get("GEMINI_DELAY_SECONDS", "5"))
+        # No inter-call pad by default (fastest). Raise via GEMINI_DELAY_SECONDS
+        # if Gemini starts returning 429 RESOURCE_EXHAUSTED on rapid/back-to-back runs.
+        self.delay = float(os.environ.get("GEMINI_DELAY_SECONDS", "0"))
 
     def format_tools(self, raw_tools):
         decls = [
