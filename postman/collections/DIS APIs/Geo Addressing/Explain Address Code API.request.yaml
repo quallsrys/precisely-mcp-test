@@ -1,0 +1,31 @@
+$kind: http-request
+url: https://{{host}}/v1/explain-addresscode
+method: POST
+headers:
+  accept: application/json
+  Content-Type: application/json
+  Authorization: Bearer {{json_web_token_00og}}
+body:
+  type: json
+  content: |-
+    {
+      "codeType": "GlobalMatchCode",
+      "codes": [
+        {
+          "id": "1",
+          "code": "V4-D4M0B0U0F0G0P4S4Q0X0A0T4E0R4W0Z4Y6C4-5"
+        },
+        {
+          "id": "2",
+          "code": "V4-P4S4A0T4R4Z3C4-5"
+        }
+      ],
+      "responseOptions": {
+        "includeOfficialDescription": true
+      }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 8000

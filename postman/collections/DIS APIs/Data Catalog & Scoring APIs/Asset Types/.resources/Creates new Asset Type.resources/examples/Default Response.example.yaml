@@ -1,0 +1,213 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/asset-types"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      {
+        "class": "Business",
+        "name": "QA_BUS_EXM_1",
+        "displayFormat": "{Name}",
+        "description": "This is a business asset type",
+        "abstract": false,
+        "views": [
+          {
+            "name": "QA_View",
+            "viewType": "Grid",
+            "isDefault": true,
+            "columns": [
+              {
+                "name": "Name",
+                "widthType": "Fixed",
+                "widthValue": 250
+              }
+            ],
+            "filters": [
+              {
+                "name": "Name",
+                "persist": false
+              }
+            ],
+            "sorts": [
+              {
+                "name": "Name",
+                "direction": "Asc"
+              }
+            ]
+          }
+        ],
+        "properties": [
+          {
+            "name": "Name",
+            "label": "Name",
+            "type": "Text",
+            "description": "this is a text field",
+            "category": "",
+            "requirement": "Key",
+            "display": {
+              "show": true,
+              "showIfEmpty": false,
+              "showInColumn": false
+            },
+            "search": {
+              "prefix": "",
+              "suffix": "",
+              "displayOrder": 1,
+              "addToResult": true
+            },
+            "definition": {
+              "text": {
+                "allowRichText": false,
+                "validation": {}
+              }
+            }
+          },
+          {
+            "name": "Boolean",
+            "label": "Boolean",
+            "type": "Boolean",
+            "description": "this is a boolean field",
+            "category": "",
+            "requirement": "Optional",
+            "display": {
+              "show": true,
+              "showIfEmpty": false,
+              "showInColumn": false
+            },
+            "search": {
+              "prefix": "",
+              "suffix": "",
+              "displayOrder": 1,
+              "addToResult": true
+            },
+            "definition": {
+              "boolean": {
+                "defaultValue": false
+              }
+            }
+          }
+        ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "id": "68ca86d1b2347ffa884feae7",
+          "class": "Business",
+          "name": "QA_BUS_EXM_1",
+          "displayFormat": "{Name}",
+          "abstract": false,
+          "state": "Active",
+          "overridability": "All",
+          "isSystem": false,
+          "createdBy": "00u17r5rbf45iXfQp0h8",
+          "createdAt": "2025-09-17T10:00:49.294Z",
+          "updatedAt": "2025-09-17T10:00:49.294Z",
+          "updatedBy": "00u17r5rbf45iXfQp0h8",
+          "views": [
+            {
+              "name": "QA_View",
+              "viewType": "Grid",
+              "isDefault": true,
+              "columns": [
+                {
+                  "name": "Name",
+                  "widthType": "Fixed",
+                  "widthValue": 250
+                }
+              ],
+              "filters": [
+                {
+                  "name": "Name",
+                  "persist": false
+                }
+              ],
+              "sorts": [
+                {
+                  "name": "Name",
+                  "direction": "Asc"
+                }
+              ]
+            }
+          ],
+          "description": "This is a business asset type",
+          "xref": [
+            "7e7d3cd60274"
+          ],
+          "contexts": [],
+          "properties": [
+            {
+              "name": "Name",
+              "label": "Name",
+              "type": "Text",
+              "definition": {
+                "text": {
+                  "allowRichText": false,
+                  "validation": {}
+                }
+              },
+              "requirement": "Key",
+              "category": "",
+              "display": {
+                "show": true,
+                "showIfEmpty": false,
+                "showInColumn": false
+              },
+              "search": {
+                "prefix": "",
+                "suffix": "",
+                "displayOrder": 1,
+                "addToResult": true
+              },
+              "description": "this is a text field",
+              "editableOnUi": true
+            },
+            {
+              "name": "Boolean",
+              "label": "Boolean",
+              "type": "Boolean",
+              "definition": {
+                "boolean": {
+                  "defaultValue": false
+                }
+              },
+              "requirement": "Optional",
+              "category": "",
+              "display": {
+                "show": true,
+                "showIfEmpty": false,
+                "showInColumn": false
+              },
+              "search": {
+                "prefix": "",
+                "suffix": "",
+                "displayOrder": 1,
+                "addToResult": true
+              },
+              "description": "this is a boolean field",
+              "editableOnUi": true
+            }
+          ],
+          "maximumDepth": 1,
+          "assetCount": 0
+        },
+        "links": {
+          "self": "https://api.cloud.precisely.com/asset-types"
+        }
+      }
+order: 1000

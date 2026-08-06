@@ -1,0 +1,27 @@
+$kind: http-request
+url: https://{{host}}/v1/autocomplete
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "preferences": {
+            "maxResults": 10,
+            "returnAllInfo": true,
+            "customPreferences": {}
+        },
+        "address": {
+            "addressLines": [
+                "1 global view "
+            ],
+            "city": "Troy",
+            "admin1": "NY",
+            "postalCode": "12180",
+            "country": "USA"
+        }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

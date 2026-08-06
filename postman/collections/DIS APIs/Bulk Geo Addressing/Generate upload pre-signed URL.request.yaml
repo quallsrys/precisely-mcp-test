@@ -1,0 +1,23 @@
+$kind: http-request
+url: https://{{host}}/v1/files/upload-url
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "fileName": "<sampleFileName>"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      // Parse the JSON response
+      var jsonData = pm.response.json();
+
+      // Assign the value of 'id' to a collection-scoped variable
+      pm.collectionVariables.set("preSignedUrl", jsonData["url"]);
+    language: text/javascript
+order: 3000

@@ -1,0 +1,15 @@
+$kind: http-request
+url: https://{{host}}/v1/phone-numbers/validate
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "phoneNumber": "+17063062767",
+        "country": "US"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

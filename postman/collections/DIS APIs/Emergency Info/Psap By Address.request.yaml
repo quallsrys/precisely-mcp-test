@@ -1,0 +1,42 @@
+$kind: http-request
+url: https://{{host}}/v1/emergency-info/psap/address
+method: POST
+headers:
+  accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: "{\r
+
+    \  \"address\": {\r
+
+    \    \"addressLines\": [\r
+
+    \      \"860 White Plains Road Trumbull CT 06611, USA\"\r
+
+    \    ],\r
+
+    \    \"admin1\": \"\",\r
+
+    \    \"admin2\": \"\",\r
+
+    \    \"city\": \"\",\r
+
+    \    \"borough\": \"\",\r
+
+    \    \"suburb\": \"\",\r
+
+    \    \"postalCode\": \"\",\r
+
+    \    \"postalCodeExt\": \"\",\r
+
+    \    \"placeName\": \"\"\r
+
+    \  }\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

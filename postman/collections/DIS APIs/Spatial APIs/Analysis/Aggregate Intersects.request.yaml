@@ -1,0 +1,58 @@
+$kind: http-request
+description: "Generated from cURL: curl --location 'http://localhost:8089/v1/spatial/summarize' \\\r
+
+  --header 'Content-Type: application/json' \\\r
+
+  --data '{\r
+
+  \    \"tableName\": \"hwr_usa_windgrid\",\r
+
+  \    \"geometryType\": \"WKT\",\r
+
+  \    \"geometry\": \"GEOMETRYCOLLECTION (MULTIPOLYGON (((-122.399306 37.712211, -122.398975 37.712132, -122.399007 37.712049, -122.399338 37.712127, -122.399316 37.712185, -122.399306 37.712211))), LINESTRING (-121.756899 37.653383, -121.158302 37.304645, -121.690998 37.120906))\",\r
+
+  \    \"spatialOperation\": \"intersects\",\r
+
+  \    \"proportionalCalculation\": true,\r
+
+  \    \"aggregateColumns\": {\r
+
+  \        \"w11\" : [\"min\",\"max\",\"avg\",\"sum\"],\r
+
+  \        \"w10\" : [\"min\",\"max\",\"sum\",\"avg\",\"median\"]\r
+
+  \t}\r
+
+  }'"
+url: https://{{host}}/v1/spatial/summarize
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"tableName\": \"hwr_usa_windgrid\",\r
+
+    \    \"geometryFormat\": \"WKT\",\r
+
+    \    \"geometry\": \"GEOMETRYCOLLECTION (MULTIPOLYGON (((-122.399306 37.712211, -122.398975 37.712132, -122.399007 37.712049, -122.399338 37.712127, -122.399316 37.712185, -122.399306 37.712211))), LINESTRING (-121.756899 37.653383, -121.158302 37.304645, -121.690998 37.120906))\",\r
+
+    \    \"spatialOperation\": \"intersects\",\r
+
+    \    \"proportionalCalculation\": true,\r
+
+    \    \"aggregateColumns\": {\r
+
+    \        \"w11\" : [\"min\",\"max\",\"avg\",\"sum\"],\r
+
+    \        \"w10\" : [\"min\",\"max\",\"sum\",\"avg\",\"median\"]\r
+
+    \t}\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 5000

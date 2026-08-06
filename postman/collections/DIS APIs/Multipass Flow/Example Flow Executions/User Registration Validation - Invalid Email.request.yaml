@@ -1,0 +1,27 @@
+$kind: http-request
+description: Execute user registration validation with invalid email (missing @ symbol). Expected to return INVALID_EMAIL error.
+url: https://{{host}}/v1/multipass/flows/:flow-name/execute
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{bearer_token}}
+pathVariables:
+  flow-name: ""
+body:
+  type: json
+  content: |-
+    {
+        "input": [
+            {
+                "name": "Jane Smith",
+                "email": "janesmithexample.com",
+                "phone": "(555) 987-6543",
+                "age": 30
+            }
+        ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

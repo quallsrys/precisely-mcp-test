@@ -1,0 +1,47 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/lineage/:assetId"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    assetId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "assetId": "9B9Dfbc19C6cBCB0bDD97E1c",
+          "displayValue": "Asset1",
+          "aggregation": [
+            {
+              "type": "aggr1",
+              "total": 22167466.413239807
+            },
+            {
+              "type": "aggr2",
+              "total": 7914668.93956469
+            }
+          ],
+          "alerts": {},
+          "icon": "testIcon",
+          "path": {},
+          "score": {
+            "value": -38409356.89043983,
+            "color": "Green"
+          }
+        },
+        "links": {
+          "self": "https://api.cloud.precisely.com/lineage/:assetId"
+        }
+      }
+order: 1000

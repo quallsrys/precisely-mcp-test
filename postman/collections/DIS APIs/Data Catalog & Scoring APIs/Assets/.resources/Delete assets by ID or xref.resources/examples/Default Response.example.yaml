@@ -1,0 +1,63 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/assets?externalExecutionId=65f00e903d974a9332140bf1"
+  method: DELETE
+  headers:
+    - key: x-batch
+      value: "true"
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    externalExecutionId: 65f00e903d974a9332140bf1
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "d96Bc6CEAF5aacBfDA446a47"
+        }
+      ]
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {},
+        "links": {
+          "self": "http://wLkXjAQhaMjnkXqyZTCBbyKNvX.jidHlFXW,WLE1g,G.U50CA6jvz1CvhWErYpr54yoExMj19VilODK94dDH3H",
+          "next": "http://suRfdRNZIoTCctYXRPEKWWrk.jnvF1CWrrGhPlA2NP,dUK21s0AyNA8",
+          "prev": "https://vPeHRVbcBnIeNbBqlZeFNfNXwYaK.kti-Rt,elrd1C0Gog2kUsJjC4sdneIaGL13oZzu7bvXDYo2ycIJ"
+        },
+        "errors": [
+          {
+            "id": "string",
+            "status": 7883.436579384755,
+            "code": "string",
+            "detail": "string",
+            "source": {
+              "key_0": true,
+              "key_1": true
+            }
+          },
+          {
+            "id": "string",
+            "status": 9410.904356694113,
+            "code": "string",
+            "detail": "string",
+            "source": {
+              "key_0": 8403,
+              "key_1": "string"
+            }
+          }
+        ]
+      }
+order: 1000

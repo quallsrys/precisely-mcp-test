@@ -1,0 +1,24 @@
+$kind: http-request
+url: https://{{host}}/v1/express-autocomplete
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "preferences": {
+            "maxResults": 1,
+            "returnAllInfo": true,
+            "customPreferences": {}
+        },
+        "address": {
+            "addressLines": [
+                "350 Jordan"
+            ],
+            "country": "USA"
+        }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 5000

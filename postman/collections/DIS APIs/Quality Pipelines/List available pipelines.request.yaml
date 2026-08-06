@@ -1,0 +1,18 @@
+$kind: http-request
+description: Retrieves a paginated list of pipelines
+url: https://{{host}}/v1/quality/pipelines?page=1&limit=10
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: page
+    value: "1"
+    description: Page number
+  - key: limit
+    value: "10"
+    description: Number of items per page
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 5000

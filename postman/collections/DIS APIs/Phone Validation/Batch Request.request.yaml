@@ -1,0 +1,25 @@
+$kind: http-request
+url: https://{{host}}/v1/phone-numbers/validate/batch
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "phoneNumbers": [
+            {
+                "id": "12345",
+                "phoneNumber": "+9197116779",
+                "country": "ind"
+            },
+             {
+                "id": "12346",
+                "phoneNumber": "+17063062767",
+                "country": "us"
+            }
+        ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

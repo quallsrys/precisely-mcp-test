@@ -1,0 +1,42 @@
+$kind: http-request
+description: Updates an existing Relation Type
+url: https://{{host}}/v2/catalog/relation-types/:id
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  id: 6Db28DFFbDbf177Eab23bDeC
+body:
+  type: json
+  content: |-
+    [
+      {
+        "op": "add",
+        "path": "/properties/0",
+        "value": {
+          "name": "Link",
+          "label": "Link",
+          "type": "Link",
+          "definition": {
+            "link": {
+              "defaultLabel": "Example",
+              "defaultUrl": "https://www.example.com"
+            }
+          },
+          "requirement": "Optional",
+          "category": "General",
+          "display": {
+            "show": true,
+            "showIfEmpty": true,
+            "showInColumn": true
+          }
+        }
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Updates an existing Relation Type.resources/examples
+order: 3000

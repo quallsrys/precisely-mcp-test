@@ -1,0 +1,88 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/metric-instances"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "assetId": "307eFB67308C4fDdeA21bcFE",
+          "effectiveDate": "2025-08-12T10:20:46.627Z",
+          "metrics": [
+            {
+              "metricTypeId": "Bb8Cb6f25dbDfBEBc1bF42D8",
+              "ruleId": "D42702E21FA68e02a624bd94",
+              "xref": "E42802E546FA68e02aSdw",
+              "value": "1.0"
+            }
+          ],
+          "correlationId": "bb62b735-b8c7-4172-b229-b2445603c838",
+          "tags": [
+            "zogOlYRV4KM6Fhu6QGfLy:AvouJTIJt1an6DmaBq1x3n_xXo=lIzt_l3Bzx6AKf1iOL"
+          ],
+          "parentAssetId": "Fa444f7DD9f9DC3aaAdc492e"
+        }
+      ]
+response:
+  statusCode: 202
+  statusText: Accepted
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "assetId": "fCA14c5b8f70848E11B1bc1E",
+            "metrics": [
+              {
+                "value": {},
+                "metricTypeId": "8f392DDEC13D5242eF99Ed2c",
+                "ruleId": "0A447E7f6cDDd5e00F6eBB1C",
+                "xref": "string"
+              }
+            ],
+            "effectiveDate": "2004-12-17T20:31:02.621Z",
+            "correlationId": "string",
+            "tags": [
+              "VgJ41=1DR",
+              "6SqQCzYQJO"
+            ],
+            "parentAssetId": "3ce07edC5A99aE48CaF72674"
+          },
+          {
+            "assetId": "BDfbe463eE603CF06249aDbf",
+            "metrics": [
+              {
+                "value": {},
+                "metricTypeId": "C8070BF93DBDEDC9dEa8984d",
+                "ruleId": "0a9e17c967e6c8af9a19A670",
+                "xref": "string"
+              }
+            ],
+            "effectiveDate": "2020-02-08T15:05:04.039Z",
+            "correlationId": "string",
+            "tags": [
+              "JrbU",
+              "1e"
+            ],
+            "parentAssetId": "eD15d56aF912742640Ec138d"
+          }
+        ],
+        "links": {
+          "self": "https://RZBhySDVJwut.gxSOEtrXPRsAEDFo4ek.V5qSgjLvZlbWcL8f-rAjGmYk2g-D.",
+          "next": "http://cEAhBXWIYnWzdqcwtMJfvyCWWdMeAxsD.geYpgbH8SSqQ+O7Sl9QpR7RtQsGqYOOZL6a",
+          "prev": "https://FplSTQjfdPoiRaMcXloFfjBb.ijBSvY4+BlOmN4PvxK8,FTG1ayZhiDYRzJTgWf266SoUQLm"
+        }
+      }
+order: 1000

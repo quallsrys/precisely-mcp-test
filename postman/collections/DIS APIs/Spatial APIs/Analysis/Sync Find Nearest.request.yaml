@@ -1,0 +1,44 @@
+$kind: http-request
+description: |-
+  Generated from cURL: curl --location 'https://spatial-feature-api-dev.spatial.cloud.precisely.services/v1/spatial/findNearest?sortBy=mapname&sortOrder=ASCENDING&maxFeatures=10' \
+  --header 'Content-Type: application/json' \
+  --data '{
+      "tableName": ["flr_usa_comm"],
+      "attributes": ["statecode", "type", "mapname"],
+      "geometryType": "WKT",
+      "geometry": "MULTIPOLYGON (((-122.399306 37.712211, -122.398975 37.712132, -122.399007 37.712049, -122.399338 37.712127, -122.399316 37.712185, -122.399306 37.712211)))",
+      "withinDistance": "10 mi",
+      "distanceAttributeName": "dist"
+  }'
+url: https://{{host}}/v1/spatial/findNearest
+method: POST
+headers:
+  Content-Type: application/json
+queryParams:
+  - key: sortBy
+    value: mapname
+    disabled: true
+  - key: sortOrder
+    value: ASCENDING
+    disabled: true
+body:
+  type: json
+  content: |-
+    {
+        "tableName": "flr_usa_comm",
+        "attributes": ["statecode", "type", "mapname"],
+        "geometryFormat": "WKT",
+        "geometry": "MULTIPOLYGON (((-122.399306 37.712211, -122.398975 37.712132, -122.399007 37.712049, -122.399338 37.712127, -122.399316 37.712185, -122.399306 37.712211)))",
+        "withinDistance": "10 mi",
+        "distanceAttributeName": "dist",
+        "maxFeatures": "1",
+        "uomAttributeName": "unit",
+        "inputPointAttributeName": "ip",
+        "targetPointAttributeName": "tp",
+        "bearingAttributeName": "bearingAngle"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 3000

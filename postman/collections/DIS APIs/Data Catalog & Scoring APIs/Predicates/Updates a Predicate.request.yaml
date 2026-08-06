@@ -1,0 +1,25 @@
+$kind: http-request
+description: Updates a Predicate
+url: https://{{host}}/v2/catalog/predicates/:id
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  id: 6Db28DFFbDbf177Eab23bDeC
+body:
+  type: json
+  content: |-
+    [
+      {
+        "path": "/name",
+        "op": "replace",
+        "value": "NameUpdated"
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Updates a Predicate.resources/examples
+order: 3000

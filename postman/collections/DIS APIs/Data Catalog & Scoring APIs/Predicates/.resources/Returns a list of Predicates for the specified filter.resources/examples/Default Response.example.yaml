@@ -1,0 +1,137 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/predicates?filter=field1:eq(value1)&sort=asc(field1)&offset=0&limit=20&includeTotal=false"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    - key: filter
+      value: field1:eq(value1)
+      description: |
+        Filter the results by specifying a filter expression.
+
+        <details>
+        <summary>Details</summary>
+        This API allows filtering the result set by specifying a filter expression.
+        Use the format `filter=field1:op(value1)`.
+
+        #### Filter operators
+
+        - `eq` Equal to
+        - `ne` Not equal to
+        - `lt` Less than
+        - `le` Less than or equal to
+        - `gt` Greater than
+        - `ge` Greater than or equal to
+        - `in` In a list of comma seperated values
+        - `ni` Not in a list of comma seperated values
+        - `ct` Contains a value
+        - `sw` Starts with a value
+        - `ew` Ends with a value
+        - `ex` Exists (only accepts true/false values)
+
+        #### Grouping filter expressions
+
+        By default, filter expressions are combined using the `AND` operator, but filter expressions can be grouped and each group will be combined using the `OR` operator.
+
+        `filter=name:eq(Bob):0&filter=name:eq(Alice):1` will return results where `name` is either `Bob` or `Alice`.
+
+        #### Case sensitivity
+
+        Filter expressions are case-insensitive by default, but can be made case-sensitive by adding the `search=true` query parameter (if supported).
+
+        Using `search=true` query parameter (where applicable) will also improve performance with complex filter expressions such as using "contains" operators.
+
+        </details>
+    - key: sort
+      value: asc(field1)
+      description: |
+        Sort the results by a field in ascending or descending order.
+
+        <details>
+        <summary>Details</summary>
+        This API allows sorting the results by a field in ascending or
+        descending order.
+        Use the format `sort=asc(field1)` or `sort=desc(field1)`.
+        Specify multiple sort fields by adding multiple sort parameters and
+        sorting will be applied in the order specified.
+
+        #### Example
+
+        To first sort by `field1` in ascending order and then by `field2` in descending order, use the format `?sort=asc(field1)&sort=desc(field2)`
+
+        #### Sort directions
+
+        - `asc` Ascending order
+
+        - `desc` Descending order
+
+        </details>
+    - key: offset
+      value: "0"
+      description: The number of records to skip before returning results.
+    - key: limit
+      value: "20"
+      description: The number of records to return per page.
+    - key: includeTotal
+      value: "false"
+      description: |
+        Return a count of the total number of records that match the specified filter expression.
+
+        <details>
+        <summary>Details</summary>
+
+        Specifying `includeTotal` will return the total number of records that match the specified filter expression, irrespective of the number of records returned in the response page.
+
+        ```jsonc
+        {
+          data: [], // Array of first page of results
+          meta: {
+            total: 8762 // Total number of records that match the filter expression across all pages
+            totalOverflow: false // If true, indicates that the total count is an estimate and may exceed the returned total
+          }
+        }
+        ```
+
+        #### Usage with search
+
+        When not using `search=true`, the total count may be limited to 10,000 results with `totalOverflow: true` set to indicate that the total count is an estimate and may exceed the returned total.
+
+        When using `search=true` in combination with `includeTotal=true`, the search engine will always return the total number of records that match the specified filter expression.
+
+        </details>
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "B8EfB7C17b32BB5bA7b5B2ac",
+            "class": "Lineage",
+            "name": "string",
+            "inverse": "string",
+            "xref": [
+              "string"
+            ],
+            "state": "Active",
+            "overridability": "All",
+            "createdBy": "string",
+            "createdAt": "2025-09-16T17:11:28.740Z",
+            "updatedAt": "2025-09-16T17:11:28.740Z",
+            "updatedBy": "string"
+          }
+        ],
+        "links": {
+          "self": "https://api.cloud.precisely.com/predicates"
+        }
+      }
+order: 1000

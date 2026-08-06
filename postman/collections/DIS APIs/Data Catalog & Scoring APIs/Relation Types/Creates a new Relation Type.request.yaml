@@ -1,0 +1,24 @@
+$kind: http-request
+description: Creates a new Relation Type
+url: https://{{host}}/v2/catalog/relation-types
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "predicateId": "68ca933af8375d9ffb2eeb44",
+      "subjectId": "68ca92b97ae9bcef4bb12649",
+      "subjectCardinality": "One",
+      "objectId": "68ca92e250212e5df6b27e94",
+      "objectCardinality": "Many",
+      "properties": []
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Creates a new Relation Type.resources/examples
+order: 2000

@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{preSignedUrl}}"
+method: PUT
+body:
+  type: file
+  content: {}
+order: 4000

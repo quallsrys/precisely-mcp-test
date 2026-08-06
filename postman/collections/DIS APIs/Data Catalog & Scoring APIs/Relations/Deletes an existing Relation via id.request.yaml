@@ -1,0 +1,22 @@
+$kind: http-request
+description: "Deletes an existing Relation via id "
+url: https://{{host}}/v2/catalog/relations
+method: DELETE
+headers:
+  x-batch: "true"
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    [
+      {
+        "id": "Cc25FCCcc91E4E87A5A09694"
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Deletes an existing Relation via id.resources/examples
+order: 3000

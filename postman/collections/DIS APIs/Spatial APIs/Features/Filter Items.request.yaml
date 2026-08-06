@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://{{host}}/v1/ogcapi/enrich/collections/pbb_usa/items?filter=bldgid='B000CTPYUB7Z'
+method: GET
+headers:
+  - key: Authorization
+    value: Apikey OWU2NjE5ZWVmMGVjZjQ0ODpEcUJHVlF3TERXa0RvN3ZscWM4ekFXMHoxbER4MG1DYQ==
+    disabled: true
+queryParams:
+  filter: bldgid='B000CTPYUB7Z'
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 4000

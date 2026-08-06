@@ -1,0 +1,6 @@
+name: PRD-US
+values:
+  - key: host
+    value: api.cloud.precisely.com
+  - key: secret
+    secret: true

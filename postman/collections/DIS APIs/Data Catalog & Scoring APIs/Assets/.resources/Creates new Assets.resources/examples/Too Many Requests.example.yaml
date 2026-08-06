@@ -1,0 +1,46 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/assets"
+  method: POST
+  headers:
+    - key: x-batch
+      value: "true"
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "assetTypeId": "653b82b54264fef0f9a52a06",
+          "properties": [
+            {
+              "name": "Name",
+              "value": "Test_2"
+            }
+          ],
+          "xref": [
+            "ON4Hr2P9gsV0R6akRx2Hsw=="
+          ],
+          "tags": []
+        }
+      ]
+response:
+  statusCode: 429
+  statusText: Too Many Requests
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "statusCode": 429,
+        "error": "Too Many Requests",
+        "message": "Rate limit exceeded"
+      }
+order: 6000

@@ -1,0 +1,29 @@
+$kind: http-request
+description: Execute user registration validation flow with valid data. Expected to return normalized email and phone number.
+url: https://{{host}}/v1/multipass/flows/:flow-name/execute
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{bearer_token}}
+pathVariables:
+  - key: flow-name
+    value: user-registration-validation
+    description: Id of the flow available to execute.
+body:
+  type: json
+  content: |-
+    {
+        "input": [
+            {
+                "name": "John Doe",
+                "email": "John.Doe@Example.COM",
+                "phone": "(555) 123-4567",
+                "age": 25
+            }
+        ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

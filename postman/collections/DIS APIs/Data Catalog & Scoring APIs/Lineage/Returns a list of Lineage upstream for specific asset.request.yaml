@@ -1,0 +1,14 @@
+$kind: http-request
+description: Returns a list of Lineage upstream for specific asset
+url: https://{{host}}/v2/catalog/lineage/:assetId/upstream
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  assetId: 6Db28DFFbDbf177Eab23bDeC
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Returns a list of Lineage upstream for specific asset.resources/examples
+order: 5000

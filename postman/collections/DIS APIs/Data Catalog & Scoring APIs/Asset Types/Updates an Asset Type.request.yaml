@@ -1,0 +1,49 @@
+$kind: http-request
+description: Updates an Asset Type
+url: https://{{host}}/v2/catalog/asset-types/:id
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  id: 6Db28DFFbDbf177Eab23bDeC
+body:
+  type: json
+  content: |-
+    [
+      {
+        "op": "add",
+        "path": "/properties/1",
+        "value": {
+          "name": "BooleanField",
+          "label": "Boolean values",
+          "type": "Boolean",
+          "description": "Adding boolean field",
+          "category": "Salary Category",
+          "requirement": "Optional",
+          "display": {
+            "show": true,
+            "showIfEmpty": false,
+            "showInColumn": false
+          },
+          "search": {
+            "prefix": "",
+            "suffix": "",
+            "displayOrder": 1
+          },
+          "definition": {
+            "boolean": {
+              "defaultValue": true,
+              "trueLabel": "false",
+              "falseLabel": "false"
+            }
+          }
+        }
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Updates an Asset Type.resources/examples
+order: 3000

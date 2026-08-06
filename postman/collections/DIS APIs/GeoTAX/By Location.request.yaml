@@ -1,0 +1,36 @@
+$kind: http-request
+url: https://{{host}}/v1/geo-tax/location
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: ••••••
+body:
+  type: text
+  content: |-
+    {
+        "preferences": {
+            "output": {
+                "taxDistrict": "SPD",
+                "salesTaxRateType": "GENERAL",
+                "outputCasing": "MIXED"
+            },
+            "geocoding": {
+                "defaultBufferWidth": "0",
+                "latLongOffset": "NONE",
+                "squeeze": "NO",
+                "latLongAltFormat": "DecimalSign"
+            },
+            "matching": {
+                "matchMode": "CLOSE"
+            }
+        },
+        "location": {
+            "longitude": "-98.401796",
+            "latitude": "34.688726"
+        }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

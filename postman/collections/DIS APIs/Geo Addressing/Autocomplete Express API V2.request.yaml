@@ -1,0 +1,189 @@
+$kind: http-request
+description: "Generated from cURL: curl --location 'https://api-stg.cloud.precisely.com/v2/express-autocomplete' \\
+
+  \r
+
+  --header 'Content-Type: application/json' \\
+
+  \r
+
+  --header 'Authorization: Apikey bearer/token' \\
+
+  \r
+
+  --data '{
+
+  \r
+
+  \    \"preferences\": {
+
+  \r
+
+  \        \"maxResults\": 5,
+
+  \r
+
+  \        \"returnAllInfo\": true,
+
+  \r
+
+  \        \"customPreferences\": {
+
+  \r
+
+  \            \"SEARCH_TYPE\": \"ADDRESS\"
+
+  \r
+
+  \        },
+
+  \r
+
+  \        \"matchMode\": \"STANDARD\",
+
+  \r
+
+  \        \"distance\": {
+
+  \r
+
+  \            \"value\": 150.0,
+
+  \r
+
+  \            \"distanceUnit\": \"METER\"
+
+  \r
+
+  \        },
+
+  \r
+
+  \        \"filterBias\": {
+
+  \r
+
+  \            \"type\": \"bias\",
+
+  \r
+
+  \            \"fields\": {
+
+  \r
+
+  \                \"include\": {
+
+  \r
+
+  \                    \"city\": {
+
+  \r
+
+  \                        \"value\": \"Albany\"
+
+  \r
+
+  \                    },
+
+  \r
+
+  \                    \"postalCode\": {
+
+  \r
+
+  \                        \"value\": \"C40E\"
+
+  \r
+
+  \                    }
+
+  \r
+
+  \                }
+
+  \r
+
+  \            }
+
+  \r
+
+  \        }
+
+  \r
+
+  \    },
+
+  \r
+
+  \    \"address\": {
+
+  \r
+
+  \        \"addressLines\": [
+
+  \r
+
+  \            \"303 E 2nd Street\"
+
+  \r
+
+  \        ],
+
+  \r
+
+  \        \"country\": \"USA\"
+
+  \r
+
+  \    }
+
+  \r
+
+  }'
+
+  \ "
+url: https://{{host}}/v2/express-autocomplete
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+        "preferences": {
+            "maxResults": 5,
+            "returnAllInfo": true,
+            "customPreferences": {
+                "SEARCH_TYPE": "ADDRESS"
+            },
+            "matchMode": "STANDARD",
+            "distance": {
+                "value": 150.0,
+                "distanceUnit": "METER"
+            },
+            "filterBias": {
+                "type": "bias",
+                "fields": {
+                    "include": {
+                        "city": {
+                            "value": "Albany"
+                        },
+                        "postalCode": {
+                            "value": "C40E"
+                        }
+                    }
+                }
+            }
+        },
+        "address": {
+            "addressLines": [
+                "303 E 2nd Street"
+            ],
+            "country": "USA"
+        }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 6000

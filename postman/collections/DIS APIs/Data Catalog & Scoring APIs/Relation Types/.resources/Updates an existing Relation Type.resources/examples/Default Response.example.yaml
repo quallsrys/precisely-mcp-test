@@ -1,0 +1,97 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/relation-types/:id"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: ""
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "op": "add",
+          "path": "/properties/0",
+          "value": {
+            "name": "Link",
+            "label": "Link",
+            "type": "Link",
+            "definition": {
+              "link": {
+                "defaultLabel": "Example",
+                "defaultUrl": "https://www.example.com"
+              }
+            },
+            "requirement": "Optional",
+            "category": "General",
+            "display": {
+              "show": true,
+              "showIfEmpty": true,
+              "showInColumn": true
+            }
+          }
+        }
+      ]
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "id": "68ca9d565ae39f6b24b87282",
+          "overridability": "All",
+          "subjectCardinality": "One",
+          "objectCardinality": "Many",
+          "class": "Simple",
+          "subjectId": "6853c744e223c4e03ea5872b",
+          "objectId": "68c2ac62bb0f260fe2a52597",
+          "state": "Active",
+          "createdBy": "00u17r5rbf45iXfQp0h8",
+          "createdAt": "2025-09-17T11:36:54.423Z",
+          "updatedAt": "2025-09-17T11:39:54.566Z",
+          "updatedBy": "00u17r5rbf45iXfQp0h8",
+          "predicateId": "68ca9adf9a68cae1704d4222",
+          "subjectName": "QA-AT-1706-A",
+          "objectName": "QA_TECH_SAMPLE_11",
+          "predicateName": "NameUpdated",
+          "xref": [
+            "cc3c545a3fcc"
+          ],
+          "properties": [
+            {
+              "name": "Link",
+              "label": "Link",
+              "type": "Link",
+              "definition": {
+                "link": {
+                  "defaultLabel": "Example",
+                  "defaultUrl": "https://www.example.com"
+                }
+              },
+              "requirement": "Optional",
+              "category": "General",
+              "display": {
+                "show": true,
+                "showIfEmpty": true,
+                "showInColumn": true
+              },
+              "editableOnUi": false
+            }
+          ]
+        },
+        "links": {
+          "self": "https://api.cloud.precisely.com/relation-types/:id"
+        }
+      }
+order: 1000

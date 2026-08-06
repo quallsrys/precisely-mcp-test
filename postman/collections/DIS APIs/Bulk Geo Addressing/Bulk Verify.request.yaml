@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://{{host}}/v1/bulk-verify
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "fileId": "11ba1c26-8e38-42ff-bf85-9d3301bac29e"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 6000

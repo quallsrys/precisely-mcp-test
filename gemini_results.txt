@@ -1,0 +1,1040 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.5, pytest-9.1.0, pluggy-1.6.0 -- /Library/Frameworks/Python.framework/Versions/3.14/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/rystan.qualls/Desktop/precisely-mcp-test
+configfile: pytest.ini
+plugins: asyncio-1.4.0, anyio-4.13.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 308 items / 230 deselected / 78 selected
+
+tests/test_address_extended.py::test_address_extended_gemini[addresses detailed-Get the detailed address record for 1 Global View, Troy, NY 12180 including the Precisely ID.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [  1%]
+tests/test_address_extended.py::test_address_extended_gemini[serviceability-Is broadband service available at 2755 Milwaukee St, Denver, CO 80238?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [  2%]
+tests/test_address_extended.py::test_address_extended_gemini[ground view-Get the Ground View census demographic statistics for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [  3%]
+tests/test_address_extended.py::test_address_extended_gemini[address family-Find all addresses in the same building as 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [  5%]
+tests/test_address_extended.py::test_ground_view_income_data_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [  6%]
+tests/test_address_extended.py::test_serviceability_returns_status_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [  7%]
+tests/test_broken_tools.py::test_broken_tools_routing_gemini[validate phones-Validate the phone number 817-557-7877 and tell me if it is valid.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [  8%]
+tests/test_broken_tools.py::test_broken_tools_routing_gemini[get timezones-Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 10%]
+tests/test_broken_tools.py::test_broken_tools_routing_gemini[get spatial products-List all available Precisely spatial data products.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 11%]
+tests/test_broken_tools.py::test_broken_tools_routing_gemini[lookup-Look up the Precisely address record for key P0000GL41OME.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+XFAIL (Gemini refuses to call lookup after prior session error — doc...) [ 12%]
+tests/test_broken_tools.py::test_broken_tools_routing_gemini[summarize-Use the summarize tool to aggregate flood risk attributes within 1 mile of 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+XFAIL (Gemini refuses to call summarize after prior session error — ...) [ 14%]
+tests/test_demographics.py::test_demographic_tools_gemini[demographics-What are the demographics for the area around 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 15%]
+tests/test_demographics.py::test_demographic_tools_gemini[neighborhoods-What neighborhood is 350 Fifth Ave, New York, NY 10118 in?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 16%]
+tests/test_demographics.py::test_demographic_tools_gemini[schools-Use the get_schools_by_address tool to find schools near 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 17%]
+tests/test_demographics.py::test_demographic_tools_gemini[crime index-What is the crime index for 350 Fifth Ave, New York, NY 10118?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 19%]
+tests/test_demographics.py::test_demographic_tools_gemini[places nearby-Use the get_places_by_address tool to find places near 1 Global View, Troy, NY 12180. List the first 3 place names only.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 20%]
+tests/test_demographics.py::test_demographic_tools_gemini[psyte geodemographics-Get psychographic/geodemographic profile for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 21%]
+tests/test_demographics.py::test_schools_include_name_and_distance_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 23%]
+tests/test_demographics.py::test_demographics_population_data_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 24%]
+tests/test_geocoding.py::test_geocoding_gemini[geocode a specific address-Geocode 1 Global View, Troy, NY 12180 and give me the latitude and longitude.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 25%]
+tests/test_geocoding.py::test_geocoding_gemini[reverse geocode coordinates-What address is at latitude 40.7128, longitude -74.0060?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 26%]
+tests/test_geocoding.py::test_geocoding_gemini[verify an address-Verify this address and tell me if it's deliverable: 350 Fifth Ave, New York, NY 10118] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 28%]
+tests/test_geocoding.py::test_geocoding_gemini[autocomplete partial address-Autocomplete this partial address: '1 Global View, Troy'] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 29%]
+tests/test_geocoding.py::test_geocoding_gemini[parse a freeform address-Parse this freeform address into components: '1600 Amphitheatre Pkwy Mountain View CA 94043'] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 30%]
+tests/test_geocoding.py::test_geocode_returns_coordinates_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 32%]
+tests/test_geocoding.py::test_verify_address_deliverable_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 33%]
+tests/test_llm_compat.py::test_gemini_responds[geocode_basic-Geocode 1 Global View, Troy, NY 12180 and return the latitude and longitude.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 34%]
+tests/test_llm_compat.py::test_gemini_responds[flood_risk-What is the flood risk for 1 Market St, San Francisco, CA 94105?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 35%]
+tests/test_llm_compat.py::test_gemini_responds[property_summary-Use the get_property_data tool to summarize the property at 2755 Milwaukee St, Denver, CO 80238 \u2014 year built, size, and type.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 37%]
+tests/test_llm_compat.py::test_gemini_responds[neighborhood_lookup-What neighborhood is 1600 Pennsylvania Ave NW, Washington, DC 20500 in?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 38%]
+tests/test_map_services.py::test_map_services_gemini[ogc functions-What OGC API spatial functions are available in the Precisely platform?] FAILED [ 39%]
+tests/test_map_services.py::test_map_services_gemini[ogc collections-List all OGC feature collections available in the Precisely platform.] FAILED [ 41%]
+tests/test_map_services.py::test_map_services_gemini[ogc collection-Get the metadata for the OGC feature collection 'risks/flood_risk'.] FAILED [ 42%]
+tests/test_map_services.py::test_map_services_gemini[ogc collection schema-What is the schema for the OGC collection 'risks/flood_risk'? List the field names.] FAILED [ 43%]
+tests/test_map_services.py::test_map_services_gemini[ogc collection queryables-What fields can be queried in the OGC collection 'risks/flood_risk'?] FAILED [ 44%]
+tests/test_map_services.py::test_map_services_gemini[ogc collection items-Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.] FAILED [ 46%]
+tests/test_map_services.py::test_map_services_gemini[wms capabilities-Get the WMS GetCapabilities response from the Precisely map service and list available layers.] FAILED [ 47%]
+tests/test_map_services.py::test_map_services_gemini[wmts capabilities-Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.] FAILED [ 48%]
+tests/test_map_services.py::test_ogc_functions_lists_spatial_ops_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 50%]
+tests/test_map_services.py::test_ogc_collection_schema_field_names_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 51%]
+tests/test_map_services.py::test_ogc_items_returns_geojson_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 52%]
+tests/test_map_services.py::test_wms_capabilities_lists_layers_gemini FAILED [ 53%]
+tests/test_map_services.py::test_wmts_capabilities_lists_tile_layers_gemini FAILED [ 55%]
+tests/test_property.py::test_property_tools_gemini[property data-Get property data for 2755 Milwaukee St, Denver, CO 80238.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 56%]
+tests/test_property.py::test_property_tools_gemini[parcel info-What parcel information is available for 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 57%]
+tests/test_property.py::test_property_tools_gemini[building info-What buildings are at 1600 Pennsylvania Ave NW, Washington, DC 20500?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 58%]
+tests/test_property.py::test_property_tools_gemini[replacement cost-What is the replacement cost estimate for 2755 Milwaukee St, Denver, CO 80238?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 60%]
+tests/test_property.py::test_property_tools_gemini[property attributes-Get property attributes for 233 S Wacker Dr, Chicago, IL 60606.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 61%]
+tests/test_property.py::test_property_tools_gemini[parcel by owner-Find parcel details by owner name for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 62%]
+tests/test_property.py::test_property_data_has_expected_fields_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 64%]
+tests/test_property.py::test_buildings_response_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 65%]
+tests/test_risk.py::test_risk_tools_gemini[flood risk-What is the flood risk for 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 66%]
+tests/test_risk.py::test_risk_tools_gemini[wildfire risk-What is the wildfire risk for 1 Panoramic Way, Berkeley, CA 94704?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 67%]
+tests/test_risk.py::test_risk_tools_gemini[fire risk-Get the property fire risk for 350 Fifth Ave, New York, NY 10118.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 69%]
+tests/test_risk.py::test_risk_tools_gemini[coastal risk-What is the coastal risk for 1 Ocean Drive, Miami Beach, FL 33139?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 70%]
+tests/test_risk.py::test_risk_tools_gemini[earth/earthquake risk-What is the earthquake or earth risk for 1 Market St, San Francisco, CA 94105?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 71%]
+tests/test_risk.py::test_risk_tools_gemini[historical weather risk-What historical weather risks exist at 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 73%]
+tests/test_risk.py::test_flood_risk_includes_zone_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 74%]
+tests/test_risk.py::test_multi_risk_summary_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 75%]
+tests/test_spatial.py::test_spatial_tools_gemini[list tables-What spatial data tables are available in the Precisely platform?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 76%]
+tests/test_spatial.py::test_spatial_tools_gemini[table metadata-What columns and schema are available in the flood risk spatial table?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 78%]
+tests/test_spatial.py::test_spatial_tools_gemini[nearest fire stations-Use the find_nearest_candidates tool to find the nearest fire stations within 5 miles of 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 79%]
+tests/test_spatial.py::test_spatial_tools_gemini[search flood zone-Search for flood risk zones that contain the location at 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 80%]
+tests/test_spatial.py::test_spatial_tools_gemini[overlap flood-Use the overlap tool to find what flood risk zones overlap within 1km of 1 Global View, Troy, NY 12180. Report the statecode, mapname, and type values.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 82%]
+tests/test_spatial.py::test_list_tables_returns_known_tables_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 83%]
+tests/test_spatial.py::test_find_nearest_returns_distance_gemini FAILED  [ 84%]
+tests/test_utilities.py::test_utility_tools_gemini[verify email-Verify this email address and tell me if it's valid: rystan.qualls@precisely.com] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 85%]
+tests/test_utilities.py::test_utility_tools_gemini[parse name-Parse this full name into components: 'Dr. John Robert Smith Jr.'] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 87%]
+tests/test_utilities.py::test_utility_tools_gemini[geolocate ip-What is the geographic location of IP address 8.8.8.8?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+FAILED                                                                   [ 88%]
+tests/test_utilities.py::test_utility_tools_gemini[geolocate wifi-Geolocate this WiFi access point MAC address: 00:22:75:10:d5:91] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 89%]
+tests/test_utilities.py::test_utility_tools_gemini[emergency services-What is the emergency services dispatch center (PSAP) for 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 91%]
+tests/test_utilities.py::test_email_verification_detail_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 92%]
+tests/test_utilities.py::test_emergency_services_has_psap_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 93%]
+tests/test_workflows.py::test_property_purchase_due_diligence_gemini FAILED [ 94%]
+tests/test_workflows.py::test_insurance_risk_workflow_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 96%]
+tests/test_workflows.py::test_address_data_enrichment_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [ 97%]
+tests/test_workflows.py::test_site_selection_workflow_gemini FAILED      [ 98%]
+tests/test_workflows.py::test_tax_jurisdiction_lookup_gemini 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+PASSED                                                                   [100%]
+
+=================================== FAILURES ===================================
+_ test_broken_tools_routing_gemini[get timezones-Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.] _
+
+label = 'get timezones'
+prompt = 'Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x106e22b90>
+
+    @pytest.mark.parametrize("label,prompt", BROKEN_TOOL_PROMPTS)
+    async def test_broken_tools_routing_gemini(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"llm": "gemini", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Gemini] No text response for: {label}"
+    
+        if label in STILL_BROKEN:
+            pytest.xfail(f"Gemini refuses to call {EXPECTED_TOOLS[label]} after prior session error — documented compatibility difference")
+    
+        assert result["tool_calls"], f"[Gemini] No tool calls for: {label} — LLM did not attempt to route"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+        assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Gemini] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+    
+        if label not in STILL_BROKEN and label in EXPECTED_CONTENT:
+            text_lower = result["text"].lower()
+>           assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+                f"[Gemini] Response for '{label}' missing expected content {EXPECTED_CONTENT[label]}"
+            )
+E           AssertionError: [Gemini] Response for 'get timezones' missing expected content ['america/new_york', 'eastern', '-18000000']
+E           assert False
+E            +  where False = any(<generator object test_broken_tools_routing_gemini.<locals>.<genexpr> at 0x106d17140>)
+
+tests/test_broken_tools.py:101: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_ test_demographic_tools_gemini[psyte geodemographics-Get psychographic/geodemographic profile for 1 Global View, Troy, NY 12180.] _
+
+label = 'psyte geodemographics'
+prompt = 'Get psychographic/geodemographic profile for 1 Global View, Troy, NY 12180.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107844b40>
+
+    @pytest.mark.parametrize("label,prompt", DEMO_PROMPTS)
+    async def test_demographic_tools_gemini(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"llm": "gemini", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Gemini] No text for: {label}"
+        assert result["tool_calls"], f"[Gemini] No tool calls for: {label}"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Gemini] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+E       AssertionError: [Gemini] Expected tool containing 'get_psyte_geodemographics_by_address' for 'psyte geodemographics', got: ['get_demographics']
+E       assert False
+E        +  where False = any(<generator object test_demographic_tools_gemini.<locals>.<genexpr> at 0x106d0f760>)
+
+tests/test_demographics.py:68: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+________________ test_schools_include_name_and_distance_gemini _________________
+
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+
+    async def test_schools_include_name_and_distance_gemini(gemini_client):
+        prompt = "Use the get_schools_by_address tool to list schools within 2 miles of 1 Global View, Troy, NY 12180 with their names and distances."
+        result = gemini_client.ask(prompt)
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("school" in n.lower() for n in tool_names), (
+            f"[Gemini] Expected a school tool, got: {tool_names}"
+        )
+E       AssertionError: [Gemini] Expected a school tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_schools_include_name_and_distance_gemini.<locals>.<genexpr> at 0x106c2a6c0>)
+
+tests/test_demographics.py:98: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_ test_geocoding_gemini[parse a freeform address-Parse this freeform address into components: '1600 Amphitheatre Pkwy Mountain View CA 94043'] _
+
+label = 'parse a freeform address'
+prompt = "Parse this freeform address into components: '1600 Amphitheatre Pkwy Mountain View CA 94043'"
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107844880>
+
+    @pytest.mark.parametrize("label,prompt", GEOCODE_PROMPTS)
+    async def test_geocoding_gemini(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"llm": "gemini", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Gemini] No text response for: {label}"
+        assert result["tool_calls"], f"[Gemini] No tool calls for: {label}"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+        assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Gemini] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+    
+        text_lower = result["text"].lower()
+>       assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[Gemini] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+        )
+E       AssertionError: [Gemini] Response for 'parse a freeform address' missing expected content keywords ['1600', 'amphitheatre', 'mountain view', '94043']
+E       assert False
+E        +  where False = any(<generator object test_geocoding_gemini.<locals>.<genexpr> at 0x106d173e0>)
+
+tests/test_geocoding.py:69: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_ test_gemini_responds[geocode_basic-Geocode 1 Global View, Troy, NY 12180 and return the latitude and longitude.] _
+
+label = 'geocode_basic'
+prompt = 'Geocode 1 Global View, Troy, NY 12180 and return the latitude and longitude.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107844460>
+
+    @pytest.mark.parametrize("label,prompt", COMPARISON_PROMPTS)
+    async def test_gemini_responds(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"label": label, "model": "gemini", "result": result})
+    
+>       assert result["returncode"] == 0, f"Gemini CLI exited non-zero for: {label} — stderr: {result['stderr']}"
+               ^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'returncode'
+
+tests/test_llm_compat.py:68: KeyError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_ test_gemini_responds[flood_risk-What is the flood risk for 1 Market St, San Francisco, CA 94105?] _
+
+label = 'flood_risk'
+prompt = 'What is the flood risk for 1 Market St, San Francisco, CA 94105?'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107845f30>
+
+    @pytest.mark.parametrize("label,prompt", COMPARISON_PROMPTS)
+    async def test_gemini_responds(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"label": label, "model": "gemini", "result": result})
+    
+>       assert result["returncode"] == 0, f"Gemini CLI exited non-zero for: {label} — stderr: {result['stderr']}"
+               ^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'returncode'
+
+tests/test_llm_compat.py:68: KeyError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_ test_gemini_responds[property_summary-Use the get_property_data tool to summarize the property at 2755 Milwaukee St, Denver, CO 80238 \u2014 year built, size, and type.] _
+
+label = 'property_summary'
+prompt = 'Use the get_property_data tool to summarize the property at 2755 Milwaukee St, Denver, CO 80238 — year built, size, and type.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x1078440f0>
+
+    @pytest.mark.parametrize("label,prompt", COMPARISON_PROMPTS)
+    async def test_gemini_responds(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"label": label, "model": "gemini", "result": result})
+    
+>       assert result["returncode"] == 0, f"Gemini CLI exited non-zero for: {label} — stderr: {result['stderr']}"
+               ^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'returncode'
+
+tests/test_llm_compat.py:68: KeyError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_ test_gemini_responds[neighborhood_lookup-What neighborhood is 1600 Pennsylvania Ave NW, Washington, DC 20500 in?] _
+
+label = 'neighborhood_lookup'
+prompt = 'What neighborhood is 1600 Pennsylvania Ave NW, Washington, DC 20500 in?'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x1078466c0>
+
+    @pytest.mark.parametrize("label,prompt", COMPARISON_PROMPTS)
+    async def test_gemini_responds(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"label": label, "model": "gemini", "result": result})
+    
+>       assert result["returncode"] == 0, f"Gemini CLI exited non-zero for: {label} — stderr: {result['stderr']}"
+               ^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'returncode'
+
+tests/test_llm_compat.py:68: KeyError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_ test_map_services_gemini[ogc functions-What OGC API spatial functions are available in the Precisely platform?] _
+
+label = 'ogc functions'
+prompt = 'What OGC API spatial functions are available in the Precisely platform?'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107847270>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+_ test_map_services_gemini[ogc collections-List all OGC feature collections available in the Precisely platform.] _
+
+label = 'ogc collections'
+prompt = 'List all OGC feature collections available in the Precisely platform.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107846820>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+_ test_map_services_gemini[ogc collection-Get the metadata for the OGC feature collection 'risks/flood_risk'.] _
+
+label = 'ogc collection'
+prompt = "Get the metadata for the OGC feature collection 'risks/flood_risk'."
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x1078440f0>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+_ test_map_services_gemini[ogc collection schema-What is the schema for the OGC collection 'risks/flood_risk'? List the field names.] _
+
+label = 'ogc collection schema'
+prompt = "What is the schema for the OGC collection 'risks/flood_risk'? List the field names."
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107845dd0>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+_ test_map_services_gemini[ogc collection queryables-What fields can be queried in the OGC collection 'risks/flood_risk'?] _
+
+label = 'ogc collection queryables'
+prompt = "What fields can be queried in the OGC collection 'risks/flood_risk'?"
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x106e21170>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+_ test_map_services_gemini[ogc collection items-Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.] _
+
+label = 'ogc collection items'
+prompt = 'Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x1078185c0>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+_ test_map_services_gemini[wms capabilities-Get the WMS GetCapabilities response from the Precisely map service and list available layers.] _
+
+label = 'wms capabilities'
+prompt = 'Get the WMS GetCapabilities response from the Precisely map service and list available layers.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107818ca0>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+_ test_map_services_gemini[wmts capabilities-Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.] _
+
+label = 'wmts capabilities'
+prompt = 'Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x107819430>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_gemini(label, prompt, gemini_client, log_result):
+        # WMS/WMTS/OGC collection responses are 50-120k chars; Gemini needs extra time to process
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:70: TypeError
+__________________ test_wms_capabilities_lists_layers_gemini ___________________
+
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+
+    async def test_wms_capabilities_lists_layers_gemini(gemini_client):
+        prompt = "Call the Precisely WMS GetCapabilities endpoint and list the available map layers."
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:181: TypeError
+_______________ test_wmts_capabilities_lists_tile_layers_gemini ________________
+
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+
+    async def test_wmts_capabilities_lists_tile_layers_gemini(gemini_client):
+        prompt = "Call the Precisely WMTS GetCapabilities endpoint and list the available tile layers and tile matrix sets."
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_map_services.py:205: TypeError
+_ test_property_tools_gemini[parcel by owner-Find parcel details by owner name for 1 Global View, Troy, NY 12180.] _
+
+label = 'parcel by owner'
+prompt = 'Find parcel details by owner name for 1 Global View, Troy, NY 12180.'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x10781aa30>
+
+    @pytest.mark.parametrize("label,prompt", PROPERTY_PROMPTS)
+    async def test_property_tools_gemini(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"llm": "gemini", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Gemini] No text for: {label}"
+>       assert result["tool_calls"], f"[Gemini] No tool calls for: {label}"
+E       AssertionError: [Gemini] No tool calls for: parcel by owner
+E       assert []
+
+tests/test_property.py:65: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+__________________ test_find_nearest_returns_distance_gemini ___________________
+
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+
+    async def test_find_nearest_returns_distance_gemini(gemini_client):
+        prompt = "Use the find_nearest_candidates tool to find the nearest fire station to 1 Market St, San Francisco, CA 94105. Include the name and distance."
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_spatial.py:112: TypeError
+_ test_utility_tools_gemini[geolocate ip-What is the geographic location of IP address 8.8.8.8?] _
+
+label = 'geolocate ip'
+prompt = 'What is the geographic location of IP address 8.8.8.8?'
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x1078cd590>
+
+    @pytest.mark.parametrize("label,prompt", UTILITY_PROMPTS)
+    async def test_utility_tools_gemini(label, prompt, gemini_client, log_result):
+        result = gemini_client.ask(prompt)
+        log_result({"llm": "gemini", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Gemini] No text for: {label}"
+        assert result["tool_calls"], f"[Gemini] No tool calls for: {label}"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+        assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Gemini] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+    
+        text_lower = result["text"].lower()
+>       assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[Gemini] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+        )
+E       AssertionError: [Gemini] Response for 'geolocate ip' missing expected content keywords ['mountain view', 'california', 'google', '94043']
+E       assert False
+E        +  where False = any(<generator object test_utility_tools_gemini.<locals>.<genexpr> at 0x106e7c3c0>)
+
+tests/test_utilities.py:69: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+_________________ test_property_purchase_due_diligence_gemini __________________
+
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x1078cea30>
+
+    async def test_property_purchase_due_diligence_gemini(gemini_client, log_result):
+        """[Gemini] Full due-diligence workflow: geocode → property data → risk assessment → demographics."""
+        prompt = (
+            "I'm considering buying a property at 1 Ocean Drive, Miami Beach, FL 33139. "
+            "Please: 1) verify the address, 2) get property details, 3) assess flood and coastal risk, "
+            "4) look up local demographics and schools. Give me a summary."
+        )
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_workflows.py:137: TypeError
+_____________________ test_site_selection_workflow_gemini ______________________
+
+gemini_client = <clients.gemini_client.GeminiClient object at 0x106b01550>
+log_result = <function log_result.<locals>._log at 0x1078cfc10>
+
+    async def test_site_selection_workflow_gemini(gemini_client, log_result):
+        """[Gemini] Site selection: demographics + crime + schools + places around a location."""
+        prompt = (
+            "I'm evaluating 1 Global View, Troy, NY 12180 as a potential retail location. "
+            "Give me the local demographics, crime index, nearby schools, and notable places within 1 mile."
+        )
+>       result = gemini_client.ask(prompt, timeout=240)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: GeminiClient.ask() got an unexpected keyword argument 'timeout'
+
+tests/test_workflows.py:200: TypeError
+=============================== warnings summary ===============================
+tests/test_address_extended.py::test_address_extended_gemini[addresses detailed-Get the detailed address record for 1 Global View, Troy, NY 12180 including the Precisely ID.]
+  /Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/google/genai/types.py:42: DeprecationWarning: '_UnionGenericAlias' is deprecated and slated for removal in Python 3.17
+    VersionedUnionType = Union[builtin_types.UnionType, _UnionGenericAlias]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== MCP Tool Coverage & Token Summary =======================
+Test                                                  LLM       Tools Called                                    Tokens In / Out       
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+misc / addresses_detailed                             gemini    get_addresses_detailed (1)                      22,366 / 68           
+misc / serviceability                                 gemini    get_serviceability (1)                          22,467 / 36           
+misc / ground_view                                    gemini    get_ground_view_by_address (1)                  22,680 / 353          
+misc / address_family                                 gemini    geocode, get_address_family (2)                 24,766 / 38           
+misc / validate_phones                                gemini    validate_phones (1)                             22,332 / 40           
+misc / get_timezones                                  gemini    get_timezones (1)                               22,191 / 72           
+misc / get_spatial_products                           gemini    get_spatial_products (1)                        77,651 / 175          
+misc / lookup                                         gemini    none (0)                                        22,124 / 14           
+misc / summarize                                      gemini    none (0)                                        22,134 / 80           
+demographics / demographics                           gemini    get_demographics (1)                            22,658 / 158          
+demographics / neighborhoods                          gemini    get_neighborhoods_by_address (1)                22,596 / 26           
+demographics / schools                                gemini    get_schools_by_address (1)                      22,464 / 41           
+demographics / crime_index                            gemini    get_crime_index (1)                             22,481 / 87           
+demographics / places_nearby                          gemini    get_places_by_address (1)                       22,458 / 37           
+demographics / psyte_geodemographics                  gemini    get_demographics (1)                            22,659 / 203          
+geocoding / geocode_a_specific_address                gemini    geocode (1)                                     24,538 / 39           
+geocoding / reverse_geocode_coordinates               gemini    reverse_geocode (1)                             24,143 / 50           
+geocoding / verify_an_address                         gemini    verify_address (1)                              24,529 / 92           
+geocoding / autocomplete_partial_address              gemini    autocomplete_address (1)                        22,615 / 21           
+geocoding / parse_a_freeform_address                  gemini    parse_addresses (1)                             22,197 / 52           
+llm_compat / geocode_basic                            gemini    geocode (1)                                     24,537 / 39           
+llm_compat / flood_risk                               gemini    get_flood_risk_by_address (1)                   22,638 / 170          
+llm_compat / property_summary                         gemini    get_property_data (1)                           22,901 / 47           
+llm_compat / neighborhood_lookup                      gemini    get_neighborhoods_by_address (1)                22,588 / 25           
+property / property_data                              gemini    get_property_data (1)                           22,884 / 253          
+property / parcel_info                                gemini    get_parcels_by_address (1)                      22,574 / 292          
+property / building_info                              gemini    get_buildings_by_address (1)                    22,485 / 66           
+property / replacement_cost                           gemini    get_replacement_cost_by_address (1)             22,321 / 38           
+property / property_attributes                        gemini    get_property_attributes_by_address (1)          22,408 / 58           
+property / parcel_by_owner                            gemini    none (0)                                        22,127 / 44           
+risk / flood_risk                                     gemini    get_flood_risk_by_address (1)                   22,669 / 170          
+risk / wildfire_risk                                  gemini    get_wildfire_risk_by_address (1)                23,616 / 108          
+risk / fire_risk                                      gemini    get_property_fire_risk (1)                      22,814 / 225          
+risk / coastal_risk                                   gemini    get_coastal_risk (1)                            22,784 / 148          
+risk / earth_earthquake_risk                          gemini    get_earth_risk (1)                              22,789 / 140          
+risk / historical_weather_risk                        gemini    get_historical_weather_risk (1)                 22,506 / 60           
+misc / list_tables                                    gemini    list_spatial_tables (1)                         22,897 / 725          
+misc / table_metadata                                 gemini    list_spatial_tables, get_table_metadata (2)     23,734 / 204          
+misc / nearest_fire_stations                          gemini    list_spatial_tables, find_nearest_candidates,   28,867 / 527          
+misc / search_flood_zone                              gemini    search_at_location (1)                          49,173 / 78           
+misc / overlap_flood                                  gemini    overlap (1)                                     34,031 / 131          
+misc / verify_email                                   gemini    verify_emails (1)                               22,353 / 17           
+misc / parse_name                                     gemini    parse_name (1)                                  22,283 / 43           
+misc / geolocate_ip                                   gemini    geo_locate_ip_address (1)                       22,770 / 47           
+misc / geolocate_wifi                                 gemini    geo_locate_wifi_access_point (1)                22,310 / 60           
+misc / emergency_services                             gemini    find_emergency_services (1)                     22,718 / 49           
+workflows / test_insurance_risk_workflow_gemini       gemini    get_property_attributes_by_address, get_proper  24,386 / 150          
+workflows / test_address_data_enrichment_gemini       gemini    verify_address, get_neighborhoods_by_address (  27,366 / 134          
+workflows / test_tax_jurisdiction_lookup_gemini       gemini    lookup_tax_jurisdiction (1)                     23,220 / 82           
+=========================== short test summary info ============================
+FAILED tests/test_broken_tools.py::test_broken_tools_routing_gemini[get timezones-Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.]
+FAILED tests/test_demographics.py::test_demographic_tools_gemini[psyte geodemographics-Get psychographic/geodemographic profile for 1 Global View, Troy, NY 12180.]
+FAILED tests/test_demographics.py::test_schools_include_name_and_distance_gemini
+FAILED tests/test_geocoding.py::test_geocoding_gemini[parse a freeform address-Parse this freeform address into components: '1600 Amphitheatre Pkwy Mountain View CA 94043']
+FAILED tests/test_llm_compat.py::test_gemini_responds[geocode_basic-Geocode 1 Global View, Troy, NY 12180 and return the latitude and longitude.]
+FAILED tests/test_llm_compat.py::test_gemini_responds[flood_risk-What is the flood risk for 1 Market St, San Francisco, CA 94105?]
+FAILED tests/test_llm_compat.py::test_gemini_responds[property_summary-Use the get_property_data tool to summarize the property at 2755 Milwaukee St, Denver, CO 80238 \u2014 year built, size, and type.]
+FAILED tests/test_llm_compat.py::test_gemini_responds[neighborhood_lookup-What neighborhood is 1600 Pennsylvania Ave NW, Washington, DC 20500 in?]
+FAILED tests/test_map_services.py::test_map_services_gemini[ogc functions-What OGC API spatial functions are available in the Precisely platform?]
+FAILED tests/test_map_services.py::test_map_services_gemini[ogc collections-List all OGC feature collections available in the Precisely platform.]
+FAILED tests/test_map_services.py::test_map_services_gemini[ogc collection-Get the metadata for the OGC feature collection 'risks/flood_risk'.]
+FAILED tests/test_map_services.py::test_map_services_gemini[ogc collection schema-What is the schema for the OGC collection 'risks/flood_risk'? List the field names.]
+FAILED tests/test_map_services.py::test_map_services_gemini[ogc collection queryables-What fields can be queried in the OGC collection 'risks/flood_risk'?]
+FAILED tests/test_map_services.py::test_map_services_gemini[ogc collection items-Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.]
+FAILED tests/test_map_services.py::test_map_services_gemini[wms capabilities-Get the WMS GetCapabilities response from the Precisely map service and list available layers.]
+FAILED tests/test_map_services.py::test_map_services_gemini[wmts capabilities-Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.]
+FAILED tests/test_map_services.py::test_wms_capabilities_lists_layers_gemini
+FAILED tests/test_map_services.py::test_wmts_capabilities_lists_tile_layers_gemini
+FAILED tests/test_property.py::test_property_tools_gemini[parcel by owner-Find parcel details by owner name for 1 Global View, Troy, NY 12180.]
+FAILED tests/test_spatial.py::test_find_nearest_returns_distance_gemini - Typ...
+FAILED tests/test_utilities.py::test_utility_tools_gemini[geolocate ip-What is the geographic location of IP address 8.8.8.8?]
+FAILED tests/test_workflows.py::test_property_purchase_due_diligence_gemini
+FAILED tests/test_workflows.py::test_site_selection_workflow_gemini - TypeErr...
+= 23 failed, 53 passed, 230 deselected, 2 xfailed, 1 warning in 891.26s (0:14:51) =

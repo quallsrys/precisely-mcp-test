@@ -1,0 +1,13 @@
+$kind: http-request
+description: Retrieve the definition of a specific flow by its name.
+url: https://{{host}}/v1/multipass/flows/:flow_name
+method: GET
+headers:
+  Authorization: Bearer {{bearer_token}}
+pathVariables:
+  flow_name: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

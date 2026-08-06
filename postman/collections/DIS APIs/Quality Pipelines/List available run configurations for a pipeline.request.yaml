@@ -1,0 +1,22 @@
+$kind: http-request
+description: Retrieves a paginated list of run configurations associated with a specific pipeline ID.
+url: https://{{host}}/v1/quality/pipelines/:pipelineId/run-configs?page=1&limit=10
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: page
+    value: "1"
+    description: Page number
+  - key: limit
+    value: "10"
+    description: Number of items per page
+pathVariables:
+  - key: pipelineId
+    value: 123456789abcdef
+    description: Unique identifier of the pipeline to retrieve run configurations for
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 7000

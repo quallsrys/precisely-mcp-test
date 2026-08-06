@@ -1,0 +1,70 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/lineage/:assetId/upstream"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    assetId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "assetId": "AaCdB385552cdfAcc9AeE6c0",
+            "displayValue": "asset1",
+            "aggregation": [
+              {
+                "type": "aggr1",
+                "total": -91619813.32750298
+              },
+              {
+                "type": "aggr2",
+                "total": 93210114.07024452
+              }
+            ],
+            "alerts": {},
+            "icon": "icon1",
+            "path": {},
+            "score": {
+              "value": 2086204.0614059418,
+              "color": "red"
+            }
+          },
+          {
+            "assetId": "ac86eBFb449cF3F1f7F58Af0",
+            "displayValue": "asset2",
+            "aggregation": [
+              {
+                "type": "aggr1",
+                "total": -11857819.479761884
+              },
+              {
+                "type": "aggr2",
+                "total": 23771235.93533255
+              }
+            ],
+            "alerts": {},
+            "icon": "icon2",
+            "path": {},
+            "score": {
+              "value": 56348990.55453774,
+              "color": "green"
+            }
+          }
+        ],
+        "links": {
+          "self": "https://api.cloud.precisely.com/lineage/:assetId/upstream"
+        }
+      }
+order: 1000

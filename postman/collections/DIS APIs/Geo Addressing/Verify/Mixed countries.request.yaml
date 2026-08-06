@@ -1,0 +1,115 @@
+$kind: http-request
+url: https://{{host}}/v1/verify
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"preferences\": {\r
+
+    \        \"factoryDescription\": {\r
+
+    \            \"label\": \"ggs\",\r
+
+    \            \"featureSpecific\": {}\r
+
+    \        },\r
+
+    \        \"returnAllInfo\": true\r
+
+    \    },\r
+
+    \    \"addresses\": [\r
+
+    \        {\r
+
+    \            \"addressId\": \"1\",\r
+
+    \            \"addressLines\": [\r
+
+    \                \"BAG 5000, BC, REVELSTOKE, V0E 2S0\"\r
+
+    \            ],\r
+
+    \            \"country\": \"CAN\"\r
+
+    \        },\r
+
+    \        {\r
+
+    \            \"addressId\": \"2\",\r
+
+    \            \"addressLines\": [\r
+
+    \                \"Wasserburgstraße 41 Rommerskirchen 41569\"\r
+
+    \            ],\r
+
+    \            \"country\": \"DEU\"\r
+
+    \        },\r
+
+    \        {\r
+
+    \            \"addressId\": \"3\",\r
+
+    \            \"addressLines\": [\r
+
+    \                \"11 RUE JEAN JAURES CANNES 6400\"\r
+
+    \            ],\r
+
+    \            \"country\": \"FRA\"\r
+
+    \        },\r
+
+    \        {\r
+
+    \            \"addressId\": \"4\",\r
+
+    \            \"addressLines\": [\r
+
+    \                \"80 gordon view prospect\"\r
+
+    \            ],\r
+
+    \            \"country\": \"AUS\"\r
+
+    \        },\r
+
+    \        {\r
+
+    \            \"addressId\": \"5\",\r
+
+    \            \"addressLines\": [\r
+
+    \                \"221 b baker streeet london\"\r
+
+    \            ],\r
+
+    \            \"country\": \"United Kingdom\"\r
+
+    \        },\r
+
+    \        {\r
+
+    \            \"addressId\": \"6\",\r
+
+    \            \"addressLines\": [\r
+
+    \                \"1 Global View Troy NY 12180 \"\r
+
+    \            ],\r
+
+    \            \"country\": \"USA\"\r
+
+    \        }\r
+
+    \    ]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 3000

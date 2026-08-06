@@ -1,0 +1,65 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/assets"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "65f00e903d974a9332140bf1",
+          "patch": [
+            {
+              "op": "replace",
+              "path": "/properties",
+              "value": [
+                {
+                  "name": "Name",
+                  "value": "Sherlock_Mssql-08March2024"
+                },
+                {
+                  "name": "Description",
+                  "value": "Test Description"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "fEdE078426900844f0944Ecc",
+            "assetTypeId": "d3AbCeBE2a1F760f22FCc78F",
+            "class": "Technical",
+            "createdBy": "Sample User",
+            "createdAt": "2024-10-01T07:51:41.666Z",
+            "updatedBy": "Sample User",
+            "updatedAt": "2004-10-06T08:44:23.634Z",
+            "xref": [
+              "Sample xref"
+            ],
+            "color": "Sample color"
+          }
+        ],
+        "links": {
+          "self": "https://api.cloud.precisely.com/assets"
+        }
+      }
+order: 1000

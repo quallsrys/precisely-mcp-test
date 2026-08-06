@@ -1,0 +1,28 @@
+$kind: http-request
+url: https://{{host}}/v1/emergency-info/psap/location
+method: POST
+headers:
+  accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: "{\r
+
+    \  \"location\": {\r
+
+    \    \"coordinates\": [\r
+
+    \      -73.22344,\r
+
+    \      41.23443\r
+
+    \    ]\r
+
+    \  }\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

@@ -1,0 +1,25 @@
+$kind: http-request
+description: "Generated from cURL: curl --location 'https://api.cloud.precisely.com/v1/matrix/location?mode=car&departure_time=1563254734&origins=41.349302%2C2.136480%2C41.389925%2C2.136258%2C41.357961%2C2.097878&destinations=41.349302%2C2.136480%2C41.389925%2C2.136258%2C41.357961%2C2.097878&exclude=none&approaches=unrestricted%3Bunrestricted%3Bunrestricted&truck_weight=11770&route_type=fastest&cross_border=false&route_failed_prompt=false&option=flexible' \\\r
+
+  --header 'Authorization: Bearer {{json_web_token_0hju}}'\r\n"
+url: https://{{host}}/v1/matrix/location?mode=car&departure_time=1563254734&origins=41.349302,2.136480,41.389925,2.136258,41.357961,2.097878&destinations=41.349302,2.136480,41.389925,2.136258,41.357961,2.097878&exclude=none&approaches=unrestricted;unrestricted;unrestricted&truck_weight=11770&route_type=fastest&cross_border=false&route_failed_prompt=false&option=flexible
+method: GET
+headers:
+  Authorization: Bearer {{json_web_token_0hju}}
+queryParams:
+  mode: car
+  departure_time: "1563254734"
+  origins: 41.349302,2.136480,41.389925,2.136258,41.357961,2.097878
+  destinations: 41.349302,2.136480,41.389925,2.136258,41.357961,2.097878
+  exclude: none
+  approaches: unrestricted;unrestricted;unrestricted
+  truck_weight: "11770"
+  route_type: fastest
+  cross_border: "false"
+  route_failed_prompt: "false"
+  option: flexible
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 4000

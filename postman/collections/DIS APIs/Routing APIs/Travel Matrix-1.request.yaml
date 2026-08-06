@@ -1,0 +1,68 @@
+$kind: http-request
+name: Travel Matrix
+description: "Generated from cURL: curl --location 'https://api.cloud.precisely.com/v1/matrix/location?option=flexible' \\\r
+
+  --header 'Content-Type: application/json' \\\r
+
+  --header 'Authorization: Bearer {{json_web_token_0hju}}' \\\r
+
+  --data '{\r
+
+  \    \"origins\": \"41.349302,2.136480|41.389925,2.136258|41.357961,2.097878\",\r
+
+  \    \"destinations\": \"41.349302,2.136480|41.389925,2.136258|41.357961,2.09787\",\r
+
+  \    \"mode\": \"car\",\r
+
+  \    \"avoid\": \"ferry\",\r
+
+  \    \"exclude\": \"none\",\r
+
+  \    \"approaches\": \"unrestricted;unrestricted;unrestricted\",\r
+
+  \    \"departure_time\": 1563254734,\r
+
+  \    \"route_type\": \"fastest\",\r
+
+  \    \"cross_border\": false,\r
+
+  \    \"route_failed_prompt\": false\r
+
+  }'"
+url: https://{{host}}/v1/matrix/location?option=flexible
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{json_web_token_0hju}}
+queryParams:
+  option: flexible
+body:
+  type: json
+  content: "{\r
+
+    \  \"origins\": \"41.349302,2.136480|41.389925,2.136258|41.357961,2.097878\",\r
+
+    \  \"destinations\": \"41.349302,2.136480|41.389925,2.136258|41.357961,2.09787\",\r
+
+    \  \"mode\": \"car\",\r
+
+    \  \"avoid\": \"ferry\",\r
+
+    \  \"exclude\": \"none\",\r
+
+    \  \"approaches\": \"unrestricted;unrestricted;unrestricted\",\r
+
+    \  \"departure_time\": 1563254734,\r
+
+    \  \"route_type\": \"fastest\",\r
+
+    \  \"cross_border\": false,\r
+
+    \  \"route_failed_prompt\": false\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 5000

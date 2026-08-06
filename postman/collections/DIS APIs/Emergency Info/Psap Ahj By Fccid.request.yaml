@@ -1,0 +1,12 @@
+$kind: http-request
+url: https://{{host}}/v1/emergency-info/psap-ahj/fccid?fccId=1048
+method: GET
+headers:
+  accept: application/json
+queryParams:
+  fccId: "1048"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 4000

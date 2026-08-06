@@ -1,0 +1,38 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/relations?externalExecutionId=65f00e903d974a9332140bf1"
+  method: DELETE
+  headers:
+    - key: x-batch
+      value: "true"
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    externalExecutionId: 65f00e903d974a9332140bf1
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "Cc25FCCcc91E4E87A5A09694"
+        }
+      ]
+response:
+  statusCode: 429
+  statusText: Too Many Requests
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "statusCode": 429,
+        "error": "Too Many Requests",
+        "message": "Rate limit exceeded"
+      }
+order: 6000

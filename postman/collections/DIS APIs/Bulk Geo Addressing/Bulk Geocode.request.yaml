@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://{{host}}/v1/bulk-geocode
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "fileId": "1b955466-e417-4c0c-a4c6-8dd0d0e6096a"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 5000

@@ -1,0 +1,42 @@
+$kind: http-request
+url: https://{{host}}/v1/geo-tax/address
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer
+body:
+  type: text
+  content: |-
+    {
+        "preferences": {
+            "output": {
+                "taxDistrict": "SPD",
+                "salesTaxRateType": "GENERAL",
+                "outputCasing": "MIXED"
+            },
+            "geocoding": {
+                "defaultBufferWidth": "0",
+                "latLongOffset": "NONE",
+                "squeeze": "NO",
+                "latLongAltFormat": "DecimalSign"
+            },
+            "matching": {
+                "matchMode": "CLOSE"
+            }
+        },
+        "address": {
+            "addressLines": [
+                "1206 Bob Pennell Rd,Fort Sill, OK  73503"
+            ],
+            "admin1": "",
+            "admin2": "",
+            "city": "",
+            "postalCode": "",
+            "postalCodeExt": ""
+        }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

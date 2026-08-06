@@ -1,0 +1,57 @@
+$kind: http-request
+description: Returns a list of matched assets
+url: https://{{host}}/v2/catalog/lineage/:assetId/asset-matches?filter=field1:eq(value1)&searchDescendants=true&phrase=string
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: filter
+    value: field1:eq(value1)
+    description: |
+      Filter the results by specifying a filter expression.
+
+      <details>
+      <summary>Details</summary>
+      This API allows filtering the result set by specifying a filter expression.
+      Use the format `filter=field1:op(value1)`.
+
+      #### Filter operators
+
+      - `eq` Equal to
+      - `ne` Not equal to
+      - `lt` Less than
+      - `le` Less than or equal to
+      - `gt` Greater than
+      - `ge` Greater than or equal to
+      - `in` In a list of comma seperated values
+      - `ni` Not in a list of comma seperated values
+      - `ct` Contains a value
+      - `sw` Starts with a value
+      - `ew` Ends with a value
+      - `ex` Exists (only accepts true/false values)
+
+      #### Grouping filter expressions
+
+      By default, filter expressions are combined using the `AND` operator, but filter expressions can be grouped and each group will be combined using the `OR` operator.
+
+      `filter=name:eq(Bob):0&filter=name:eq(Alice):1` will return results where `name` is either `Bob` or `Alice`.
+
+      #### Case sensitivity
+
+      Filter expressions are case-insensitive by default, but can be made case-sensitive by adding the `search=true` query parameter (if supported).
+
+      Using `search=true` query parameter (where applicable) will also improve performance with complex filter expressions such as using "contains" operators.
+
+      </details>
+  - key: searchDescendants
+    value: "true"
+  - key: phrase
+    value: string
+pathVariables:
+  assetId: 6Db28DFFbDbf177Eab23bDeC
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Returns a list of matched assets.resources/examples
+order: 6000

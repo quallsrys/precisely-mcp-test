@@ -1,0 +1,15 @@
+$kind: http-request
+description: Retrieves detailed information about a specific pipeline job including status, timing, and processing metrics
+url: https://{{host}}/v1/quality/pipelines/jobs/:jobId
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: jobId
+    value: 123456-abcdef-56789
+    description: The unique identifier of the pipeline job to retrieve
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 3000

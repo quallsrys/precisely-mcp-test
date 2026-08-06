@@ -1,0 +1,44 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/lineage/:assetId/downstream/trace"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    assetId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "assetId": "DAc57feF46B1aD97cf37E8a9",
+            "hop": -10365605.043619916,
+            "previousAssetId": "d6Def8fDDF85FBB3733FaEca",
+            "parentId": "0dac5b8DC028FfBFfBF64c6a",
+            "displayValue": "asset1",
+            "score": -58151596.63781739
+          },
+          {
+            "assetId": "afBaa4eBDE9Ab1bE006eDaE6",
+            "hop": 92406738.40330157,
+            "previousAssetId": "cDb1fED9cd1e25CcE7FA8be6",
+            "parentId": "083ADbe5EdCdfa0F64Ef24D4",
+            "displayValue": "asset2",
+            "score": -30213855.210613742
+          }
+        ],
+        "links": {
+          "self": "https://api.cloud.precisely.com/lineage/:assetId/downstream/trace"
+        }
+      }
+order: 1000

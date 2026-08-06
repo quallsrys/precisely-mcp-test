@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/predicates"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      {
+        "class": "Simple",
+        "name": "Sample_Predicate_29",
+        "inverse": "Sample-inverse-predicate-central"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "id": "68ca88a9cfb7c6417f7d109c",
+          "class": "Simple",
+          "name": "Sample_Predicate_29",
+          "inverse": "Sample-inverse-predicate-central",
+          "state": "Active",
+          "overridability": "All",
+          "createdBy": "00u17r5rbf45iXfQp0h8",
+          "createdAt": "2025-09-17T09:21:53.500Z",
+          "updatedAt": "2025-09-17T09:21:53.500Z",
+          "updatedBy": "00u17r5rbf45iXfQp0h8",
+          "xref": [
+            "c0e076cb52d1"
+          ]
+        },
+        "links": {
+          "self": "https://api.cloud.precisely.com/predicates"
+        }
+      }
+order: 1000

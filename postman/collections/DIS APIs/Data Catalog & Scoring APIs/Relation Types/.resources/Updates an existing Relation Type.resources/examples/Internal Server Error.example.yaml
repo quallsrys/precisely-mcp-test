@@ -1,0 +1,55 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/relation-types/:id"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: ""
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "op": "add",
+          "path": "/properties/0",
+          "value": {
+            "name": "Link",
+            "label": "Link",
+            "type": "Link",
+            "definition": {
+              "link": {
+                "defaultLabel": "Example",
+                "defaultUrl": "https://www.example.com"
+              }
+            },
+            "requirement": "Optional",
+            "category": "General",
+            "display": {
+              "show": true,
+              "showIfEmpty": true,
+              "showInColumn": true
+            }
+          }
+        }
+      ]
+response:
+  statusCode: 500
+  statusText: Internal Server Error
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "statusCode": 500,
+        "error": "Internal Server Error",
+        "message": "An unexpected error occurred"
+      }
+order: 6000

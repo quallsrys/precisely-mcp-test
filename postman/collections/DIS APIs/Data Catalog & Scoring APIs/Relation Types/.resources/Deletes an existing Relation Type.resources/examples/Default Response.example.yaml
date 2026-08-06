@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/relation-types/:id"
+  method: DELETE
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: ""
+response:
+  statusCode: 204
+  statusText: No Content
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {},
+        "links": {
+          "self": "https://OmoK.tapLaaZMyHif8K0+rQjsZgw1dInPfWKu8",
+          "next": "http://zJWnIbAQKtEXPiNqFE.lktymfG.",
+          "prev": "https://JBrankobhuBvYOSJWVJmwO.yhlxaYLSbDpPP+k1cFqwC.JKJ-xrjn3LQO+JGuMmDkCOcj,2rG"
+        }
+      }
+order: 1000

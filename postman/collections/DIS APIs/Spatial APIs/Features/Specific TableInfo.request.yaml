@@ -1,0 +1,12 @@
+$kind: http-request
+url: https://{{host}}/v1/ogcapi/enrich/collections/pbb_usa
+method: GET
+headers:
+  - key: Authorization
+    value: Apikey OWU2NjE5ZWVmMGVjZjQ0ODpEcUJHVlF3TERXa0RvN3ZscWM4ekFXMHoxbER4MG1DYQ==
+    disabled: true
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 8000

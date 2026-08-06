@@ -1,0 +1,74 @@
+$kind: http-example
+name: Default Response
+request:
+  url: "{{baseUrl}}/v2/catalog/assets"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "65f00e903d974a9332140bf1",
+          "patch": [
+            {
+              "op": "replace",
+              "path": "/properties",
+              "value": [
+                {
+                  "name": "Name",
+                  "value": "Sherlock_Mssql-08March2024"
+                },
+                {
+                  "name": "Description",
+                  "value": "Test Description"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+response:
+  statusCode: 202
+  statusText: Accepted
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {},
+        "links": {
+          "self": "https://mZextjwpTiyWtEmJUrmmPtjZ.szrduOMB+n9,v33Jj8tpQVmHsDLYfaq8iitK.ail7GdTedwO-SCLv1iUP7wjzgHf7cf",
+          "next": "http://YfoMZ.whfaDzXKrelxfqgB3dJIr",
+          "prev": "https://BTnp.hbgqP8ZdE2jTKJ5TZycevzqXtFZFqbD-MH3gHErwFw5VuJaecjPkiHfdeWMM9u8sTdzXz"
+        },
+        "errors": [
+          {
+            "id": "string",
+            "status": 3728.1736584153614,
+            "code": "string",
+            "detail": "string",
+            "source": {
+              "key_0": true
+            }
+          },
+          {
+            "id": "string",
+            "status": 5237.539287821933,
+            "code": "string",
+            "detail": "string",
+            "source": {
+              "key_0": 1872.4438880935534
+            }
+          }
+        ]
+      }
+order: 2000

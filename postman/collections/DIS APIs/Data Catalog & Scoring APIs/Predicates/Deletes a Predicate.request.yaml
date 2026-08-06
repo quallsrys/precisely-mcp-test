@@ -1,0 +1,14 @@
+$kind: http-request
+description: Deletes a Predicate
+url: https://{{host}}/v2/catalog/predicates/:id
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  id: 6Db28DFFbDbf177Eab23bDeC
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Deletes a Predicate.resources/examples
+order: 4000

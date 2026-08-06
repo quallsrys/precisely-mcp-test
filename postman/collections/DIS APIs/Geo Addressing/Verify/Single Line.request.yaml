@@ -1,0 +1,45 @@
+$kind: http-request
+url: https://{{host}}/v1/verify
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"preferences\": {\r
+
+    \        \"maxResults\": 1,\r
+
+    \        \"returnAllInfo\": true,\r
+
+    \        \"factoryDescription\": {\r
+
+    \            \"label\": \"ggs\",\r
+
+    \            \"featureSpecific\": {}\r
+
+    \        }\r
+
+    \    },\r
+
+    \    \"addresses\": [\r
+
+    \        {\r
+
+    \            \"addressLines\": [\r
+
+    \                \"1 Global View Troy NY 12180 \"\r
+
+    \            ],\r
+
+    \            \"country\": \"USA\"\r
+
+    \        }\r
+
+    \    ]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

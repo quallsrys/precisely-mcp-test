@@ -1,0 +1,12 @@
+$kind: http-request
+url: https://{{host}}/data-graph/graphql
+method: POST
+body:
+  type: graphql
+  content:
+    query: ""
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

@@ -1,0 +1,17 @@
+$kind: http-request
+description: "Generated from cURL: curl --location 'https://api.cloud.precisely.com/v1/isochrone/location?mode=car&coordinates=48.64474709%2C%20-0.09536877&generalize=0&contours_colors=8D5A9E&contours_minutes=1&departure_time=1752201831&polygons=false&denoise=0.5&generalize=110.3&departure_time=1563254734&denoise=1' \\\r
+
+  --header 'Authorization: Bearer {{json_web_token_0hju}}'\r\n"
+url: https://{{host}}/v1/isochrone/location?coordinates=40, -74&contours_minutes=1&polygons=true
+method: GET
+headers:
+  Authorization: Bearer {{json_web_token_0hju}}
+queryParams:
+  coordinates: 40, -74
+  contours_minutes: "1"
+  polygons: "true"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 3000

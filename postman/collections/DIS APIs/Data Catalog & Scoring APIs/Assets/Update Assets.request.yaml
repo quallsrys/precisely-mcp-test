@@ -1,0 +1,37 @@
+$kind: http-request
+description: Updates Assets
+url: https://{{host}}/v2/catalog/assets
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    [
+      {
+        "id": "65f00e903d974a9332140bf1",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/properties",
+            "value": [
+              {
+                "name": "Name",
+                "value": "Sherlock_Mssql-08March2024"
+              },
+              {
+                "name": "Description",
+                "value": "Test Description"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Update Assets.resources/examples
+order: 4000

@@ -1,0 +1,80 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/assets"
+  method: POST
+  headers:
+    - key: x-batch
+      value: "true"
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "assetTypeId": "653b82b54264fef0f9a52a06",
+          "properties": [
+            {
+              "name": "Name",
+              "value": "Test_2"
+            }
+          ],
+          "xref": [
+            "ON4Hr2P9gsV0R6akRx2Hsw=="
+          ],
+          "tags": []
+        }
+      ]
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "fEdE078426900844f0944Ecc",
+            "assetTypeId": "d3AbCeBE2a1F760f22FCc78F",
+            "class": "Technical",
+            "createdBy": "nostrud",
+            "createdAt": "1999-03-25T00:16:12.949Z",
+            "updatedBy": "Sample User",
+            "updatedAt": "1979-04-22T15:43:26.664Z",
+            "parentId": "4efeaCfe9FC55abcCB5Da0fb",
+            "xref": [
+              "Sample xref"
+            ],
+            "color": "Sample color",
+            "counter": {
+              "value": 32630529.364159733,
+              "valueWithPrefix": "exercitation"
+            },
+            "metrics": [
+              {
+                "metricTypeId": "870DDB0EbaCFfC4cca56DbBe",
+                "value": 98854747.6530267,
+                "lastUpdatedOn": "1974-02-21T23:02:09.797Z"
+              }
+            ],
+            "assetTypeXrefs": [
+              "Sample assetTypeXref 1",
+              "Sample assetTypeXref 2"
+            ],
+            "isPlaceholder": false,
+            "keyPath": "Sample keyPath",
+            "level": -54930120.069365576
+          }
+        ],
+        "links": {
+          "self": "https://api.cloud.precisely.com/assets"
+        }
+      }
+order: 1000

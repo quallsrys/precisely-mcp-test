@@ -1,0 +1,11 @@
+$kind: http-request
+description: Retrieve a list of all flows in your workspace.
+url: https://{{host}}/v1/multipass/flows
+method: GET
+headers:
+  Authorization: Bearer {{bearer_token}}
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

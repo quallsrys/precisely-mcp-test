@@ -1,0 +1,71 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/relations"
+  method: PATCH
+  headers:
+    - key: x-batch
+      value: "true"
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "65f00e903d974a9332140bf1",
+          "patch": [
+            {
+              "op": "replace",
+              "path": "/properties",
+              "value": [
+                {
+                  "name": "DisplayName",
+                  "value": "Sherlock_Mssql-08March2024"
+                },
+                {
+                  "name": "DisplayDescription",
+                  "value": "Test Description"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "Dde989e6251aFEf0dfEabf19",
+            "relationTypeId": "9e8c6Fe968bCAabeFDaf4D7e",
+            "subjectId": "7CfCB2fB15e487B6e8FEEdC0",
+            "objectId": "FEacFf168bB03EEC000a20a5",
+            "class": "Diagram",
+            "createdBy": "Sample User",
+            "createdAt": "2012-12-05T20:45:01.459Z",
+            "updatedBy": "id",
+            "updatedAt": "2018-05-13T02:47:27.339Z",
+            "properties": [
+              {
+                "name": "Sample Property Name",
+                "value": {}
+              }
+            ]
+          }
+        ],
+        "links": {
+          "self": "https://api.cloud.precisely.com/relations"
+        }
+      }
+order: 1000

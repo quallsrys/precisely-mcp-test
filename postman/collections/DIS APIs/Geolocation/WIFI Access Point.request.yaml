@@ -1,0 +1,45 @@
+$kind: http-request
+url: https://{{host}}/v1/geolocation/access-point
+method: POST
+headers:
+  - key: Content-Type
+    value: application/xml
+    disabled: true
+body:
+  type: json
+  content: "{\r
+
+    \t\"servingCell\": {\r
+
+    \t\t// \"mac\": \"00-15-5D-FF-\",\r
+
+    \        \"mac\": \"00-15-5D-FF-60-05\",\r
+
+    \t\t\"ssid\": \"\",\r
+
+    \t\t\"rssi\": \"0\",\r
+
+    \t\t\"speed\": \"9866666666667987979\"\r
+
+    \t},\r
+
+    \t\"otherCells\": [\r
+
+    \t\t{\r
+
+    \t\t\t\"mac\": \"00-22:75-10:d5:91\",\r
+
+    \t\t\t\"ssid\": \"0\",\r
+
+    \t\t\t\"rssi\": \"-90\"\r
+
+    \t\t}\r
+
+    \t]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

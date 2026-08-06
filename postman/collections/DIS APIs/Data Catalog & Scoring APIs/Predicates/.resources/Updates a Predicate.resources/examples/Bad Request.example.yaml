@@ -1,0 +1,38 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/predicates/:id"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: ""
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "path": "/name",
+          "op": "replace",
+          "value": "NameUpdated"
+        }
+      ]
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "statusCode": 400,
+        "error": "Bad Request",
+        "message": "Bad Request"
+      }
+order: 2000

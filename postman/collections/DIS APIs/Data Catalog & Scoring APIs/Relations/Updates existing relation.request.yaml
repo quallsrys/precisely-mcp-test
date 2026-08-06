@@ -1,0 +1,38 @@
+$kind: http-request
+description: Updates existing relation
+url: https://{{host}}/v2/catalog/relations
+method: PATCH
+headers:
+  x-batch: "true"
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    [
+      {
+        "id": "65f00e903d974a9332140bf1",
+        "patch": [
+          {
+            "op": "replace",
+            "path": "/properties",
+            "value": [
+              {
+                "name": "DisplayName",
+                "value": "Sherlock_Mssql-08March2024"
+              },
+              {
+                "name": "DisplayDescription",
+                "value": "Test Description"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Updates existing relation.resources/examples
+order: 4000

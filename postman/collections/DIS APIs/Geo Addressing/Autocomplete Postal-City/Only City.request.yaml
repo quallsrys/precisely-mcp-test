@@ -1,0 +1,33 @@
+$kind: http-request
+url: https://{{host}}/v1/autocomplete/postal-city
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"preferences\": {\r
+
+    \        \"maxResults\": 1,\r
+
+    \        \"returnAllInfo\": true,\r
+
+    \        \"customPreferences\": {}\r
+
+    \    },\r
+
+    \    \"address\": {\r
+
+    \        \"type\": \"CITY\",\r
+
+    \        \"postAddress\": \"troy\",\r
+
+    \        \"country\": \"USA\"\r
+
+    \    }\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

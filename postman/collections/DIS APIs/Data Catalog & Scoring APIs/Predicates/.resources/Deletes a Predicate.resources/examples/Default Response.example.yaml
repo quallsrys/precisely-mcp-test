@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/predicates/:id"
+  method: DELETE
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: ""
+response:
+  statusCode: 202
+  statusText: Accepted
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {},
+        "links": {
+          "self": "https://ONSxBuDmaI.gnyhy6HcSWEr+9grVe,gALhmVsrp2UuxwRrmTR.WSS",
+          "next": "http://bEqyresNneIlRFOGsXwNmDh.yudycQwmDjaipJMkxo7Q4H6xQR",
+          "prev": "https://hDMqziKfYWlaUWMbrRPTVUitnQtgskTz.rrtqLh8ZkTqV7-rdVTwZ+qM4OgdEpkFe-9+r8t2.kHQsjtgGcFXwaDdPZeYe5C9eAXIoMlAkHvvW"
+        }
+      }
+order: 1000

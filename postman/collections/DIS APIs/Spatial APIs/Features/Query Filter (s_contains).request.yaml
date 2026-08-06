@@ -1,0 +1,10 @@
+$kind: http-request
+url: https://{{host}}/v1/ogcapi/enrich/collections/pbb_usa/items?filter=s_contains(GEOM,POINT(-74.0116656 40.7009890))
+method: GET
+queryParams:
+  filter: s_contains(GEOM,POINT(-74.0116656 40.7009890))
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

@@ -1,0 +1,12 @@
+$kind: http-request
+url: https://{{host}}/v1/ogcapi/enrich/collections/pbb_usa/items?filter=s_within(LINESTRING (-122.47874 37.722885, -122.478455 37.722491),geom)
+method: GET
+headers:
+  Authorization: Bearer null
+queryParams:
+  filter: s_within(LINESTRING (-122.47874 37.722885, -122.478455 37.722491),geom)
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 3000

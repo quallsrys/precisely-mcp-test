@@ -1,0 +1,22 @@
+$kind: http-request
+url: https://{{host}}/v1/spatial/wmts?Service=WMTS&Request=GetTile&Version=1.0.0&Layer=pbb-usa&Style=default&TileMatrixSet=WorldWebMercatorQuad_0_to_19&TileMatrix=12&TileRow=1550&TileCol=1190&Format=png
+method: GET
+headers:
+  accept: application/xml
+  Authorization: Bearer {{json_web_token_14tl}}
+queryParams:
+  Service: WMTS
+  Request: GetTile
+  Version: 1.0.0
+  Layer: pbb-usa
+  Style: default
+  TileMatrixSet: WorldWebMercatorQuad_0_to_19
+  TileMatrix: "12"
+  TileRow: "1550"
+  TileCol: "1190"
+  Format: png
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 4000

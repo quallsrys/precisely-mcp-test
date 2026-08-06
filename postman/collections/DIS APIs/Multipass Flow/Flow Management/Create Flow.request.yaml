@@ -1,0 +1,85 @@
+$kind: http-request
+description: Create a new flow or update an existing flow. Requires Workspace Admin or Manager permissions.
+url: https://{{host}}/v1/multipass/flows/:flow_name
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{bearer_token}}
+pathVariables:
+  - key: flow_name
+    value: user-registration-validation
+    description: The unique identifier for the flow
+body:
+  type: json
+  content: |-
+    {
+      "flowId": "user-registration-validation",
+      "startOperatorId": "validate_email",
+      "inputDataKey": "request",
+      "operators": [
+        {
+          "id": "validate_email",
+          "type": "Predicate",
+          "description": "Check if email is valid",
+          "condition": "$exists($.request.email) and $contains($.request.email, '@') and $length($.request.email) > 5",
+          "successNode": "validate_age",
+          "failureNode": "email_invalid"
+        },
+        {
+          "id": "validate_age",
+          "type": "Predicate",
+          "description": "Check if user is 18 or older",
+          "condition": "$exists($.request.age) and $.request.age >= 18",
+          "successNode": "normalize_phone",
+          "failureNode": "age_invalid"
+        },
+        {
+          "id": "normalize_phone",
+          "type": "Transform",
+          "description": "Format phone number to international format",
+          "operation": "'+' & $join($split($.request.phone, /[^0-9]/))",
+          "key": "normalized_phone",
+          "nextNode": "normalize_email"
+        },
+        {
+          "id": "normalize_email",
+          "type": "Transform",
+          "description": "Convert email to lowercase",
+          "operation": "$lowercase($trim($.request.email))",
+          "key": "normalized_email",
+          "nextNode": "create_response"
+        },
+        {
+          "id": "create_response",
+          "type": "Transform",
+          "description": "Build success response",
+          "operation": "{'status': 'valid', 'user': {'email': $.normalized_email, 'phone': $.normalized_phone, 'name': $.request.name, 'age': $.request.age}}",
+          "key": "result",
+          "nextNode": "return_success"
+        },
+        {
+          "id": "return_success",
+          "type": "Return",
+          "resultExpression": "$.result"
+        },
+        {
+          "id": "email_invalid",
+          "type": "Fail",
+          "errorCode": 400,
+          "status": "INVALID_EMAIL",
+          "errorMessage": "Email must be valid and contain @ symbol"
+        },
+        {
+          "id": "age_invalid",
+          "type": "Fail",
+          "errorCode": 400,
+          "status": "AGE_RESTRICTION",
+          "errorMessage": "User must be 18 years or older to register"
+        }
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 3000

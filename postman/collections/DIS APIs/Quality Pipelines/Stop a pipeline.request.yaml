@@ -1,0 +1,22 @@
+$kind: http-request
+description: Cancels a running or queued pipeline job execution
+url: https://{{host}}/v1/quality/pipelines/jobs/:jobId
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: jobId
+    value: 123456-abcdef-56789
+    description: The unique identifier of the pipeline job to cancel
+body:
+  type: json
+  content: |-
+    {
+      "status": "CANCELLED"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

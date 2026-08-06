@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/relation-types"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      {
+        "predicateId": "68ca933af8375d9ffb2eeb44",
+        "subjectId": "68ca92b97ae9bcef4bb12649",
+        "subjectCardinality": "One",
+        "objectId": "68ca92e250212e5df6b27e94",
+        "objectCardinality": "Many",
+        "properties": []
+      }
+response:
+  statusCode: 503
+  statusText: Service Unavailable
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "statusCode": 503,
+        "error": "Service Unavailable",
+        "message": "Service temporarily unavailable"
+      }
+order: 7000

@@ -1,0 +1,24 @@
+$kind: http-request
+description: Creates new Relations
+url: https://{{host}}/v2/catalog/relations
+method: POST
+headers:
+  x-batch: "true"
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    [
+      {
+        "relationTypeId": "654e437bf1072e5e14d95910",
+        "subjectId": "655b730e04ff6b23e7bdc353",
+        "objectId": "655b730e04ff6b23e7bdc353"
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Creates new Relations.resources/examples
+order: 2000

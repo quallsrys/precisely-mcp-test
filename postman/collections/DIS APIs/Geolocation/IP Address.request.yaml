@@ -1,0 +1,17 @@
+$kind: http-request
+url: https://{{host}}/v1/geolocation/ip-address?ipAddress=232.45.42.34
+method: GET
+queryParams:
+  - key: ipAddress
+    value: 232.45.42
+    disabled: true
+  - key: ipAddress
+    value: 0.0.0.0
+    disabled: true
+  - key: ipAddress
+    value: 232.45.42.34
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

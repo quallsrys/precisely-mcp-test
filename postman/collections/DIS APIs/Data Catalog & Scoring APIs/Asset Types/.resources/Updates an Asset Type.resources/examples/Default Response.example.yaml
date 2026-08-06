@@ -1,0 +1,161 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/asset-types/:id"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    id: ""
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "op": "add",
+          "path": "/properties/1",
+          "value": {
+            "name": "BooleanField",
+            "label": "Boolean values",
+            "type": "Boolean",
+            "description": "Adding boolean field",
+            "category": "Salary Category",
+            "requirement": "Optional",
+            "display": {
+              "show": true,
+              "showIfEmpty": false,
+              "showInColumn": false
+            },
+            "search": {
+              "prefix": "",
+              "suffix": "",
+              "displayOrder": 1
+            },
+            "definition": {
+              "boolean": {
+                "defaultValue": true,
+                "trueLabel": "false",
+                "falseLabel": "false"
+              }
+            }
+          }
+        }
+      ]
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "id": "68ca97cc50212e5df6b280d0",
+          "class": "Business",
+          "name": "QA_",
+          "displayFormat": "{Name}",
+          "abstract": false,
+          "state": "Active",
+          "overridability": "All",
+          "isSystem": false,
+          "createdBy": "00u17r5rbf45iXfQp0h8",
+          "createdAt": "2025-09-17T11:13:16.119Z",
+          "updatedAt": "2025-09-17T11:15:27.408Z",
+          "updatedBy": "00u17r5rbf45iXfQp0h8",
+          "views": [
+            {
+              "name": "QA_View",
+              "viewType": "Grid",
+              "isDefault": true,
+              "columns": [
+                {
+                  "name": "Name",
+                  "widthType": "Fixed",
+                  "widthValue": 250
+                }
+              ],
+              "filters": [
+                {
+                  "name": "Name",
+                  "persist": false
+                }
+              ],
+              "sorts": [
+                {
+                  "name": "Name",
+                  "direction": "Asc"
+                }
+              ]
+            }
+          ],
+          "description": "This is a test",
+          "xref": [
+            "e023087ecaed"
+          ],
+          "contexts": [],
+          "properties": [
+            {
+              "name": "Name",
+              "label": "Name",
+              "type": "Text",
+              "definition": {
+                "text": {
+                  "allowRichText": true,
+                  "defaultValue": "false",
+                  "validation": {
+                    "regex": "",
+                    "minLength": 0,
+                    "maxLength": 0
+                  }
+                }
+              },
+              "requirement": "Key",
+              "category": "General",
+              "display": {
+                "show": true,
+                "showIfEmpty": true,
+                "showInColumn": true
+              },
+              "editableOnUi": true
+            },
+            {
+              "name": "BooleanField",
+              "label": "Boolean values",
+              "type": "Boolean",
+              "definition": {
+                "boolean": {
+                  "defaultValue": true,
+                  "trueLabel": "false",
+                  "falseLabel": "false"
+                }
+              },
+              "requirement": "Optional",
+              "category": "Salary Category",
+              "display": {
+                "show": true,
+                "showIfEmpty": false,
+                "showInColumn": false
+              },
+              "search": {
+                "prefix": "",
+                "suffix": "",
+                "displayOrder": 1
+              },
+              "description": "Adding boolean field",
+              "editableOnUi": true
+            }
+          ],
+          "maximumDepth": 1,
+          "assetCount": 0
+        },
+        "links": {
+          "self": "https://api.cloud.precisely.com/asset-types/:id"
+        }
+      }
+order: 1000

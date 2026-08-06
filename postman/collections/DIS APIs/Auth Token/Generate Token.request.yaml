@@ -1,0 +1,20 @@
+$kind: http-request
+url: https://{{host}}/auth/v2/token
+method: POST
+body:
+  type: urlencoded
+  content:
+    grant_type: client_credentials
+    scope: default
+auth:
+  type: basic
+  credentials:
+    username: <api_key>
+    password: "{{auth_password_129y}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      const jsonResponse = pm.response.json();
+      pm.globals.set("authToken", jsonResponse.access_token);
+    language: text/javascript
+order: 1000

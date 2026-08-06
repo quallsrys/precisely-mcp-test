@@ -1,0 +1,59 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/relation-types"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      {
+        "predicateId": "68ca933af8375d9ffb2eeb44",
+        "subjectId": "68ca92b97ae9bcef4bb12649",
+        "subjectCardinality": "One",
+        "objectId": "68ca92e250212e5df6b27e94",
+        "objectCardinality": "Many",
+        "properties": []
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "id": "68ca933af8375d9ffb2eeb44",
+          "overridability": "All",
+          "subjectCardinality": "One",
+          "objectCardinality": "Many",
+          "class": "Simple",
+          "subjectId": "68ca92b97ae9bcef4bb12649",
+          "objectId": "68ca92e250212e5df6b27e94",
+          "state": "Active",
+          "createdBy": "00u1wp2ej7pODrOk70h8",
+          "createdAt": "2025-09-17T10:53:46.706Z",
+          "updatedAt": "2025-09-17T10:53:46.706Z",
+          "updatedBy": "00u1wp2ej7pODrOk70h8",
+          "predicateId": "68ca5f380edbc22000f6b11a",
+          "subjectName": "QA_BUS_EXM_1",
+          "objectName": "QA_BUS_EXM_2",
+          "predicateName": "Sample_Predicate_29",
+          "xref": [
+            "5116c2cef0b9"
+          ],
+          "properties": []
+        },
+        "links": {
+          "self": "https://api.cloud.precisely.com/relation-types"
+        }
+      }
+order: 1000

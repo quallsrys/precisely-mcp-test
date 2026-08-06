@@ -1,0 +1,44 @@
+$kind: http-request
+url: https://{{host}}/v1/travel-boundary/location?point=-73.970257%2C40.794045%2Cepsg%3A4326&costs=15.2&costUnit=min&country=USA&maxOffroadDistance=60&maxOffroadDistanceUnit=mi&destinationSrs=epsg%3A4326&majorRoads=true&returnHoles=false&returnIslands=false&simplificationFactor=0.5&bandingStyle=Donut&historicTrafficTimeBucket=None&defaultAmbientSpeed=15&ambientSpeedUnit=MPH&propagationFactor=0.16&version=1&networkType=driving
+method: POST
+headers:
+  accept: application/json
+  Authorization: Bearer {{json_web_token_0mvb}}
+  Content-Type: application/json
+queryParams:
+  point: -73.970257%2C40.794045%2Cepsg%3A4326
+  costs: "15.2"
+  costUnit: min
+  country: USA
+  maxOffroadDistance: "60"
+  maxOffroadDistanceUnit: mi
+  destinationSrs: epsg%3A4326
+  majorRoads: "true"
+  returnHoles: "false"
+  returnIslands: "false"
+  simplificationFactor: "0.5"
+  bandingStyle: Donut
+  historicTrafficTimeBucket: None
+  defaultAmbientSpeed: "15"
+  ambientSpeedUnit: MPH
+  propagationFactor: "0.16"
+  version: "1"
+  networkType: driving
+body:
+  type: json
+  content: |-
+    {
+      "ambientSpeeds": {
+        "defaultAmbientSpeed": 25,
+        "ambientSpeedUnit": "MPH",
+        "ambientSpeedOverrides": {
+          "Primary Highway Urban": 25,
+          "Secondary Highway Urban": 10
+        }
+      }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

@@ -1,0 +1,53 @@
+$kind: http-request
+url: https://{{host}}/v1/geocode
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"preferences\": {\r
+
+    \        \"maxResults\": 1,\r
+
+    \        \"returnAllInfo\": true,\r
+
+    \        \"customPreferences\": {},\r
+
+    \        \"factoryDescription\": {\r
+
+    \            \"label\": \"ggs\",\r
+
+    \            \"featureSpecific\": {}\r
+
+    \        }\r
+
+    \    },\r
+
+    \    \"addresses\": [\r
+
+    \        {\r
+
+    \            \"addressLines\": [\r
+
+    \                \"1 global view \"\r
+
+    \            ],\r
+
+    \            \"city\": \"Troy\",\r
+
+    \            \"admin1\": \"NY\",\r
+
+    \            \"postalCode\": \"12180\",\r
+
+    \            \"country\": \"USA\"\r
+
+    \        }\r
+
+    \    ]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

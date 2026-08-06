@@ -1,0 +1,11 @@
+$kind: http-request
+url: https://{{host}}/v1/ogcapi/enrich/collections/pbb_usa/items?filter=bldgid%3D%27B000CTOWD2PJ%27&limit=5
+method: GET
+queryParams:
+  filter: bldgid%3D%27B000CTOWD2PJ%27
+  limit: "5"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 11000

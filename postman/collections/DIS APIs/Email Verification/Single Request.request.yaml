@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://{{host}}/v1/emails/verify
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "email": "abc@example.com.com"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

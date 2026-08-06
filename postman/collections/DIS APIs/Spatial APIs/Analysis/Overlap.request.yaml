@@ -1,0 +1,30 @@
+$kind: http-request
+url: https://{{host}}/v1/spatial/overlap?limit=10&offset=0
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{json_web_token_18gz}}
+queryParams:
+  limit: "10"
+  offset: "0"
+body:
+  type: json
+  content: |-
+    {
+        "tableName": "pbb_usa", 
+        "geometryFormat": "WKT",
+        "geometry": "POLYGON ((-74.01316 40.700479, -74.012028 40.700479, -74.012028 40.701403, -74.01316 40.701403, -74.01316 40.700479))",
+        "attributes": ["fips"],
+        "uom": "m",
+        "areaAttributeName": "ar",
+        "lengthAttributeName": "len",
+        "totalAttributeName": "tc",
+        "percentTargetAttributeName": "PerTargt",
+        "percentInputAttributeName": "PerIn",
+        "uomAttributeName" : "SIUnit"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 8000

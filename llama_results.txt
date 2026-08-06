@@ -1,0 +1,1242 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.5, pytest-9.1.0, pluggy-1.6.0 -- /Library/Frameworks/Python.framework/Versions/3.14/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/rystan.qualls/Desktop/precisely-mcp-test
+configfile: pytest.ini
+plugins: asyncio-1.4.0, anyio-4.13.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 308 items / 234 deselected / 74 selected
+
+tests/test_address_extended.py::test_address_extended_llama[addresses detailed-Get the detailed address record for 1 Global View, Troy, NY 12180 including the Precisely ID.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [  1%]
+tests/test_address_extended.py::test_address_extended_llama[serviceability-Is broadband service available at 2755 Milwaukee St, Denver, CO 80238?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [  2%]
+tests/test_address_extended.py::test_address_extended_llama[ground view-Get the Ground View census demographic statistics for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [  4%]
+tests/test_address_extended.py::test_address_extended_llama[address family-Find all addresses in the same building as 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [  5%]
+tests/test_address_extended.py::test_ground_view_income_data_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [  6%]
+tests/test_address_extended.py::test_serviceability_returns_status_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [  8%]
+tests/test_broken_tools.py::test_broken_tools_routing_llama[validate phones-Validate the phone number 817-557-7877 and tell me if it is valid.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [  9%]
+tests/test_broken_tools.py::test_broken_tools_routing_llama[get timezones-Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 10%]
+tests/test_broken_tools.py::test_broken_tools_routing_llama[get spatial products-List all available Precisely spatial data products.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 12%]
+tests/test_broken_tools.py::test_broken_tools_routing_llama[lookup-Look up the Precisely address record for key P0000GL41OME.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+XFAIL ([Llama] lookup is broken server-side — routing-only not asserted) [ 13%]
+tests/test_broken_tools.py::test_broken_tools_routing_llama[summarize-Use the summarize tool to aggregate flood risk attributes within 1 mile of 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+XFAIL ([Llama] summarize is broken server-side — routing-only not as...) [ 14%]
+tests/test_demographics.py::test_demographic_tools_llama[demographics-What are the demographics for the area around 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 16%]
+tests/test_demographics.py::test_demographic_tools_llama[neighborhoods-What neighborhood is 350 Fifth Ave, New York, NY 10118 in?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 17%]
+tests/test_demographics.py::test_demographic_tools_llama[schools-Use the get_schools_by_address tool to find schools near 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 18%]
+tests/test_demographics.py::test_demographic_tools_llama[crime index-What is the crime index for 350 Fifth Ave, New York, NY 10118?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 20%]
+tests/test_demographics.py::test_demographic_tools_llama[places nearby-Use the get_places_by_address tool to find places near 1 Global View, Troy, NY 12180. List the first 3 place names only.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 21%]
+tests/test_demographics.py::test_demographic_tools_llama[psyte geodemographics-Get psychographic/geodemographic profile for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 22%]
+tests/test_demographics.py::test_schools_include_name_and_distance_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 24%]
+tests/test_demographics.py::test_demographics_population_data_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 25%]
+tests/test_geocoding.py::test_geocode_returns_coordinates_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 27%]
+tests/test_geocoding.py::test_verify_address_deliverable_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 28%]
+tests/test_geocoding.py::test_geocoding_llama[geocode a specific address-Geocode 1 Global View, Troy, NY 12180 and give me the latitude and longitude.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 29%]
+tests/test_geocoding.py::test_geocoding_llama[reverse geocode coordinates-What address is at latitude 40.7128, longitude -74.0060?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 31%]
+tests/test_geocoding.py::test_geocoding_llama[verify an address-Verify this address and tell me if it's deliverable: 350 Fifth Ave, New York, NY 10118] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 32%]
+tests/test_geocoding.py::test_geocoding_llama[autocomplete partial address-Autocomplete this partial address: '1 Global View, Troy'] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 33%]
+tests/test_geocoding.py::test_geocoding_llama[parse a freeform address-Parse this freeform address into components: '1600 Amphitheatre Pkwy Mountain View CA 94043'] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 35%]
+tests/test_map_services.py::test_map_services_llama[ogc functions-What OGC API spatial functions are available in the Precisely platform?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 36%]
+tests/test_map_services.py::test_map_services_llama[ogc collections-List all OGC feature collections available in the Precisely platform.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 37%]
+tests/test_map_services.py::test_map_services_llama[ogc collection-Get the metadata for the OGC feature collection 'risks/flood_risk'.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 39%]
+tests/test_map_services.py::test_map_services_llama[ogc collection schema-What is the schema for the OGC collection 'risks/flood_risk'? List the field names.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 40%]
+tests/test_map_services.py::test_map_services_llama[ogc collection queryables-What fields can be queried in the OGC collection 'risks/flood_risk'?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 41%]
+tests/test_map_services.py::test_map_services_llama[ogc collection items-Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 43%]
+tests/test_map_services.py::test_map_services_llama[wms capabilities-Get the WMS GetCapabilities response from the Precisely map service and list available layers.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 44%]
+tests/test_map_services.py::test_map_services_llama[wmts capabilities-Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 45%]
+tests/test_map_services.py::test_ogc_functions_lists_spatial_ops_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 47%]
+tests/test_map_services.py::test_ogc_collection_schema_field_names_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 48%]
+tests/test_map_services.py::test_ogc_items_returns_geojson_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 50%]
+tests/test_map_services.py::test_wms_capabilities_lists_layers_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 51%]
+tests/test_map_services.py::test_wmts_capabilities_lists_tile_layers_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 52%]
+tests/test_property.py::test_property_tools_llama[property data-Get property data for 2755 Milwaukee St, Denver, CO 80238.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 54%]
+tests/test_property.py::test_property_tools_llama[parcel info-What parcel information is available for 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 55%]
+tests/test_property.py::test_property_tools_llama[building info-What buildings are at 1600 Pennsylvania Ave NW, Washington, DC 20500?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 56%]
+tests/test_property.py::test_property_tools_llama[replacement cost-What is the replacement cost estimate for 2755 Milwaukee St, Denver, CO 80238?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 58%]
+tests/test_property.py::test_property_tools_llama[property attributes-Get property attributes for 233 S Wacker Dr, Chicago, IL 60606.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 59%]
+tests/test_property.py::test_property_tools_llama[parcel by owner-Find parcel details by owner name for 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 60%]
+tests/test_property.py::test_property_data_has_expected_fields_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 62%]
+tests/test_property.py::test_buildings_response_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 63%]
+tests/test_risk.py::test_risk_tools_llama[flood risk-What is the flood risk for 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 64%]
+tests/test_risk.py::test_risk_tools_llama[wildfire risk-What is the wildfire risk for 1 Panoramic Way, Berkeley, CA 94704?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 66%]
+tests/test_risk.py::test_risk_tools_llama[fire risk-Get the property fire risk for 350 Fifth Ave, New York, NY 10118.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 67%]
+tests/test_risk.py::test_risk_tools_llama[coastal risk-What is the coastal risk for 1 Ocean Drive, Miami Beach, FL 33139?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 68%]
+tests/test_risk.py::test_risk_tools_llama[earth/earthquake risk-What is the earthquake or earth risk for 1 Market St, San Francisco, CA 94105?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 70%]
+tests/test_risk.py::test_risk_tools_llama[historical weather risk-What historical weather risks exist at 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 71%]
+tests/test_risk.py::test_flood_risk_includes_zone_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 72%]
+tests/test_risk.py::test_multi_risk_summary_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 74%]
+tests/test_spatial.py::test_spatial_tools_llama[list tables-What spatial data tables are available in the Precisely platform?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 75%]
+tests/test_spatial.py::test_spatial_tools_llama[table metadata-What columns and schema are available in the flood risk spatial table?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 77%]
+tests/test_spatial.py::test_spatial_tools_llama[nearest fire stations-Use the find_nearest_candidates tool to find the nearest fire stations within 5 miles of 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 78%]
+tests/test_spatial.py::test_spatial_tools_llama[search flood zone-Search for flood risk zones that contain the location at 1 Global View, Troy, NY 12180.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 79%]
+tests/test_spatial.py::test_spatial_tools_llama[overlap flood-Use the overlap tool to find what flood risk zones overlap within 1km of 1 Global View, Troy, NY 12180. Report the statecode, mapname, and type values.] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 81%]
+tests/test_spatial.py::test_list_tables_returns_known_tables_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 82%]
+tests/test_spatial.py::test_find_nearest_returns_distance_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 83%]
+tests/test_utilities.py::test_utility_tools_llama[verify email-Verify this email address and tell me if it's valid: rystan.qualls@precisely.com] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 85%]
+tests/test_utilities.py::test_utility_tools_llama[parse name-Parse this full name into components: 'Dr. John Robert Smith Jr.'] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 86%]
+tests/test_utilities.py::test_utility_tools_llama[geolocate ip-What is the geographic location of IP address 8.8.8.8?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 87%]
+tests/test_utilities.py::test_utility_tools_llama[geolocate wifi-Geolocate this WiFi access point MAC address: 00:22:75:10:d5:91] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 89%]
+tests/test_utilities.py::test_utility_tools_llama[emergency services-What is the emergency services dispatch center (PSAP) for 1 Global View, Troy, NY 12180?] 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 90%]
+tests/test_utilities.py::test_email_verification_detail_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+PASSED                                                                   [ 91%]
+tests/test_utilities.py::test_emergency_services_has_psap_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 93%]
+tests/test_workflows.py::test_property_purchase_due_diligence_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 94%]
+tests/test_workflows.py::test_insurance_risk_workflow_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 95%]
+tests/test_workflows.py::test_address_data_enrichment_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 97%]
+tests/test_workflows.py::test_site_selection_workflow_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [ 98%]
+tests/test_workflows.py::test_tax_jurisdiction_lookup_llama 
+-------------------------------- live log call ---------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+FAILED                                                                   [100%]
+
+=================================== FAILURES ===================================
+_ test_address_extended_llama[serviceability-Is broadband service available at 2755 Milwaukee St, Denver, CO 80238?] _
+
+label = 'serviceability'
+prompt = 'Is broadband service available at 2755 Milwaukee St, Denver, CO 80238?'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x1084f4720>
+
+    @pytest.mark.parametrize("label,prompt", ADDRESS_EXTENDED_PROMPTS)
+    async def test_address_extended_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="geocoding")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+        assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+E       AssertionError: [Llama] Expected tool containing 'get_serviceability' for 'serviceability', got: ['verify_address']
+E       assert False
+E        +  where False = any(<generator object test_address_extended_llama.<locals>.<genexpr> at 0x108cc8120>)
+
+tests/test_address_extended.py:154: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_address_extended_llama[ground view-Get the Ground View census demographic statistics for 1 Global View, Troy, NY 12180.] _
+
+label = 'ground view'
+prompt = 'Get the Ground View census demographic statistics for 1 Global View, Troy, NY 12180.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109a6a140>
+
+    @pytest.mark.parametrize("label,prompt", ADDRESS_EXTENDED_PROMPTS)
+    async def test_address_extended_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="geocoding")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: ground view
+E       assert []
+
+tests/test_address_extended.py:151: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+______________________ test_ground_view_income_data_llama ______________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_ground_view_income_data_llama(llama_client):
+        prompt = "What is the average household income and home value for the census block group at 1 Global View, Troy, NY 12180?"
+        result = llama_client.ask(prompt, category="geocoding")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("ground" in n.lower() or "demographic" in n.lower() for n in tool_names), (
+            f"[Llama] Expected ground view or demographics tool, got: {tool_names}"
+        )
+E       AssertionError: [Llama] Expected ground view or demographics tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_ground_view_income_data_llama.<locals>.<genexpr> at 0x1099bfca0>)
+
+tests/test_address_extended.py:185: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+___________________ test_serviceability_returns_status_llama ___________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_serviceability_returns_status_llama(llama_client):
+        prompt = "Check broadband serviceability for 2755 Milwaukee St, Denver, CO 80238 and tell me if the address is serviceable."
+        result = llama_client.ask(prompt, category="geocoding")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("serviceab" in n.lower() for n in tool_names), f"[Llama] Expected serviceability tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected serviceability tool, got: ['verify_address']
+E       assert False
+E        +  where False = any(<generator object test_serviceability_returns_status_llama.<locals>.<genexpr> at 0x1099bdfc0>)
+
+tests/test_address_extended.py:211: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_broken_tools_routing_llama[get timezones-Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.] _
+
+label = 'get timezones'
+prompt = 'Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109a6a350>
+
+    @pytest.mark.parametrize("label,prompt", BROKEN_TOOL_PROMPTS)
+    async def test_broken_tools_routing_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="broken")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text response for: {label}"
+    
+        if label in STILL_BROKEN:
+            pytest.xfail(f"[Llama] {EXPECTED_TOOLS[label]} is broken server-side — routing-only not asserted")
+    
+        assert result["tool_calls"], f"[Llama] No tool calls for: {label} — LLM did not attempt to route"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+        assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+    
+        if label not in STILL_BROKEN and label in EXPECTED_CONTENT:
+            text_lower = result["text"].lower()
+>           assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+                f"[Llama] Response for '{label}' missing expected content {EXPECTED_CONTENT[label]}"
+            )
+E           AssertionError: [Llama] Response for 'get timezones' missing expected content ['america/new_york', 'eastern', '-18000000']
+E           assert False
+E            +  where False = any(<generator object test_broken_tools_routing_llama.<locals>.<genexpr> at 0x1099bd7e0>)
+
+tests/test_broken_tools.py:145: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_demographic_tools_llama[places nearby-Use the get_places_by_address tool to find places near 1 Global View, Troy, NY 12180. List the first 3 place names only.] _
+
+label = 'places nearby'
+prompt = 'Use the get_places_by_address tool to find places near 1 Global View, Troy, NY 12180. List the first 3 place names only.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109ab0460>
+
+    @pytest.mark.parametrize("label,prompt", DEMO_PROMPTS)
+    async def test_demographic_tools_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="demographics")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: places nearby
+E       assert []
+
+tests/test_demographics.py:161: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_geocoding_llama[reverse geocode coordinates-What address is at latitude 40.7128, longitude -74.0060?] _
+
+label = 'reverse geocode coordinates'
+prompt = 'What address is at latitude 40.7128, longitude -74.0060?'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109ab24b0>
+
+    @pytest.mark.parametrize("label,prompt", GEOCODE_PROMPTS)
+    async def test_geocoding_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="geocoding")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text response for: {label}"
+        assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+        assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+    
+        text_lower = result["text"].lower()
+>       assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+        )
+E       AssertionError: [Llama] Response for 'reverse geocode coordinates' missing expected content keywords ['chambers', 'new york', '10007']
+E       assert False
+E        +  where False = any(<generator object test_geocoding_llama.<locals>.<genexpr> at 0x109ae65e0>)
+
+tests/test_geocoding.py:219: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[ogc functions-What OGC API spatial functions are available in the Precisely platform?] _
+
+label = 'ogc functions'
+prompt = 'What OGC API spatial functions are available in the Precisely platform?'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109ab2b90>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: ogc functions
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[ogc collections-List all OGC feature collections available in the Precisely platform.] _
+
+label = 'ogc collections'
+prompt = 'List all OGC feature collections available in the Precisely platform.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109ab0510>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: ogc collections
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[ogc collection-Get the metadata for the OGC feature collection 'risks/flood_risk'.] _
+
+label = 'ogc collection'
+prompt = "Get the metadata for the OGC feature collection 'risks/flood_risk'."
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109ab3ed0>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: ogc collection
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[ogc collection schema-What is the schema for the OGC collection 'risks/flood_risk'? List the field names.] _
+
+label = 'ogc collection schema'
+prompt = "What is the schema for the OGC collection 'risks/flood_risk'? List the field names."
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b14250>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: ogc collection schema
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[ogc collection queryables-What fields can be queried in the OGC collection 'risks/flood_risk'?] _
+
+label = 'ogc collection queryables'
+prompt = "What fields can be queried in the OGC collection 'risks/flood_risk'?"
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b147d0>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: ogc collection queryables
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[ogc collection items-Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.] _
+
+label = 'ogc collection items'
+prompt = 'Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b14f60>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: ogc collection items
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[wms capabilities-Get the WMS GetCapabilities response from the Precisely map service and list available layers.] _
+
+label = 'wms capabilities'
+prompt = 'Get the WMS GetCapabilities response from the Precisely map service and list available layers.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b14040>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: wms capabilities
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_map_services_llama[wmts capabilities-Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.] _
+
+label = 'wmts capabilities'
+prompt = 'Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b15dd0>
+
+    @pytest.mark.parametrize("label,prompt", MAP_SERVICE_PROMPTS)
+    async def test_map_services_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="map_services")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: wmts capabilities
+E       assert []
+
+tests/test_map_services.py:240: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+__________________ test_ogc_functions_lists_spatial_ops_llama __________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_ogc_functions_lists_spatial_ops_llama(llama_client):
+        prompt = "What spatial filter functions does the Precisely OGC API support?"
+        result = llama_client.ask(prompt, category="map_services")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("ogc_functions" in n for n in tool_names), f"[Llama] Expected ogc_functions tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected ogc_functions tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_ogc_functions_lists_spatial_ops_llama.<locals>.<genexpr> at 0x109ac7030>)
+
+tests/test_map_services.py:271: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_________________ test_ogc_collection_schema_field_names_llama _________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_ogc_collection_schema_field_names_llama(llama_client):
+        prompt = "List every field name in the schema for the risks/flood_risk OGC collection."
+        result = llama_client.ask(prompt, category="map_services")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("ogc_collection_schema" in n for n in tool_names), f"[Llama] Expected ogc_collection_schema tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected ogc_collection_schema tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_ogc_collection_schema_field_names_llama.<locals>.<genexpr> at 0x109e41220>)
+
+tests/test_map_services.py:295: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_____________________ test_ogc_items_returns_geojson_llama _____________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_ogc_items_returns_geojson_llama(llama_client):
+        prompt = (
+            "Retrieve flood risk features from the risks/flood_risk OGC collection within bounding box "
+            "-122.4194,37.7749,-122.4094,37.7849 in San Francisco. Return up to 2 results and report "
+            "the statecode, mapname, and floodzone values."
+        )
+        result = llama_client.ask(prompt, category="map_services")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("ogc_collection_items" in n for n in tool_names), f"[Llama] Expected ogc_collection_items tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected ogc_collection_items tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_ogc_items_returns_geojson_llama.<locals>.<genexpr> at 0x109b36e90>)
+
+tests/test_map_services.py:327: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+___________________ test_wms_capabilities_lists_layers_llama ___________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_wms_capabilities_lists_layers_llama(llama_client):
+        prompt = "Call the Precisely WMS GetCapabilities endpoint and list the available map layers."
+        result = llama_client.ask(prompt, category="map_services")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("wms_request" in n for n in tool_names), f"[Llama] Expected wms_request tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected wms_request tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_wms_capabilities_lists_layers_llama.<locals>.<genexpr> at 0x109ac7440>)
+
+tests/test_map_services.py:351: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+________________ test_wmts_capabilities_lists_tile_layers_llama ________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_wmts_capabilities_lists_tile_layers_llama(llama_client):
+        prompt = "Call the Precisely WMTS GetCapabilities endpoint and list the available tile layers and tile matrix sets."
+        result = llama_client.ask(prompt, category="map_services")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("wmts_request" in n for n in tool_names), f"[Llama] Expected wmts_request tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected wmts_request tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_wmts_capabilities_lists_tile_layers_llama.<locals>.<genexpr> at 0x109b365a0>)
+
+tests/test_map_services.py:375: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_spatial_tools_llama[table metadata-What columns and schema are available in the flood risk spatial table?] _
+
+label = 'table metadata'
+prompt = 'What columns and schema are available in the flood risk spatial table?'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b149e0>
+
+    @pytest.mark.parametrize("label,prompt", SPATIAL_PROMPTS)
+    async def test_spatial_tools_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="spatial")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: table metadata
+E       assert []
+
+tests/test_spatial.py:146: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_spatial_tools_llama[nearest fire stations-Use the find_nearest_candidates tool to find the nearest fire stations within 5 miles of 1 Global View, Troy, NY 12180.] _
+
+label = 'nearest fire stations'
+prompt = 'Use the find_nearest_candidates tool to find the nearest fire stations within 5 miles of 1 Global View, Troy, NY 12180.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b74eb0>
+
+    @pytest.mark.parametrize("label,prompt", SPATIAL_PROMPTS)
+    async def test_spatial_tools_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="spatial")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: nearest fire stations
+E       assert []
+
+tests/test_spatial.py:146: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_spatial_tools_llama[search flood zone-Search for flood risk zones that contain the location at 1 Global View, Troy, NY 12180.] _
+
+label = 'search flood zone'
+prompt = 'Search for flood risk zones that contain the location at 1 Global View, Troy, NY 12180.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b743b0>
+
+    @pytest.mark.parametrize("label,prompt", SPATIAL_PROMPTS)
+    async def test_spatial_tools_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="spatial")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+        assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+    
+        tool_names = [t["name"] for t in result["tool_calls"]]
+        assert any(EXPECTED_TOOLS[label] in n for n in tool_names), (
+            f"[Llama] Expected tool containing '{EXPECTED_TOOLS[label]}' for '{label}', got: {tool_names}"
+        )
+    
+        text_lower = result["text"].lower()
+>       assert any(word in text_lower for word in EXPECTED_CONTENT[label]), (
+            f"[Llama] Response for '{label}' missing expected content keywords {EXPECTED_CONTENT[label]}"
+        )
+E       AssertionError: [Llama] Response for 'search flood zone' missing expected content keywords ['36', 'p2p', '3611640003a', 'flood']
+E       assert False
+E        +  where False = any(<generator object test_spatial_tools_llama.<locals>.<genexpr> at 0x109ae5c40>)
+
+tests/test_spatial.py:154: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp "HTTP/1.1 307 Temporary Redirect"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:3000/mcp/ "HTTP/1.1 200 OK"
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+_ test_spatial_tools_llama[overlap flood-Use the overlap tool to find what flood risk zones overlap within 1km of 1 Global View, Troy, NY 12180. Report the statecode, mapname, and type values.] _
+
+label = 'overlap flood'
+prompt = 'Use the overlap tool to find what flood risk zones overlap within 1km of 1 Global View, Troy, NY 12180. Report the statecode, mapname, and type values.'
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b75380>
+
+    @pytest.mark.parametrize("label,prompt", SPATIAL_PROMPTS)
+    async def test_spatial_tools_llama(label, prompt, llama_client, log_result):
+        result = llama_client.ask(prompt, category="spatial")
+        log_result({"llm": "llama", "label": label, "prompt": prompt, "result": result})
+    
+        assert result["text"], f"[Llama] No text for: {label}"
+>       assert result["tool_calls"], f"[Llama] No tool calls for: {label}"
+E       AssertionError: [Llama] No tool calls for: overlap flood
+E       assert []
+
+tests/test_spatial.py:146: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+___________________ test_find_nearest_returns_distance_llama ___________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_find_nearest_returns_distance_llama(llama_client):
+        prompt = "Find the nearest fire station to 1 Market St, San Francisco, CA 94105. Include the name and distance."
+        result = llama_client.ask(prompt, category="spatial")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("nearest" in n.lower() for n in tool_names), f"[Llama] Expected find_nearest_candidates tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected find_nearest_candidates tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_find_nearest_returns_distance_llama.<locals>.<genexpr> at 0x109ae7d80>)
+
+tests/test_spatial.py:201: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+____________________ test_emergency_services_has_psap_llama ____________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+
+    async def test_emergency_services_has_psap_llama(llama_client):
+        prompt = "Find the 911 dispatch center (PSAP) for 350 Fifth Ave, New York, NY 10118."
+        result = llama_client.ask(prompt, category="utilities")
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("emergency" in n.lower() for n in tool_names), f"[Llama] Expected emergency tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected emergency tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_emergency_services_has_psap_llama.<locals>.<genexpr> at 0x109ae7220>)
+
+tests/test_utilities.py:202: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+__________________ test_property_purchase_due_diligence_llama __________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b14720>
+
+    async def test_property_purchase_due_diligence_llama(llama_client, log_result):
+        """[Llama] Full due-diligence workflow: verify → property data → risk → demographics."""
+        prompt = (
+            "I'm considering buying a property at 1 Ocean Drive, Miami Beach, FL 33139. "
+            "Please: 1) verify the address, 2) get property details, 3) assess flood and coastal risk, "
+            "4) look up local demographics and schools. Give me a summary."
+        )
+        result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+        log_result({"llm": "llama", "test": "property_due_diligence", "result": result})
+    
+        assert result["text"]
+>       assert len(result["tool_calls"]) >= 2, (
+            f"[Llama] Expected at least 2 tool calls for due-diligence, got {len(result['tool_calls'])}: "
+            f"{[t['name'] for t in result['tool_calls']]}"
+        )
+E       AssertionError: [Llama] Expected at least 2 tool calls for due-diligence, got 0: []
+E       assert 0 >= 2
+E        +  where 0 = len([])
+
+tests/test_workflows.py:330: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+______________________ test_insurance_risk_workflow_llama ______________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b75fe0>
+
+    async def test_insurance_risk_workflow_llama(llama_client, log_result):
+        """[Llama] Insurance underwriting: property attributes → fire risk → flood risk → earthquake risk."""
+        prompt = (
+            "I need to underwrite a homeowner's policy for 1 Market St, San Francisco, CA 94105. "
+            "Get the property attributes, fire risk, flood risk, and earthquake risk."
+        )
+        result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+        log_result({"llm": "llama", "test": "insurance_risk_workflow", "result": result})
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert len(tool_names) >= 2, f"[Llama] Expected multi-tool insurance workflow, got: {tool_names}"
+E       AssertionError: [Llama] Expected multi-tool insurance workflow, got: []
+E       assert 0 >= 2
+E        +  where 0 = len([])
+
+tests/test_workflows.py:351: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+______________________ test_address_data_enrichment_llama ______________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b768d0>
+
+    async def test_address_data_enrichment_llama(llama_client, log_result):
+        """[Llama] Enrich addresses: verify → get neighborhood."""
+        addresses = [
+            "1 Global View, Troy, NY 12180",
+            "350 Fifth Ave, New York, NY 10118",
+        ]
+        prompt = (
+            f"For each of these addresses, verify it and return the neighborhood it belongs to:\n"
+            + "\n".join(f"- {a}" for a in addresses)
+        )
+        result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+        log_result({"llm": "llama", "test": "address_enrichment", "result": result})
+    
+        assert result["text"]
+>       assert result["tool_calls"]
+E       assert []
+
+tests/test_workflows.py:372: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+______________________ test_site_selection_workflow_llama ______________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b76f00>
+
+    async def test_site_selection_workflow_llama(llama_client, log_result):
+        """[Llama] Site selection: demographics + crime + schools + places."""
+        prompt = (
+            "I'm evaluating 1 Global View, Troy, NY 12180 as a potential retail location. "
+            "Give me the local demographics, crime index, nearby schools, and notable places within 1 mile."
+        )
+        result = llama_client.ask(prompt, max_tokens=8192, category="workflow")
+        log_result({"llm": "llama", "test": "site_selection", "result": result})
+    
+        assert result["text"]
+>       assert len(result["tool_calls"]) >= 2, (
+            f"[Llama] Expected at least 2 tool calls for site selection, got: {[t['name'] for t in result['tool_calls']]}"
+        )
+E       AssertionError: [Llama] Expected at least 2 tool calls for site selection, got: []
+E       assert 0 >= 2
+E        +  where 0 = len([])
+
+tests/test_workflows.py:393: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+______________________ test_tax_jurisdiction_lookup_llama ______________________
+
+llama_client = <clients.llama_client.LlamaClient object at 0x108977380>
+log_result = <function log_result.<locals>._log at 0x109b775e0>
+
+    async def test_tax_jurisdiction_lookup_llama(llama_client, log_result):
+        """[Llama] Tax jurisdiction workflow."""
+        prompt = "What tax jurisdiction applies to 350 Fifth Ave, New York, NY 10118?"
+        result = llama_client.ask(prompt, category="workflow")
+        log_result({"llm": "llama", "test": "tax_jurisdiction", "result": result})
+    
+        assert result["text"]
+        tool_names = [t["name"] for t in result["tool_calls"]]
+>       assert any("tax" in n.lower() for n in tool_names), f"[Llama] Expected tax tool, got: {tool_names}"
+E       AssertionError: [Llama] Expected tax tool, got: []
+E       assert False
+E        +  where False = any(<generator object test_tax_jurisdiction_lookup_llama.<locals>.<genexpr> at 0x109ae7a00>)
+
+tests/test_workflows.py:410: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+====================== MCP Tool Coverage & Token Summary =======================
+Test                                                  LLM       Tools Called                                    Tokens In / Out       
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+misc / addresses_detailed                             llama     get_addresses_detailed (1)                      306 / 72              
+misc / serviceability                                 llama     verify_address (1)                              1,897 / 97            
+misc / ground_view                                    llama     none (0)                                        2,461 / 142           
+misc / address_family                                 llama     get_address_family (1)                          294 / 153             
+misc / validate_phones                                llama     validate_phones (1)                             173 / 49              
+misc / get_timezones                                  llama     get_timezones (1)                               208 / 46              
+misc / get_spatial_products                           llama     get_spatial_products (1)                        4,095 / 391           
+misc / lookup                                         llama     lookup (1)                                      188 / 546             
+misc / summarize                                      llama     summarize (1)                                   332 / 86              
+demographics / demographics                           llama     get_demographics (1)                            543 / 151             
+demographics / neighborhoods                          llama     get_neighborhoods_by_address (1)                508 / 20              
+demographics / schools                                llama     get_schools_by_address (1)                      382 / 45              
+demographics / crime_index                            llama     get_crime_index (1)                             398 / 51              
+demographics / places_nearby                          llama     none (0)                                        2,133 / 100           
+demographics / psyte_geodemographics                  llama     get_psyte_geodemographics_by_address (1)        550 / 176             
+geocoding / geocode_a_specific_address                llama     geocode (1)                                     1,943 / 85            
+geocoding / reverse_geocode_coordinates               llama     reverse_geocode (1)                             162 / 49              
+geocoding / verify_an_address                         llama     verify_address (1)                              1,933 / 37            
+geocoding / autocomplete_partial_address              llama     autocomplete_address (1)                        217 / 45              
+geocoding / parse_a_freeform_address                  llama     parse_addresses (1)                             237 / 96              
+misc / ogc_functions                                  llama     none (0)                                        4,095 / 92            
+misc / ogc_collections                                llama     none (0)                                        4,095 / 575           
+misc / ogc_collection                                 llama     none (0)                                        4,095 / 32            
+misc / ogc_collection_schema                          llama     none (0)                                        4,095 / 79            
+misc / ogc_collection_queryables                      llama     none (0)                                        4,095 / 190           
+misc / ogc_collection_items                           llama     none (0)                                        4,095 / 83            
+misc / wms_capabilities                               llama     none (0)                                        4,095 / 17            
+misc / wmts_capabilities                              llama     none (0)                                        4,095 / 38            
+property / property_data                              llama     get_property_data (1)                           695 / 77              
+property / parcel_info                                llama     get_parcels_by_address (1)                      423 / 74              
+property / building_info                              llama     get_buildings_by_address (1)                    380 / 53              
+property / replacement_cost                           llama     get_replacement_cost_by_address (1)             256 / 25              
+property / property_attributes                        llama     get_property_attributes_by_address (1)          322 / 91              
+property / parcel_by_owner                            llama     get_parcel_by_owner_detailed (1)                575 / 263             
+risk / flood_risk                                     llama     get_flood_risk_by_address (1)                   555 / 85              
+risk / wildfire_risk                                  llama     get_wildfire_risk_by_address (1)                1,362 / 91            
+risk / fire_risk                                      llama     get_property_fire_risk (1)                      681 / 208             
+risk / coastal_risk                                   llama     get_coastal_risk (1)                            679 / 117             
+risk / earth_earthquake_risk                          llama     get_earth_risk (1)                              681 / 210             
+risk / historical_weather_risk                        llama     get_historical_weather_risk (1)                 428 / 81              
+misc / list_tables                                    llama     list_spatial_tables (1)                         721 / 583             
+misc / table_metadata                                 llama     none (0)                                        4,095 / 274           
+misc / nearest_fire_stations                          llama     none (0)                                        4,095 / 56            
+misc / search_flood_zone                              llama     search_at_location (1)                          179 / 52              
+misc / overlap_flood                                  llama     none (0)                                        4,095 / 69            
+misc / verify_email                                   llama     verify_emails (1)                               258 / 19              
+misc / parse_name                                     llama     parse_name (1)                                  242 / 58              
+misc / geolocate_ip                                   llama     geo_locate_ip_address (1)                       614 / 129             
+misc / geolocate_wifi                                 llama     geo_locate_wifi_access_point (1)                245 / 59              
+misc / emergency_services                             llama     find_emergency_services (1)                     192 / 88              
+workflows / test_property_purchase_due_diligence_lla  llama     none (0)                                        4,095 / 937           
+workflows / test_insurance_risk_workflow_llama        llama     none (0)                                        4,095 / 542           
+workflows / test_address_data_enrichment_llama        llama     none (0)                                        4,095 / 234           
+workflows / test_site_selection_workflow_llama        llama     none (0)                                        4,095 / 75            
+workflows / test_tax_jurisdiction_lookup_llama        llama     none (0)                                        4,095 / 32            
+=========================== short test summary info ============================
+FAILED tests/test_address_extended.py::test_address_extended_llama[serviceability-Is broadband service available at 2755 Milwaukee St, Denver, CO 80238?]
+FAILED tests/test_address_extended.py::test_address_extended_llama[ground view-Get the Ground View census demographic statistics for 1 Global View, Troy, NY 12180.]
+FAILED tests/test_address_extended.py::test_ground_view_income_data_llama - A...
+FAILED tests/test_address_extended.py::test_serviceability_returns_status_llama
+FAILED tests/test_broken_tools.py::test_broken_tools_routing_llama[get timezones-Use the get_timezones tool to find the timezone for 1 Global View, Troy, NY 12180.]
+FAILED tests/test_demographics.py::test_demographic_tools_llama[places nearby-Use the get_places_by_address tool to find places near 1 Global View, Troy, NY 12180. List the first 3 place names only.]
+FAILED tests/test_geocoding.py::test_geocoding_llama[reverse geocode coordinates-What address is at latitude 40.7128, longitude -74.0060?]
+FAILED tests/test_map_services.py::test_map_services_llama[ogc functions-What OGC API spatial functions are available in the Precisely platform?]
+FAILED tests/test_map_services.py::test_map_services_llama[ogc collections-List all OGC feature collections available in the Precisely platform.]
+FAILED tests/test_map_services.py::test_map_services_llama[ogc collection-Get the metadata for the OGC feature collection 'risks/flood_risk'.]
+FAILED tests/test_map_services.py::test_map_services_llama[ogc collection schema-What is the schema for the OGC collection 'risks/flood_risk'? List the field names.]
+FAILED tests/test_map_services.py::test_map_services_llama[ogc collection queryables-What fields can be queried in the OGC collection 'risks/flood_risk'?]
+FAILED tests/test_map_services.py::test_map_services_llama[ogc collection items-Get flood risk features within the bounding box -122.4194,37.7749,-122.4094,37.7849 (San Francisco). Limit to 2 results.]
+FAILED tests/test_map_services.py::test_map_services_llama[wms capabilities-Get the WMS GetCapabilities response from the Precisely map service and list available layers.]
+FAILED tests/test_map_services.py::test_map_services_llama[wmts capabilities-Get the WMTS GetCapabilities response from the Precisely tile service and list available tile layers.]
+FAILED tests/test_map_services.py::test_ogc_functions_lists_spatial_ops_llama
+FAILED tests/test_map_services.py::test_ogc_collection_schema_field_names_llama
+FAILED tests/test_map_services.py::test_ogc_items_returns_geojson_llama - Ass...
+FAILED tests/test_map_services.py::test_wms_capabilities_lists_layers_llama
+FAILED tests/test_map_services.py::test_wmts_capabilities_lists_tile_layers_llama
+FAILED tests/test_spatial.py::test_spatial_tools_llama[table metadata-What columns and schema are available in the flood risk spatial table?]
+FAILED tests/test_spatial.py::test_spatial_tools_llama[nearest fire stations-Use the find_nearest_candidates tool to find the nearest fire stations within 5 miles of 1 Global View, Troy, NY 12180.]
+FAILED tests/test_spatial.py::test_spatial_tools_llama[search flood zone-Search for flood risk zones that contain the location at 1 Global View, Troy, NY 12180.]
+FAILED tests/test_spatial.py::test_spatial_tools_llama[overlap flood-Use the overlap tool to find what flood risk zones overlap within 1km of 1 Global View, Troy, NY 12180. Report the statecode, mapname, and type values.]
+FAILED tests/test_spatial.py::test_find_nearest_returns_distance_llama - Asse...
+FAILED tests/test_utilities.py::test_emergency_services_has_psap_llama - Asse...
+FAILED tests/test_workflows.py::test_property_purchase_due_diligence_llama - ...
+FAILED tests/test_workflows.py::test_insurance_risk_workflow_llama - Assertio...
+FAILED tests/test_workflows.py::test_address_data_enrichment_llama - assert []
+FAILED tests/test_workflows.py::test_site_selection_workflow_llama - Assertio...
+FAILED tests/test_workflows.py::test_tax_jurisdiction_lookup_llama - Assertio...
+==== 31 failed, 41 passed, 234 deselected, 2 xfailed in 2267.72s (0:37:47) =====

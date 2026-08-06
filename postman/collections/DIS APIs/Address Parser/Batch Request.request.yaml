@@ -1,0 +1,27 @@
+$kind: http-request
+url: https://{{host}}/v1/address/parse/batch
+method: POST
+headers:
+  accept: application/json
+  Authorization: Bearer {{supabase_service_role_api_key_0eka}}eyJleHAiOjE3MTgwOTkxNzYsImlhdCI6MTcxODA5NTU3NiwianRpIjoiNGRjY2I2MjQtYTE2ZC00OTExLTliNTItNThkOWQ1MDc4MDIzIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLWRldi5jbG91ZC5wcmVjaXNlbHkuc2VydmljZXMvYXV0aC9yZWFsbXMvUHJlY2lzZWx5IiwiYXVkIjoiUHJlY2lzZWx5Iiwic3ViIjoiMzRmY2ViYWUtMDEzZS00NmFjLWEwNTAtY2NhZWMzODM4YmQxIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiT0lEQy1ESVMtR0VPQUREUkVTU0lORyIsInNlc3Npb25fc3RhdGUiOiIwY2ExY2UzOS0yZWUyLTQzNWQtODZkYS0wY2EwNmZiZmM5ODYiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIHVwbiBlbWFpbCIsInNpZCI6IjBjYTFjZTM5LTJlZTItNDM1ZC04NmRhLTBjYTA2ZmJmYzk4NiIsInJlc291cmNlX2FjY2VzcyI6eyJPSURDLUNvbm5lY3QiOnsicm9sZXMiOlsiRGVzaWduZXIiLCJPcGVyYXRvciJdfSwiT0lEQy1ESVMtQ3VzdG9tZXJBY2NvdW50TWFuYWdlbWVudCI6eyJyb2xlcyI6WyJhZG1pbiIsImFnZW50YWRtaW5pc3RyYXRvciJdfSwiT0lEQy1EaXNjb3ZlcnkiOnsicm9sZXMiOlsiYWRtaW4iLCJ1c2VyIl19LCJicm9rZXIiOnsicm9sZXMiOlsicmVhZC10b2tlbiJdfSwiT0lEQy1ESVMtRFFDb3JlIjp7InJvbGVzIjpbIkRlc2lnbmVyIiwiT3BlcmF0b3IiXX19LCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiY3VzdG9tZXJfYWNjb3VudF9pZHMiOlsiZ2VvYWRkcmVzczEwMDAxIl0sInN1cnJvZ2F0ZVVzZXJJZCI6IjAwdTFqcWttazA5WUl6aDRWMGg4IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZ2VvYWRkcmVzc191c2VyXzFAbWFpbGluYXRvci5jb20iLCJnaXZlbl9uYW1lIjoiR2VvYWRkcmVzcyIsInN1YnNjcmlwdGlvbl9pZCI6Im51bGwiLCJ1cG4iOiJnZW9hZGRyZXNzX3VzZXJfMUBtYWlsaW5hdG9yLmNvbSIsImN1cnJlbnRfd29ya3NwYWNlX2lkIjoiZ2VvYWRkcmVzczEwMDAxIiwiZW50aXRsZW1lbnRfaWQiOiJudWxsIiwibmFtZSI6Ikdlb2FkZHJlc3MgVXNlciAxIiwicmVnaW9uIjoiVVMxIiwiZmFtaWx5X25hbWUiOiJVc2VyIDEiLCJlbWFpbCI6Imdlb2FkZHJlc3NfdXNlcl8xQG1haWxpbmF0b3IuY29tIn0.W0HC21J1vRwfYGN0lMfvq4x0jGyE1bY2w5Lz4DtGkG91MhWSC_BUcjB0wbcCBBEHLkXFw99_ABFqSGPzu7MIIayrFDTIDi-xjXFmhrcO6lCIdoMhjd0JgCAxheHAgM97BjJnQFg81qbWk8utO1qL38CCdbBX1OA3BR3XqGdeMtzWoYrfvkZKp-vGcDWAJT782FYzhwb8_p16qh7Z3s8qCMHXs1NPphEqVxdS8dvTLN-6xfsWqe0_7NQmheEFDvuA5kjNkOl_KOYsHGj7U736LTTohuUrwAzGy4mCAr77LFnnx1FYyzoPM1kK1FvsmN2d8-21QJQghU_w_uuy2zUZGw
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "addresses": [
+        {
+          "address": "1700 district ave #300 burlington, ma",
+          "id": "1"
+        },
+        {
+          "address": "170 district ave burlington, ma",
+          "id": "2"
+        }
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

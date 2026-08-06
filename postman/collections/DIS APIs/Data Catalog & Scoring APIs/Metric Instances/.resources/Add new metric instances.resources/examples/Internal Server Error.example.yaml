@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/metric-instances"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "assetId": "307eFB67308C4fDdeA21bcFE",
+          "effectiveDate": "2025-08-12T10:20:46.627Z",
+          "metrics": [
+            {
+              "metricTypeId": "Bb8Cb6f25dbDfBEBc1bF42D8",
+              "ruleId": "D42702E21FA68e02a624bd94",
+              "xref": "E42802E546FA68e02aSdw",
+              "value": "1.0"
+            }
+          ],
+          "correlationId": "bb62b735-b8c7-4172-b229-b2445603c838",
+          "tags": [
+            "zogOlYRV4KM6Fhu6QGfLy:AvouJTIJt1an6DmaBq1x3n_xXo=lIzt_l3Bzx6AKf1iOL"
+          ],
+          "parentAssetId": "Fa444f7DD9f9DC3aaAdc492e"
+        }
+      ]
+response:
+  statusCode: 500
+  statusText: Internal Server Error
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "statusCode": 500,
+        "error": "Internal Server Error",
+        "message": "An unexpected error occurred"
+      }
+order: 6000

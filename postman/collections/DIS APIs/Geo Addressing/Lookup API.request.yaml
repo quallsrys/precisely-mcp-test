@@ -1,0 +1,23 @@
+$kind: http-request
+url: https://{{host}}/v1/lookup
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "preferences": {
+            "returnAllInfo": true
+        },
+        "keys": [
+            {
+                "key": "P0000GL41OME",
+                "country": "USA",
+                "type": "PB_KEY"
+            }
+        ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 9000

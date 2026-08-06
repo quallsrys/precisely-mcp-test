@@ -1,0 +1,18 @@
+$kind: http-request
+description: Creates and starts a new data quality pipeline job with the specified pipeline and run configuration
+url: https://{{host}}/v1/quality/pipelines/jobs
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "runConfigId": "123456789abcdef"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

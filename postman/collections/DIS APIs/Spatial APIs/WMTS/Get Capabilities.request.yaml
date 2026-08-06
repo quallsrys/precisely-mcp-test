@@ -1,0 +1,15 @@
+$kind: http-request
+url: https://{{host}}/v1/spatial/wmts?Service=WMTS&Request=GetCapabilities&Version=1.0.0
+method: GET
+headers:
+  accept: application/xml
+  Authorization: Bearer {{json_web_token_14tl}}
+queryParams:
+  Service: WMTS
+  Request: GetCapabilities
+  Version: 1.0.0
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 1000

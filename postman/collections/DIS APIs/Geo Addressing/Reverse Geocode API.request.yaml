@@ -1,0 +1,23 @@
+$kind: http-request
+url: https://{{host}}/v1/reverse-geocode
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "preferences": {
+        "returnAllInfo": true
+      },
+      "locations": [
+        {
+          "latitude": 42.682251,
+          "longitude": -73.704719,
+          "country": "USA"
+        }
+      ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 10000

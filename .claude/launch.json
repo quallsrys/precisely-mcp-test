@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "harness-ui",
+      "runtimeExecutable": "/Users/rystan.qualls/Desktop/precisely-mcp-test/.venv/bin/python",
+      "runtimeArgs": ["-m", "harness.app"],
+      "port": 5001
+    }
+  ]
+}

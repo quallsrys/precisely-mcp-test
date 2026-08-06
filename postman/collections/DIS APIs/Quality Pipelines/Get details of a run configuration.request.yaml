@@ -1,0 +1,18 @@
+$kind: http-request
+description: Retrieves detailed information about a specific run configuration for a pipeline, including its connection and engine details.
+url: https://{{host}}/v1/quality/pipelines/:pipelineId/run-configs/:runConfigId
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: pipelineId
+    value: 123456789abcdef
+    description: Unique identifier of the pipeline to execute
+  - key: runConfigId
+    value: 123456789abcdef
+    description: Unique identifier of the run configuration to use for the pipeline job
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 6000

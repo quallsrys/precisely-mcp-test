@@ -1,0 +1,37 @@
+$kind: http-request
+url: https://{{host}}/v1/spatial/searchAtLocation?maxFeatures=1
+method: POST
+queryParams:
+  - key: sortBy
+    value: mapname
+    disabled: true
+  - key: sortOrder
+    value: DESCENDING
+    disabled: true
+  - key: limit
+    value: "3"
+    disabled: true
+  - key: maxFeatures
+    value: "1"
+body:
+  type: json
+  content: "{\r
+
+    \    \"spatialOperation\": \"INTERSECTS\",\r
+
+    \    \"tableName\": \"flr_usa_comm\",\r
+
+    \    \"attributes\": [\"*\"],\r
+
+    \    \"geometryFormat\": \"WKT\",\r
+
+    \    \"geometry\": \"MULTIPOLYGON (((-122.399306 37.712211, -122.398975 37.712132, -122.399007 37.712049, -122.399338 37.712127, -122.399316 37.712185, -122.399306 37.712211)))\",\r
+
+    \    \"bufferDistance\": \"10 mi\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 4000

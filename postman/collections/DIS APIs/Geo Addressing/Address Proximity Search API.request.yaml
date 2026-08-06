@@ -1,0 +1,52 @@
+$kind: http-request
+description: |-
+  Generated from cURL: curl --location 'https://api.cloud.precisely.com/v1/proximity-search' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: {{bearer_token_0gs1}}' \
+  --data '{
+      "preferences": {
+          "dataset": "address-fabric-usa",
+          "maxResults": 1,
+          "distance": {
+              "value": 1.0,
+              "distanceUnit": "MILE"
+          },
+          "customPreferences": {}
+      },
+      "location": {
+          "addressId": "1",
+          "latitude": 37.718356,
+          "longitude": -122.392016,
+          "country": "USA"
+      }
+  }'
+url: https://{{host}}/v1/proximity-search
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: "{{bearer_token_0gs1}}"
+body:
+  type: json
+  content: |-
+    {
+        "preferences": {
+            "dataset": "premium-address-points",
+            "maxResults": 1,
+            "distance": {
+                "value": 1.0,
+                "distanceUnit": "MILE"
+            },
+            "customPreferences": {}
+        },
+        "location": {
+            "addressId": "1",
+            "latitude": 37.718356,
+            "longitude": -122.392016,
+            "country": "USA"
+        }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 7000

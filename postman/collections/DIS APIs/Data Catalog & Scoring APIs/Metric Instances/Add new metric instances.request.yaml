@@ -1,0 +1,35 @@
+$kind: http-request
+description: This API endpoint is used to submit one or more metric instances associated with a specific assets.
+url: https://{{host}}/v2/catalog/metric-instances
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    [
+      {
+        "assetId": "307eFB67308C4fDdeA21bcFE",
+        "effectiveDate": "2025-08-12T10:20:46.627Z",
+        "metrics": [
+          {
+            "metricTypeId": "Bb8Cb6f25dbDfBEBc1bF42D8",
+            "ruleId": "D42702E21FA68e02a624bd94",
+            "xref": "E42802E546FA68e02aSdw",
+            "value": "1.0"
+          }
+        ],
+        "correlationId": "bb62b735-b8c7-4172-b229-b2445603c838",
+        "tags": [
+          "zogOlYRV4KM6Fhu6QGfLy:AvouJTIJt1an6DmaBq1x3n_xXo=lIzt_l3Bzx6AKf1iOL"
+        ],
+        "parentAssetId": "Fa444f7DD9f9DC3aaAdc492e"
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Add new metric instances.resources/examples
+order: 1000

@@ -1,0 +1,10 @@
+$kind: http-request
+url: https://{{host}}/v1/ogcapi/enrich/api
+method: GET
+headers:
+  Authorization: Bearer null
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 5000

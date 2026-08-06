@@ -1,0 +1,8 @@
+$kind: http-request
+url: <Place the URL generated in response of Bulk geocode/verify>
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 7000

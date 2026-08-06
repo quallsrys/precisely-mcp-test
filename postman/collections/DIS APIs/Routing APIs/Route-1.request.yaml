@@ -1,0 +1,92 @@
+$kind: http-request
+name: Route
+description: "Generated from cURL: curl --location 'https://api.cloud.precisely.com/v1/direction/location?option=flexible' \\\r
+
+  --header 'Content-Type: application/json' \\\r
+
+  --header 'Authorization: Bearer {{json_web_token_0hju}}' \\\r
+
+  --data '{\r
+
+  \    \"origin\": \"48.87862672840649, 2.2724349629292195\",\r
+
+  \    \"destination\": \"48.73000636636801, 2.3044168556664175\",\r
+
+  \    \"mode\": \"car\",\r
+
+  \    \"waypoints\": \"48.43000636636801, 2.2044168556664175|48.93000636636801, 2.1044168556664175\",\r
+
+  \    \"geometry\": \"geojson\",\r
+
+  \    \"alternatives\": true,\r
+
+  \    \"altcount\": 3,\r
+
+  \    \"avoid\": \"ferry\",\r
+
+  \    \"exclude\": \"none\",\r
+
+  \    \"approaches\": \"unrestricted;unrestricted;unrestricted\",\r
+
+  \    \"departure_time\": 1563254734,\r
+
+  \    \"route_type\": \"fastest\",\r
+
+  \    \"road_info\": \"max_speed\",\r
+
+  \    \"cross_border\": false,\r
+
+  \    \"drive_time_limits\": \"500, 400, 400\",\r
+
+  \    \"rest_times\": \"500, 300, 100\"\r
+
+  }'"
+url: https://{{host}}/v1/direction/location?option=flexible
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{json_web_token_0hju}}
+queryParams:
+  option: flexible
+body:
+  type: json
+  content: "{\r
+
+    \    \"origin\": \"48.87862672840649, 2.2724349629292195\",\r
+
+    \    \"destination\": \"48.73000636636801, 2.3044168556664175\",\r
+
+    \    \"mode\": \"car\",\r
+
+    \    \"waypoints\": \"48.43000636636801, 2.2044168556664175|48.93000636636801, 2.1044168556664175\",\r
+
+    \    \"geometry\": \"geojson\",\r
+
+    \    \"alternatives\": true,\r
+
+    \    \"altcount\": 3,\r
+
+    \    \"avoid\": \"ferry\",\r
+
+    \    \"exclude\": \"none\",\r
+
+    \    \"approaches\": \"unrestricted;unrestricted;unrestricted\",\r
+
+    \    \"departure_time\": 1563254734,\r
+
+    \    \"route_type\": \"fastest\",\r
+
+    \    \"road_info\": \"max_speed\",\r
+
+    \    \"cross_border\": false,\r
+
+    \    \"drive_time_limits\": \"500, 400, 400\",\r
+
+    \    \"rest_times\": \"500, 300, 100\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

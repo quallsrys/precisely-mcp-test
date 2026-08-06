@@ -1,0 +1,11 @@
+$kind: http-request
+url: https://{{host}}/v1/spatial/wmts/1.0.0/simpleProfileTile/tiles/par-usa/17/31118/50069.png
+method: GET
+headers:
+  accept: image/png
+  Authorization: Bearer {{json_web_token_14tl}}
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 3000

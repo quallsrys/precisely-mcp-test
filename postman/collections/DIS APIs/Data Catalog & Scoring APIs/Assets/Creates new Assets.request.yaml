@@ -1,0 +1,32 @@
+$kind: http-request
+description: Creates new Asset
+url: https://{{host}}/v2/catalog/assets
+method: POST
+headers:
+  x-batch: "true"
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    [
+      {
+        "assetTypeId": "653b82b54264fef0f9a52a06",
+        "properties": [
+          {
+            "name": "Name",
+            "value": "Test_2"
+          }
+        ],
+        "xref": [
+          "ON4Hr2P9gsV0R6akRx2Hsw=="
+        ],
+        "tags": []
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Creates new Assets.resources/examples
+order: 2000

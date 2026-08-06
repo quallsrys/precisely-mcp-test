@@ -1,0 +1,37 @@
+$kind: http-request
+url: https://{{host}}/v1/timezone/location
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"locations\": [\r
+
+    \        {\r
+
+    \            \"id\": \"1\",\r
+
+    \            \"timestamp\": 1692169676000,\r
+
+    \            \"geometry\": {\r
+
+    \                \"coordinates\": [\r
+
+    \                    -89.398528,\r
+
+    \                    40.633125\r
+
+    \                ]\r
+
+    \            }\r
+
+    \        }\r
+
+    \    ]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

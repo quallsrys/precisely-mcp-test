@@ -1,0 +1,14 @@
+$kind: http-request
+description: Returns a list of assets tracing by downstream lineage relations
+url: https://{{host}}/v2/catalog/lineage/:assetId/downstream/trace
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  assetId: 6Db28DFFbDbf177Eab23bDeC
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Returns a list of assets tracing by downstream lineage relations.resources/examples
+order: 2000

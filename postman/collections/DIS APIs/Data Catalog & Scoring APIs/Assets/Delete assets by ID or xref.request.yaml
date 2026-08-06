@@ -1,0 +1,22 @@
+$kind: http-request
+description: Delete assets by ID or xref
+url: https://{{host}}/v2/catalog/assets
+method: DELETE
+headers:
+  x-batch: "true"
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    [
+      {
+        "id": "d96Bc6CEAF5aacBfDA446a47"
+      }
+    ]
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+examples: ./.resources/Delete assets by ID or xref.resources/examples
+order: 3000

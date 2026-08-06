@@ -1,0 +1,142 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/v2/catalog/lineage/:assetId/assets?filter=field1:eq(value1)&sort=asc(field1)&offset=0&limit=20&searchDescendants=true"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  queryParams:
+    - key: filter
+      value: field1:eq(value1)
+      description: |
+        Filter the results by specifying a filter expression.
+
+        <details>
+        <summary>Details</summary>
+        This API allows filtering the result set by specifying a filter expression.
+        Use the format `filter=field1:op(value1)`.
+
+        #### Filter operators
+
+        - `eq` Equal to
+        - `ne` Not equal to
+        - `lt` Less than
+        - `le` Less than or equal to
+        - `gt` Greater than
+        - `ge` Greater than or equal to
+        - `in` In a list of comma seperated values
+        - `ni` Not in a list of comma seperated values
+        - `ct` Contains a value
+        - `sw` Starts with a value
+        - `ew` Ends with a value
+        - `ex` Exists (only accepts true/false values)
+
+        #### Grouping filter expressions
+
+        By default, filter expressions are combined using the `AND` operator, but filter expressions can be grouped and each group will be combined using the `OR` operator.
+
+        `filter=name:eq(Bob):0&filter=name:eq(Alice):1` will return results where `name` is either `Bob` or `Alice`.
+
+        #### Case sensitivity
+
+        Filter expressions are case-insensitive by default, but can be made case-sensitive by adding the `search=true` query parameter (if supported).
+
+        Using `search=true` query parameter (where applicable) will also improve performance with complex filter expressions such as using "contains" operators.
+
+        </details>
+    - key: sort
+      value: asc(field1)
+      description: |
+        Sort the results by a field in ascending or descending order.
+
+        <details>
+        <summary>Details</summary>
+        This API allows sorting the results by a field in ascending or
+        descending order.
+        Use the format `sort=asc(field1)` or `sort=desc(field1)`.
+        Specify multiple sort fields by adding multiple sort parameters and
+        sorting will be applied in the order specified.
+
+        #### Example
+
+        To first sort by `field1` in ascending order and then by `field2` in descending order, use the format `?sort=asc(field1)&sort=desc(field2)`
+
+        #### Sort directions
+
+        - `asc` Ascending order
+
+        - `desc` Descending order
+
+        </details>
+    - key: offset
+      value: "0"
+      description: The number of records to skip before returning results.
+    - key: limit
+      value: "20"
+      description: The number of records to return per page.
+    - key: searchDescendants
+      value: "true"
+  pathVariables:
+    assetId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": {
+          "scoreBands": [
+            {
+              "label": "ScoreBand1",
+              "color": "Red",
+              "minimumValue": -61922373.88669453
+            },
+            {
+              "label": "ScoreBand2",
+              "color": "Green",
+              "minimumValue": 13813117.273766905
+            }
+          ],
+          "assets": [
+            {
+              "assetId": "a8E130783eCA5bF54aC6617f",
+              "displayValue": "Asset1",
+              "score": 15956289.99138628,
+              "matches": -40381182.54943379
+            },
+            {
+              "assetId": "fdFa09298f2AB87C13BEb44b",
+              "displayValue": "Asset2",
+              "score": -77469074.9466831,
+              "matches": -8723197.747335836
+            }
+          ],
+          "relations": [
+            {
+              "subjectId": "cf9f2CEE1DeDf411F18682Bf",
+              "objectId": "Ee95095c360DbdF7D9Bd2b60",
+              "direct": true,
+              "subjectParentId": "feeDbe63dFc3dEFcD47eFd76",
+              "objectParentId": "45A7D20A0DB76FDaa0BFF9C8"
+            },
+            {
+              "subjectId": "761FeDC7ecF6dBa49cFFC4d1",
+              "objectId": "2d98ABfBAF4cBd74CEe1dfbc",
+              "direct": false,
+              "subjectParentId": "DA2591b99eBd9529fA43B53F",
+              "objectParentId": "1Ae3efDd8f14c3D29822d80B"
+            }
+          ],
+          "total": -26419628.216018602
+        },
+        "links": {
+          "self": "https://api.cloud.precisely.com/lineage/:assetId/assets"
+        }
+      }
+order: 1000

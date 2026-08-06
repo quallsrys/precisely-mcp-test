@@ -1,0 +1,8 @@
+$kind: http-request
+url: https://{{host}}/v1/spatial/tables/pbb_usa/metadata
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000

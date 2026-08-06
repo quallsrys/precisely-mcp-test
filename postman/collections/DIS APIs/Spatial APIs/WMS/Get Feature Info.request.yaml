@@ -1,0 +1,22 @@
+$kind: http-request
+url: https://{{host}}/v1/spatial/wms?VERSION=1.3.0&SERVICE=WMS&REQUEST=GetFeatureInfo&CRS=EPSG:4326&BBOX=-149.778548,60.136759,-147.065888,61.310969&WIDTH=400&HEIGHT=300&LAYERS=wfr_usa_fireriskpro_layer&INFO_FORMAT=application/json&QUERY_LAYERS=wfr_usa_fireriskpro_layer&I=1&J=1&PIXELSEARCHRADIUS=10
+method: GET
+queryParams:
+  VERSION: 1.3.0
+  SERVICE: WMS
+  REQUEST: GetFeatureInfo
+  CRS: EPSG:4326
+  BBOX: -149.778548,60.136759,-147.065888,61.310969
+  WIDTH: "400"
+  HEIGHT: "300"
+  LAYERS: wfr_usa_fireriskpro_layer
+  INFO_FORMAT: application/json
+  QUERY_LAYERS: wfr_usa_fireriskpro_layer
+  I: "1"
+  J: "1"
+  PIXELSEARCHRADIUS: "10"
+auth:
+  type: bearer
+  credentials:
+    token: "{{authToken}}"
+order: 2000
